@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitleCommunitySystem.Model", "SubtitleCommunitySystem.Model\SubtitleCommunitySystem.Model.csproj", "{DB33B4C7-B029-47D2-8806-7F888B930716}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitleCommunitySystem.Data", "SubtitleCommunitySystem.Data\SubtitleCommunitySystem.Data.csproj", "{6E35A756-CC4A-4CE6-B8F3-F7A91EFBDB13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitleCommunitySystem.Web", "SubtitleCommunitySystem.Web\SubtitleCommunitySystem.Web.csproj", "{5B42CEAC-849D-4DC3-86CD-D3605584040F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB33B4C7-B029-47D2-8806-7F888B930716}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB33B4C7-B029-47D2-8806-7F888B930716}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB33B4C7-B029-47D2-8806-7F888B930716}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB33B4C7-B029-47D2-8806-7F888B930716}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E35A756-CC4A-4CE6-B8F3-F7A91EFBDB13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E35A756-CC4A-4CE6-B8F3-F7A91EFBDB13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E35A756-CC4A-4CE6-B8F3-F7A91EFBDB13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E35A756-CC4A-4CE6-B8F3-F7A91EFBDB13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B42CEAC-849D-4DC3-86CD-D3605584040F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B42CEAC-849D-4DC3-86CD-D3605584040F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B42CEAC-849D-4DC3-86CD-D3605584040F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B42CEAC-849D-4DC3-86CD-D3605584040F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
