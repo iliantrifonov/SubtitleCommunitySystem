@@ -1,0 +1,30 @@
+﻿@model IEnumerable<SubtitleCommunitySystem.Web.Areas.Administration.Models.MovieOutputModel>
+<div class="container">
+    <div class="row">
+        @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+    <div class="row container">
+        <div class="row ">
+            <div class="col-md-4">
+                Movie Title
+            </div>
+        </div>
+
+        @if (Model.Count() > 0)
+        {
+            foreach (var movie in Model)
+            {
+                <div class="row">
+                    <div class="col-md-4">
+                        @movie.Name
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            @:No movies
+        }
+
+    </div>
+</div>

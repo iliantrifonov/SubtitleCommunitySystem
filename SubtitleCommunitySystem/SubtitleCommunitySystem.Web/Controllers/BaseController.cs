@@ -16,9 +16,11 @@
         public BaseController(IApplicationData data)
         {
             this.Data = data;
-            var userId = User.Identity.GetUserId();
-            if (userId != null)
+
+            if (this.User != null)
             {
+                var userId = User.Identity.GetUserId();
+
                 this.CurrentUser = data.Users.Find(userId);
             }
         }

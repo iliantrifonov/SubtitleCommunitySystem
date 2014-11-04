@@ -20,6 +20,11 @@ namespace SubtitleCommunitySystem.Data.Migrations
 
         protected override void Seed(Data.ApplicationDbContext context)
         {
+            if (context.Roles.Count() > 0)
+            {
+                return;
+            }
+
             this.AddRole(context, "Admin");
             this.AddInitialAdmin(context);
 
