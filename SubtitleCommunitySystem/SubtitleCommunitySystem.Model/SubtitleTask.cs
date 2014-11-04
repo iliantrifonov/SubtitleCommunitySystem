@@ -2,13 +2,17 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
 
     public class SubtitleTask
     {
         public int Id { get; set; }
 
+        [MaxLength(500)]
         public string Description { get; set; }
+
+        public int PercentDone { get; set; }
 
         public virtual ApplicationUser User { get; set; }
 

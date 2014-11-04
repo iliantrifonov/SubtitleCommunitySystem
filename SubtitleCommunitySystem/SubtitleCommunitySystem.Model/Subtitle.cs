@@ -1,6 +1,7 @@
 ﻿namespace SubtitleCommunitySystem.Model
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     public class Subtitle
     {
@@ -8,6 +9,9 @@
         {
             this.Tasks = new HashSet<SubtitleTask>();
         }
+
+        [Required]
+        public virtual Movie Movie { get; set; }
 
         public int Id { get; set; }
 

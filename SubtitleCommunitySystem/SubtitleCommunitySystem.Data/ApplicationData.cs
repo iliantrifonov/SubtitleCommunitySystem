@@ -3,10 +3,13 @@
 
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Data.Entity;
 
     using SubtitleCommunitySystem.Data.Repositories;
     using SubtitleCommunitySystem.Model;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.AspNet.Identity;
 
     public class ApplicationData : IApplicationData
     {
@@ -22,7 +25,6 @@
         public ApplicationData()
             : this(new ApplicationDbContext())
         {
-
         }
 
         public IRepository<ApplicationUser> Users
@@ -97,9 +99,55 @@
             }
         }
 
+        public IRepository<PromotionRequest> PromotionRequests
+        {
+            get
+            {
+                return GetRepository<PromotionRequest>();
+            }
+        }
+
         public int SaveChanges()
         {
             return this.context.SaveChanges();
+        }
+
+        public bool AddRoleToUser(ApplicationUser user, string role)
+        {
+            try
+            {
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.context));
+                userManager.AddToRole(user.Id, role);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool RemoveRoleFromUser(ApplicationUser user, string roleName)
+        {
+            var identityContext = context as IdentityDbContext<ApplicationUser>;
+            var role = identityContext.Roles.FirstOrDefault(r => r.Name == roleName);
+            if (role == null)
+            {
+                return false;
+            }
+
+            var roleId = role.Id;
+            try
+            {
+                var roleInUser = user.Roles.FirstOrDefault(r => r.RoleId == roleId);
+                user.Roles.Remove(roleInUser);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private IRepository<T> GetRepository<T>() where T : class

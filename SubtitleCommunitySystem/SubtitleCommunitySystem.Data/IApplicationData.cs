@@ -27,6 +27,8 @@
 
         IRepository<Movie> Movies { get; }
 
+        IRepository<PromotionRequest> PromotionRequests { get; }
+
         int SaveChanges();
     }
 }

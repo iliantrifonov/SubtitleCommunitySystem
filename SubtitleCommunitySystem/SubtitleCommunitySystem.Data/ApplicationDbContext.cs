@@ -42,5 +42,7 @@
         public IDbSet<SubtitleTask> Tasks { get; set; }
 
         public IDbSet<Movie> Movies { get; set; }
+
+        public IDbSet<PromotionRequest> PromotionRequests { get; set; }
     }       
 }
