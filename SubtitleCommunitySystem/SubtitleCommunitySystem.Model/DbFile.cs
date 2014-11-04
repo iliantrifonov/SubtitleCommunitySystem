@@ -8,6 +8,6 @@
 
         public string FileName { get; set; }
 
-        public string ContentFile { get; set; }
+        public string ContentType { get; set; }
     }
 }
