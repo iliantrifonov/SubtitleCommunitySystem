@@ -26,5 +26,16 @@
         }
         
         //public IDbSet<TestModelOne> Ones { get; set; }
+
+        public IDbSet<Language> Languages { get; set; }
+
+        public IDbSet<Subtitle> Subtitles { get; set; }
+
+        public IDbSet<Message> Messages { get; set; }
+
+        public IDbSet<Channel> Channels { get; set; }
+
+        public IDbSet<Team> Teams { get; set; }
+
     }
 }

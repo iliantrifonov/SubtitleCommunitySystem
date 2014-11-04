@@ -10,6 +10,17 @@
     {
         IRepository<ApplicationUser> Users { get; }
 
+        IRepository<Language> Languages { get; }
+
+        IRepository<Subtitle> Subtitles { get; }
+
+        IRepository<Channel> Channels { get; }
+
+
+        IRepository<Message> Messages { get; }
+
+        IRepository<Team> Teams { get; }
+
         int SaveChanges();
     }
 }

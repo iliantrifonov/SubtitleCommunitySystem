@@ -29,6 +29,8 @@ namespace SubtitleCommunitySystem.Data.Migrations
             this.AddRole(context, "Sync");
             this.AddRole(context, "ImageManager");
             this.AddRole(context, "Revisioner");
+
+            this.AddLanguages(context);
         }
 
         private void AddInitialAdmin(ApplicationDbContext context)
@@ -57,6 +59,26 @@ namespace SubtitleCommunitySystem.Data.Migrations
             {
                 roleManager.Create(new IdentityRole(roleName));
             }
+        }
+
+        private void AddLanguages(ApplicationDbContext context)
+        {
+            context.Languages.Add(new Language()
+            {
+                Name = "English",
+            });
+
+            context.Languages.Add(new Language()
+            {
+                Name = "Italian",
+            });
+
+            context.Languages.Add(new Language()
+            {
+                Name = "Bulgarian",
+            });
+
+            context.SaveChanges();
         }
     }
 }

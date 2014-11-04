@@ -7,6 +7,7 @@
 
     using SubtitleCommunitySystem.Data.Repositories;
     using SubtitleCommunitySystem.Model;
+
     public class ApplicationData : IApplicationData
     {
         private DbContext context;
@@ -29,6 +30,46 @@
             get
             {
                 return GetRepository<ApplicationUser>();
+            }
+        }
+
+        public IRepository<Language> Languages
+        {
+            get
+            {
+                return GetRepository<Language>();
+            }
+        }
+
+        public IRepository<Channel> Channels
+        {
+            get
+            {
+                return GetRepository<Channel>();
+            }
+        }
+
+        public IRepository<Message> Messages
+        {
+            get
+            {
+                return GetRepository<Message>();
+            }
+        }
+
+        public IRepository<Subtitle> Subtitles
+        {
+            get
+            {
+                return GetRepository<Subtitle>();
+            }
+        }
+
+        public IRepository<Team> Teams
+        {
+            get
+            {
+                return GetRepository<Team>();
             }
         }
 
