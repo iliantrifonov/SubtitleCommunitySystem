@@ -9,6 +9,7 @@
             this.Teams = new HashSet<Team>();
             this.Subtitles = new HashSet<Subtitle>();
         }
+
         public int Id { get; set; }
 
         public string Name { get; set; }

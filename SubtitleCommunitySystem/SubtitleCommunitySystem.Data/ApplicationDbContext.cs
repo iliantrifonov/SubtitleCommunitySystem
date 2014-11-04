@@ -37,5 +37,10 @@
 
         public IDbSet<Team> Teams { get; set; }
 
-    }
+        public IDbSet<DbFile> Files { get; set; }
+
+        public IDbSet<SubtitleTask> Tasks { get; set; }
+
+        public IDbSet<Movie> Movies { get; set; }
+    }       
 }

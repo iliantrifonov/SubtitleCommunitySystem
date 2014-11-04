@@ -18,7 +18,7 @@
 
         public string Name { get; set; }
 
-        public Language Language { get; set; }
+        public virtual Language Language { get; set; }
 
         public virtual ICollection<ApplicationUser> Members { get; set; }
 

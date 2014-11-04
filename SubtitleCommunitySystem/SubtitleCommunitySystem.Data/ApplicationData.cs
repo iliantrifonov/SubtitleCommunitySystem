@@ -73,6 +73,30 @@
             }
         }
 
+        public IRepository<DbFile> Files
+        {
+            get
+            {
+                return GetRepository<DbFile>();
+            }
+        }
+
+        public IRepository<SubtitleTask> Tasks
+        {
+            get
+            {
+                return GetRepository<SubtitleTask>();
+            }
+        }
+
+        public IRepository<Movie> Movies
+        {
+            get
+            {
+                return GetRepository<Movie>();
+            }
+        }
+
         public int SaveChanges()
         {
             return this.context.SaveChanges();

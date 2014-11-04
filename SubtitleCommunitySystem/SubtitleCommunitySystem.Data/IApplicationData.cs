@@ -21,6 +21,12 @@
 
         IRepository<Team> Teams { get; }
 
+        IRepository<DbFile> Files { get; }
+
+        IRepository<SubtitleTask> Tasks { get; }
+
+        IRepository<Movie> Movies { get; }
+
         int SaveChanges();
     }
 }

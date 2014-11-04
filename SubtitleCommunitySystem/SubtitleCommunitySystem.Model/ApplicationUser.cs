@@ -11,6 +11,8 @@
         public ApplicationUser()
         {
             this.Messages = new HashSet<Message>();
+            this.Teams = new HashSet<Team>();
+            this.Tasks = new HashSet<SubtitleTask>();
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -24,5 +26,7 @@
         public virtual ICollection<Message> Messages { get; set; }
 
         public virtual ICollection<Team> Teams { get; set; }
+
+        public virtual ICollection<SubtitleTask> Tasks { get; set; }
     }
 }
