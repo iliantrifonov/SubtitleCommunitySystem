@@ -8,7 +8,7 @@ An ASP.NET MVC application, for adding, searching and managing subtitles. There 
 * Languages.
 * Workflow for teams:
 * Roles in each team: Translator, Sync, ImageManager, Revisioner (approves the final subtitle, and writes a summary)
-* Site roles: Standard (each user, can apply to be a part of a team for certain language/series/movie ), Moderator (has the ability to edit the content of each subtitle post, edit news etc.), Admin (can promote users to the various roles, has access to the chats of all teams).
+* Site roles: Standard (each user, can apply to be a part of a team for certain language/series/movie ), Moderator (has the ability to edit the content of each subtitle post, edit news etc.), Admin (can promote users to the various roles, has access to the chats of all teams, and has access to all functionality of all roles).
 * Roles for news: Writer
 * Chat: Each team has a chat channel, where they can discuss the various parts of the project.
 * Each subtitle has stages that it passes on the workflow, so it can be seen on what stage of development each subtitle is.
