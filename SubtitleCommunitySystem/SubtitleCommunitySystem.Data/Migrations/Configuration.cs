@@ -5,7 +5,12 @@ namespace SubtitleCommunitySystem.Data.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+
+    using SubtitleCommunitySystem.Model;
+
+    public sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
@@ -15,18 +20,43 @@ namespace SubtitleCommunitySystem.Data.Migrations
 
         protected override void Seed(Data.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            this.AddRole(context, "Admin");
+            this.AddInitialAdmin(context);
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            this.AddRole(context, "Moderator");
+            this.AddRole(context, "Writer");
+            this.AddRole(context, "Translator");
+            this.AddRole(context, "Sync");
+            this.AddRole(context, "ImageManager");
+            this.AddRole(context, "Revisioner");
+        }
+
+        private void AddInitialAdmin(ApplicationDbContext context)
+        {
+            string username = "admin@gmail.com";
+            string password = "123456";
+            var admin = new ApplicationUser()
+            {
+                UserName = username,
+                Email = username
+            };
+
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            if (!userManager.Users.Any(u => u.UserName == username))
+            {
+                userManager.Create(admin, password);
+                userManager.AddToRole(admin.Id, "Admin");
+            }
+        }
+
+        private void AddRole(ApplicationDbContext context, string roleName = "Admin")
+        {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            if (!roleManager.RoleExists(roleName))
+            {
+                roleManager.Create(new IdentityRole(roleName));
+            }
         }
     }
 }
