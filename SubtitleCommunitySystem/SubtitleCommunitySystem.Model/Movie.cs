@@ -15,15 +15,21 @@
         }
 
         [Required]
-        [MaxLength(40)]
+        [MaxLength(70)]
         public string Name { get; set; }
+
+        [MaxLength(1000)]
+        [DataType(DataType.MultilineText)]
+        public string Content { get; set; }
+
+        public string Directory { get; set; }
 
         public int Id { get; set; }
 
         public virtual ICollection<Subtitle> Subtitles { get; set; }
 
-        public virtual DbFile BannerFile { get; set; }
+        public string BannerUrl { get; set; }
 
-        public virtual DbFile MainPoster { get; set; }
+        public string MainPosterUrl { get; set; }
     }
 }

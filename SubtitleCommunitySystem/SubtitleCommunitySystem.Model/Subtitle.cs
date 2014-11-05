@@ -13,6 +13,15 @@
         [Required]
         public virtual Movie Movie { get; set; }
 
+        [Required]
+        [MaxLength(70)]
+        public string Name { get; set; }
+
+        [MaxLength(1000)]
+        public string Content { get; set; }
+
+        public string ThumbnailUrl { get; set; }
+
         public int Id { get; set; }
 
         public bool IsFinished { get; set; }
