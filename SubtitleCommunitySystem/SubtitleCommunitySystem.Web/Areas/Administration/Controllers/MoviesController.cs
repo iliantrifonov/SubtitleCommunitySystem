@@ -21,7 +21,15 @@ namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
 
         public ActionResult Index()
         {
-            var movies = this.Data.Movies.All().OrderBy(m => m.Name).Select(m => new MovieOutputModel() {  Name = m.Name });
+            var movies = this.Data.Movies.All().OrderBy(m => m.Name).Select(m => new MovieOutputModel() 
+            {  
+                BannerUrl = m.BannerUrl,
+                Content = m.Content,
+                Id = m.Id,
+                MainPosterUrl = m.MainPosterUrl,
+                Name = m.Name
+            });
+
             return View(movies);
         }
 
