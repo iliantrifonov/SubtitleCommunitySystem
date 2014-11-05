@@ -46,17 +46,22 @@ namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
             {
                 return View(movie);
             }
-
-            if (poster != null)
+            try
             {
-                movie.MainPosterUrl = UploadFile(poster, "poster", movie);
-            }
+                if (poster != null)
+                {
+                    movie.MainPosterUrl = UploadFile(poster, "poster", movie);
+                }
 
-            if (banner != null)
+                if (banner != null)
+                {
+                    movie.BannerUrl = UploadFile(banner, "banner", movie);
+                }
+            }
+            catch (ArgumentException ex)
             {
-                movie.BannerUrl = UploadFile(banner, "banner", movie);
+                return Content(ex.Message);
             }
-
 
             this.Data.Movies.Add(movie);
 
@@ -67,6 +72,12 @@ namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
 
         private string UploadFile(HttpPostedFileBase file, string fileName, Movie movie)
         {
+            var extention = file.FileName.Substring(file.FileName.LastIndexOf('.'));
+            if (!FileConstants.AllowedPictureExtentions.Contains(extention))
+            {
+                throw new ArgumentException("Incorrect file extention type.");
+            }
+
             var directoryName = "~/Files/" + movie.Name;
             if (string.IsNullOrWhiteSpace(movie.Directory))
             {
@@ -90,7 +101,7 @@ namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
             movie.Directory = directoryName;
             var mappedDirectoryName = Server.MapPath(directoryName);
             Directory.CreateDirectory(mappedDirectoryName);
-            var extention = file.FileName.Substring(file.FileName.LastIndexOf('.'));
+
             file.SaveAs(mappedDirectoryName + "/" + fileName + extention);
 
             return directoryName.Substring(1) + "/" + fileName + extention;
