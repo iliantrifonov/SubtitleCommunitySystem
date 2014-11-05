@@ -20,7 +20,7 @@
 
         [MaxLength(1000)]
         [DataType(DataType.MultilineText)]
-        public string Content { get; set; }
+        public string Description { get; set; }
 
         public string Directory { get; set; }
 

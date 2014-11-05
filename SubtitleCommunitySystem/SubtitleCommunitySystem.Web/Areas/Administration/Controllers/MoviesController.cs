@@ -24,7 +24,7 @@ namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
             var movies = this.Data.Movies.All().OrderBy(m => m.Name).Select(m => new MovieOutputModel() 
             {  
                 BannerUrl = m.BannerUrl,
-                Content = m.Content,
+                Description = m.Description,
                 Id = m.Id,
                 MainPosterUrl = m.MainPosterUrl,
                 Name = m.Name
@@ -93,7 +93,7 @@ namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
             var extention = file.FileName.Substring(file.FileName.LastIndexOf('.'));
             file.SaveAs(mappedDirectoryName + "/" + fileName + extention);
 
-            return directoryName + "/" + fileName + extention;
+            return directoryName.Substring(1) + "/" + fileName + extention;
         }
     }
 }

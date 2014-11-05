@@ -18,7 +18,7 @@
         public string Name { get; set; }
 
         [MaxLength(1000)]
-        public string Content { get; set; }
+        public string Description { get; set; }
 
         public string ThumbnailUrl { get; set; }
 
