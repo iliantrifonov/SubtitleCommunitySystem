@@ -40,6 +40,7 @@ namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Movie movie, HttpPostedFileBase poster, HttpPostedFileBase banner)
         {
             if (!ModelState.IsValid)
