@@ -20,7 +20,8 @@
                     Description = m.Description,
                     Id = m.Id,
                     MainPosterUrl = m.MainPosterUrl,
-                    Name = m.Name
+                    Name = m.Name,
+                    ReleaseDate = m.ReleaseDate
                 };
             }
         }
@@ -34,5 +35,7 @@
         public string MainPosterUrl { get; set; }
 
         public string BannerUrl { get; set; }
+
+        public DateTime ReleaseDate { get; set; }
     }
 }

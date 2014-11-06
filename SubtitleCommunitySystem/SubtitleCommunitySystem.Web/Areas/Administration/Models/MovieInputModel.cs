@@ -11,19 +11,17 @@
 
     public class MovieInputModel
     {
-        public static Expression<Func<MovieInputModel, Movie>> FromMovie
+        public static Movie ToMovie(MovieInputModel m)
         {
-            get
-            {
-                return m => new Movie()
-                {
-                    BannerUrl = m.BannerUrl,
-                    Description = m.Description,
-                    Directory = m.Directory,
-                    MainPosterUrl = m.MainPosterUrl,
-                    Name = m.Name,
-                };
-            }
+            return new Movie()
+                   {
+                       BannerUrl = m.BannerUrl,
+                       Description = m.Description,
+                       Directory = m.Directory,
+                       MainPosterUrl = m.MainPosterUrl,
+                       Name = m.Name,
+                       ReleaseDate = m.ReleaseDate
+                   };
         }
 
         [DataType(DataType.MultilineText)]
@@ -31,10 +29,15 @@
 
         public string Directory { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         public string MainPosterUrl { get; set; }
 
         public string BannerUrl { get; set; }
+
+        [Required]
+        [Display(Name = "Released on:")]
+        public DateTime ReleaseDate { get; set; }
     }
 }

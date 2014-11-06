@@ -261,6 +261,8 @@
     <Folder Include="Areas\Administration\Views\Shared\" />
     <Folder Include="Files\" />
     <Folder Include="Views\Admin\" />
+    <Folder Include="Views\Shared\DisplayTemplates\" />
+    <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

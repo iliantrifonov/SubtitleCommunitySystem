@@ -57,14 +57,7 @@ namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
                 return Content(ex.Message);
             }
 
-            var dbMovie = new Movie()
-            {
-                BannerUrl = movie.BannerUrl,
-                Description = movie.Description,
-                Directory = movie.Directory,
-                MainPosterUrl = movie.MainPosterUrl,
-                Name = movie.Name,
-            };
+            var dbMovie = MovieInputModel.ToMovie(movie);
 
             this.Data.Movies.Add(dbMovie);
 

@@ -30,5 +30,8 @@
         public string BannerUrl { get; set; }
 
         public string MainPosterUrl { get; set; }
+
+        [Required]
+        public DateTime ReleaseDate { get; set; }
     }
 }
