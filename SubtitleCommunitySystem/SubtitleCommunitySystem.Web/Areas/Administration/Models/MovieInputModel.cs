@@ -7,6 +7,7 @@
     using System.Web;
 
     using SubtitleCommunitySystem.Model;
+    using System.ComponentModel.DataAnnotations;
 
     public class MovieInputModel
     {
@@ -25,6 +26,7 @@
             }
         }
 
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         public string Directory { get; set; }
