@@ -21,14 +21,7 @@ namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
 
         public ActionResult Index()
         {
-            var movies = this.Data.Movies.All().OrderBy(m => m.Name).Select(m => new MovieOutputModel() 
-            {  
-                BannerUrl = m.BannerUrl,
-                Description = m.Description,
-                Id = m.Id,
-                MainPosterUrl = m.MainPosterUrl,
-                Name = m.Name
-            });
+            var movies = this.Data.Movies.All().OrderBy(m => m.Name).Select(MovieOutputModel.FromMovie);
 
             return View(movies);
         }
@@ -41,7 +34,7 @@ namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Movie movie, HttpPostedFileBase poster, HttpPostedFileBase banner)
+        public ActionResult Create(MovieInputModel movie, HttpPostedFileBase poster, HttpPostedFileBase banner)
         {
             if (!ModelState.IsValid)
             {
@@ -64,14 +57,23 @@ namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
                 return Content(ex.Message);
             }
 
-            this.Data.Movies.Add(movie);
+            var dbMovie = new Movie()
+            {
+                BannerUrl = movie.BannerUrl,
+                Description = movie.Description,
+                Directory = movie.Directory,
+                MainPosterUrl = movie.MainPosterUrl,
+                Name = movie.Name,
+            };
+
+            this.Data.Movies.Add(dbMovie);
 
             this.Data.SaveChanges();
 
             return RedirectToAction("Index");
         }
 
-        private string UploadFile(HttpPostedFileBase file, string fileName, Movie movie)
+        private string UploadFile(HttpPostedFileBase file, string fileName, MovieInputModel movie)
         {
             var extention = file.FileName.Substring(file.FileName.LastIndexOf('.'));
             if (!FileConstants.AllowedPictureExtentions.Contains(extention))

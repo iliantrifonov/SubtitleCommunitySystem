@@ -8,26 +8,26 @@
 
     using SubtitleCommunitySystem.Model;
 
-    public class MovieOutputModel
+    public class MovieInputModel
     {
-        public static Expression<Func<Movie, MovieOutputModel>> FromMovie
+        public static Expression<Func<MovieInputModel, Movie>> FromMovie
         {
             get
             {
-                return m => new MovieOutputModel()
+                return m => new Movie()
                 {
                     BannerUrl = m.BannerUrl,
                     Description = m.Description,
-                    Id = m.Id,
+                    Directory = m.Directory,
                     MainPosterUrl = m.MainPosterUrl,
-                    Name = m.Name
+                    Name = m.Name,
                 };
             }
         }
 
-        public int Id { get; set; }
-
         public string Description { get; set; }
+
+        public string Directory { get; set; }
 
         public string Name { get; set; }
 
