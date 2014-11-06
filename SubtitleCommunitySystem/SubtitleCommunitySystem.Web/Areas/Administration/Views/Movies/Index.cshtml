@@ -18,9 +18,9 @@
                 foreach (var movie in Model)
                 {
                     <div class="row">
-                        <a href="#">
+                        <a href="/Administration/Movies/Edit/@movie.Id">
                             <div class="row">
-                                <div class="img-wrapper">
+                                <div class="img-wrapper-sm pull-left text-center">
                                     <img src='@movie.MainPosterUrl' id="coverUrl" alt="Poster" class="img-dims" />
                                 </div>
                                 <div class="description-wrapper">

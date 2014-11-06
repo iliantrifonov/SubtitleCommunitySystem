@@ -3,25 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
-    using SubtitleCommunitySystem.Model;
     using System.ComponentModel.DataAnnotations;
 
-    public class MovieInputModel
-    {
-        public static Movie ToMovie(MovieInputModel m)
-        {
-            return new Movie()
-                   {
-                       BannerUrl = m.BannerUrl,
-                       Description = m.Description,
-                       Directory = m.Directory,
-                       MainPosterUrl = m.MainPosterUrl,
-                       Name = m.Name,
-                       ReleaseDate = m.ReleaseDate
-                   };
-        }
+    using SubtitleCommunitySystem.Model;
+    using SubtitleCommunitySystem.Web.Infrastructure.Mappings;
 
+    public class MovieInputModel : IMapFrom<Movie>
+    {
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 

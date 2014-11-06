@@ -11,22 +11,6 @@
 
     public class MovieOutputModel : IMapFrom<Movie>
     {
-        public static Expression<Func<Movie, MovieOutputModel>> FromMovie
-        {
-            get
-            {
-                return m => new MovieOutputModel()
-                {
-                    BannerUrl = m.BannerUrl,
-                    Description = m.Description,
-                    Id = m.Id,
-                    MainPosterUrl = m.MainPosterUrl,
-                    Name = m.Name,
-                    ReleaseDate = m.ReleaseDate
-                };
-            }
-        }
-
         public int Id { get; set; }
 
         public string Description { get; set; }

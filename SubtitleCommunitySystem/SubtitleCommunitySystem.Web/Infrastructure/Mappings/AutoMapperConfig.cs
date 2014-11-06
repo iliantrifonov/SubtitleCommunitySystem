@@ -6,6 +6,8 @@
     using System.Reflection;
 
     using AutoMapper;
+    using SubtitleCommunitySystem.Web.Areas.Administration.Models;
+    using SubtitleCommunitySystem.Model;
 
     public class AutoMapperConfig
     {
@@ -16,6 +18,13 @@
             LoadStandardMappings(types);
 
             LoadCustomMappings(types);
+
+            LoadApplicationCustomMappings();
+        }
+
+        private void LoadApplicationCustomMappings()
+        {
+            Mapper.CreateMap<MovieInputModel, Movie>();
         }
 
         private static void LoadStandardMappings(IEnumerable<Type> types)

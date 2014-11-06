@@ -1,12 +1,11 @@
 ﻿@model SubtitleCommunitySystem.Web.Areas.Administration.Models.MovieInputModel
 
-
-@using (Html.BeginForm("Create", "Movies", FormMethod.Post, new { enctype="multipart/form-data" }))
+@using (Html.BeginForm("Edit", "Movies", FormMethod.Post, new { enctype="multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Movie</h4>
+        <h4>MovieInputModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -30,12 +29,18 @@
                 @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
+        <div class="img-wrapper-md">
+            <img src='@Model.MainPosterUrl' id="coverUrl" alt="Poster" class="img-dims" />
+        </div>
         <div class="form-group">
             <label for="poster" class="control-label col-md-2">Upload poster</label>
             <div class="col-md-10">
                 <input type="file" id="poster" name="poster" />
             </div>
+        </div>
+        <div class="img-wrapper-md">
+            <img src='@Model.BannerUrl' id="coverUrl" alt="Banner" class="img-dims" />
         </div>
         <div class="form-group">
             <label for="banner" class="control-label col-md-2">Upload banner</label>
@@ -43,12 +48,15 @@
                 <input type="file" id="banner" name="banner" />
             </div>
         </div>
-        @AppHelpers.Submit("Create")
+
+
+        @AppHelpers.Submit("Save")
     </div>
 }
 
 <div>
     @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+
 </div>
 
 @section scripts
@@ -61,3 +69,4 @@
 {
     @Styles.Render("//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css")
 }
+

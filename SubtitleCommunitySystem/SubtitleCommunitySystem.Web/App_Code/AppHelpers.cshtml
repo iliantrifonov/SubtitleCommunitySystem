@@ -1,0 +1,20 @@
+﻿@helper Submit(string value = "Submit")
+{
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value=@value class="btn btn-default" />
+        </div>
+    </div>
+}
+
+@helper DateTimePickerScript(string id)
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#@id').datepicker({
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
+}

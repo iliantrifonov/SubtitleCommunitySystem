@@ -213,6 +213,8 @@
     <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Administration\Views\Movies\Create.cshtml" />
     <Content Include="Areas\Administration\Views\Movies\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Movies\Edit.cshtml" />
+    <Content Include="App_Code\AppHelpers.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
