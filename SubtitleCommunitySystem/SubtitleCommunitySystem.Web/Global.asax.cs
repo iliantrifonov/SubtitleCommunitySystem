@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SubtitleCommunitySystem.Web.Infrastructure.Mappings;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,6 +18,9 @@ namespace SubtitleCommunitySystem.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var autoMapperConfig = new AutoMapperConfig();
+            autoMapperConfig.Execute();
         }
     }
 }

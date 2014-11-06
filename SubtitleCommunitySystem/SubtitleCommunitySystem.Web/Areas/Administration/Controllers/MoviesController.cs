@@ -1,27 +1,28 @@
-﻿using SubtitleCommunitySystem.Data;
-using SubtitleCommunitySystem.Model;
-using SubtitleCommunitySystem.Web.Areas.Administration.Models;
-using SubtitleCommunitySystem.Web.Controllers;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
+﻿namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Web;
+    using System.Web.Mvc;
+
+    using AutoMapper.QueryableExtensions;
+
+    using SubtitleCommunitySystem.Data;
+    using SubtitleCommunitySystem.Web.Areas.Administration.Models;
+    using SubtitleCommunitySystem.Web.Controllers;
+
     public class MoviesController : AdminController
     {
         public MoviesController(IApplicationData data)
             : base(data)
         {
-
         }
 
         public ActionResult Index()
         {
-            var movies = this.Data.Movies.All().OrderBy(m => m.Name).Select(MovieOutputModel.FromMovie);
+            var movies = this.Data.Movies.All().OrderBy(m => m.Name).Project().To<MovieOutputModel>(); //Select(MovieOutputModel.FromMovie);
 
             return View(movies);
         }
@@ -58,6 +59,8 @@ namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
             }
 
             var dbMovie = MovieInputModel.ToMovie(movie);
+            // var dbMovie = Mapper.Map<Movie>(movie);
+            
 
             this.Data.Movies.Add(dbMovie);
 

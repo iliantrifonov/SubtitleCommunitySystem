@@ -7,8 +7,9 @@
     using System.Web;
 
     using SubtitleCommunitySystem.Model;
+    using SubtitleCommunitySystem.Web.Infrastructure.Mappings;
 
-    public class MovieOutputModel
+    public class MovieOutputModel : IMapFrom<Movie>
     {
         public static Expression<Func<Movie, MovieOutputModel>> FromMovie
         {
