@@ -33,5 +33,7 @@
 
         [Required]
         public DateTime ReleaseDate { get; set; }
+
+        public virtual DbFile InitialSource { get; set; }
     }
 }

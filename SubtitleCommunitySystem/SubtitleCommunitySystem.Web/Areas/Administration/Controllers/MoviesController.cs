@@ -22,6 +22,13 @@
         {
         }
 
+        public ActionResult DownloadSource(int id)
+        {
+            var file = this.Data.Movies.Find(id).InitialSource;
+            Response.AddHeader("Content-Disposition", "attachment; filename=\"" + file.FileName + "\"");
+            return File(file.Content, file.ContentType);
+        }
+
         public ActionResult Index()
         {
             var movies = this.Data.Movies.All().OrderBy(m => m.Name).Project().To<MovieOutputModel>();
@@ -37,33 +44,48 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(MovieInputModel movie, HttpPostedFileBase poster, HttpPostedFileBase banner)
+        public ActionResult Create(MovieInputModel movie, HttpPostedFileBase poster, HttpPostedFileBase banner, HttpPostedFileBase subtitlesource)
         {
+            if (subtitlesource == null)
+            {
+                ModelState.AddModelError("", "Subtitle source is required, please upload a file.");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(movie);
             }
 
+            DbFile dbFile = null;
+
             try
             {
+                dbFile = GetDbFile(subtitlesource, "initialSubtitleSource");
+
                 if (poster != null)
                 {
-                    movie.MainPosterUrl = UploadFile(poster, "poster", movie);
+                    movie.MainPosterUrl = UploadFileToServer(poster, "poster", movie);
                 }
 
                 if (banner != null)
                 {
-                    movie.BannerUrl = UploadFile(banner, "banner", movie);
+                    movie.BannerUrl = UploadFileToServer(banner, "banner", movie);
                 }
             }
             catch (ArgumentException ex)
             {
-                return Content(ex.Message);
+                ModelState.AddModelError("", ex.Message);
             }
 
+            if (!ModelState.IsValid)
+            {
+                return View(movie);
+            }
 
+            this.Data.Files.Add(dbFile);
 
             var dbMovie = Mapper.Map<Movie>(movie);
+            dbMovie.InitialSource = dbFile;
 
             this.Data.Movies.Add(dbMovie);
 
@@ -87,7 +109,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, MovieInputModel movie, HttpPostedFileBase poster, HttpPostedFileBase banner)
+        public ActionResult Edit(int id, MovieInputModel movie, HttpPostedFileBase poster, HttpPostedFileBase banner, HttpPostedFileBase subtitlesource)
         {
             if (!ModelState.IsValid)
             {
@@ -103,24 +125,49 @@
 
             movie.Directory = dbMovie.Directory;
 
+            if (!ModelState.IsValid)
+            {
+                return View(movie);
+            }
+
+            DbFile dbFile = null;
+
             try
             {
+                if (subtitlesource != null)
+                {
+                    dbFile = GetDbFile(subtitlesource, "initialSubtitleSource");
+                }
+
                 if (poster != null)
                 {
-                    movie.MainPosterUrl = UploadFile(poster, "poster", movie);
+                    movie.MainPosterUrl = UploadFileToServer(poster, "poster", movie);
                 }
 
                 if (banner != null)
                 {
-                    movie.BannerUrl = UploadFile(banner, "banner", movie);
+                    movie.BannerUrl = UploadFileToServer(banner, "banner", movie);
                 }
             }
             catch (ArgumentException ex)
             {
-                return Content(ex.Message);
+                ModelState.AddModelError("", ex.Message);
             }
 
-            
+            if (!ModelState.IsValid)
+            {
+                return View(movie);
+            }
+
+            if (dbFile != null)
+            {
+                var currentFile = dbMovie.InitialSource;
+
+                this.Data.Files.Add(dbFile);
+                dbMovie.InitialSource = dbFile;
+
+                this.Data.Files.Delete(currentFile);
+            }
 
             dbMovie.Directory = movie.Directory == null ? dbMovie.Directory : movie.Directory;
             dbMovie.BannerUrl = movie.BannerUrl == null ? dbMovie.BannerUrl : movie.BannerUrl;
@@ -135,7 +182,7 @@
             return RedirectToAction("Edit", new { id = dbMovie.Id });
         }
 
-        private string UploadFile(HttpPostedFileBase file, string fileName, MovieInputModel movie)
+        private string UploadFileToServer(HttpPostedFileBase file, string fileName, MovieInputModel movie)
         {
             var extention = file.FileName.Substring(file.FileName.LastIndexOf('.'));
             if (!FileConstants.AllowedPictureExtentions.Contains(extention))
@@ -170,6 +217,48 @@
             file.SaveAs(mappedDirectoryName + "/" + fileName + extention);
 
             return directoryName.Substring(1) + "/" + fileName + extention;
+        }
+
+        private DbFile GetDbFile(HttpPostedFileBase file, string fileName)
+        {
+            var extention = file.FileName.Substring(file.FileName.LastIndexOf('.'));
+            if (!FileConstants.AllowedSubtitleExtentions.Contains(extention))
+            {
+                throw new ArgumentException("Incorrect file extention type.");
+            }
+
+            var dbFile = new DbFile()
+            {
+                ContentType = file.ContentType,
+                FileName = fileName + extention,
+            };
+
+            using (var memoryStream = new MemoryStream())
+            {
+                file.InputStream.CopyTo(memoryStream);
+                dbFile.Content = memoryStream.ToArray();
+            }
+
+            return dbFile;
+        }
+
+        private void CreateSubtitles(Movie movie)
+        {
+            if (!movie.Subtitles.Any())
+            {
+                var languages = this.Data.Languages.All();
+                foreach (var lang in languages)
+                {
+                    var sub = new Subtitle()
+                    {
+                        Description = movie.Description,
+                    };
+                }
+            }
+            else
+            {
+
+            }
         }
     }
 }

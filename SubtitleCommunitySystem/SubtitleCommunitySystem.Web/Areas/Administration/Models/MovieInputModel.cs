@@ -10,6 +10,8 @@
 
     public class MovieInputModel : IMapFrom<Movie>
     {
+        public int Id { get; set; }
+
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 

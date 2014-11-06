@@ -1,11 +1,11 @@
 ﻿@model SubtitleCommunitySystem.Web.Areas.Administration.Models.MovieInputModel
 
-@using (Html.BeginForm("Edit", "Movies", FormMethod.Post, new { enctype="multipart/form-data" }))
+@using (Html.BeginForm("Edit", "Movies", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>MovieInputModel</h4>
+        <h4>Update Movie</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -27,6 +27,17 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "form-control", type = "text", id = "datetimepicker" } })
                 @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                @Ajax.ActionLink("Download current subtitle source", "DownloadSource", new { id = Model.Id }, new AjaxOptions() { HttpMethod = "POST", InsertionMode = InsertionMode.InsertAfter }, new { @class = "btn btn-success" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="subtitlesource" class="control-label col-md-2">Upload subtitle source for translation</label>
+            <div class="col-md-10">
+                <input type="file" id="subtitlesource" name="subtitlesource" />
             </div>
         </div>
 

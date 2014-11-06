@@ -32,8 +32,6 @@
 
         public SubtitleState State { get; set; }
 
-        public virtual DbFile InitialSource { get; set; }
-
         public virtual DbFile PartialFile { get; set; }
 
         public virtual DbFile FinalFile { get; set; }
