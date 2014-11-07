@@ -87,7 +87,10 @@
             var dbMovie = Mapper.Map<Movie>(movie);
             dbMovie.InitialSource = dbFile;
 
+
             this.Data.Movies.Add(dbMovie);
+
+            CreateSubtitlesForAllLanguages(dbMovie);
 
             this.Data.SaveChanges();
 
@@ -242,7 +245,7 @@
             return dbFile;
         }
 
-        private void CreateSubtitles(Movie movie)
+        private void CreateSubtitlesForAllLanguages(Movie movie)
         {
             if (!movie.Subtitles.Any())
             {
@@ -252,12 +255,41 @@
                     var sub = new Subtitle()
                     {
                         Description = movie.Description,
+                        IsFinished = false,
+                        Language = lang,
+                        Movie = movie,
+                        Name = movie.Name,
+                        State = SubtitleState.AwaitingTranslationTeam,                        
                     };
+
+                    this.Data.Subtitles.Add(sub);
                 }
             }
             else
             {
+                var subtitleLanguageIds = movie.Subtitles.Select(s => s.Language.Id);
 
+                var languages = this.Data.Languages.All();
+                foreach (var lang in languages)
+                {
+
+                    if (subtitleLanguageIds.Contains(lang.Id))
+                    {
+                        continue;
+                    }
+
+                    var sub = new Subtitle()
+                    {
+                        Description = movie.Description,
+                        IsFinished = false,
+                        Language = lang,
+                        Movie = movie,
+                        Name = movie.Name,
+                        State = SubtitleState.AwaitingTranslationTeam,
+                    };
+
+                    this.Data.Subtitles.Add(sub);
+                }
             }
         }
     }
