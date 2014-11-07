@@ -8,7 +8,7 @@
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Infrastructure.Mappings;
 
-    public class MovieInputModel : IMapFrom<Movie>
+    public class MovieInputModel : IMapFrom<Movie>, IMapTo<Movie>
     {
         public int Id { get; set; }
 

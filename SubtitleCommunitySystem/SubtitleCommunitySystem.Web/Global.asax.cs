@@ -10,6 +10,7 @@ using System.Web.Routing;
 using SubtitleCommunitySystem.Data;
 using SubtitleCommunitySystem.Data.Migrations;
 using SubtitleCommunitySystem.Web.Infrastructure.Mappings;
+using System.Reflection;
 
 namespace SubtitleCommunitySystem.Web
 {
@@ -26,7 +27,7 @@ namespace SubtitleCommunitySystem.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             var autoMapperConfig = new AutoMapperConfig();
-            autoMapperConfig.Execute();
+            autoMapperConfig.Execute(Assembly.GetExecutingAssembly());
         }
     }
 }

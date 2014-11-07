@@ -11,9 +11,10 @@
 
     public class AutoMapperConfig
     {
-        public void Execute()
+        public void Execute(Assembly assembly)
         {
-            var types = Assembly.GetExecutingAssembly().GetExportedTypes();
+            //var types = Assembly.GetExecutingAssembly().GetExportedTypes();
+            var types = assembly.GetExportedTypes();
 
             LoadStandardMappings(types);
 
@@ -24,7 +25,7 @@
 
         private void LoadApplicationCustomMappings()
         {
-            Mapper.CreateMap<MovieInputModel, Movie>();
+            //Mapper.CreateMap<MovieInputModel, Movie>();
         }
 
         private static void LoadStandardMappings(IEnumerable<Type> types)
@@ -40,7 +41,23 @@
                             Destination = t
                         }).ToArray();
 
+            var mapsTo = (from t in types
+                        from i in t.GetInterfaces()
+                        where i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapTo<>) &&
+                              !t.IsAbstract &&
+                              !t.IsInterface
+                        select new
+                        {
+                            Source = t,
+                            Destination = i.GetGenericArguments()[0]
+                        }).ToArray();
+
             foreach (var map in maps)
+            {
+                Mapper.CreateMap(map.Source, map.Destination);
+            }
+
+            foreach (var map in mapsTo)
             {
                 Mapper.CreateMap(map.Source, map.Destination);
             }
