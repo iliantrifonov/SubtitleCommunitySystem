@@ -30,6 +30,7 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label col-md-2">Current subtitle</label>
             <div class="col-md-10">
                 @Ajax.ActionLink("Download current subtitle source", "DownloadSource", new { id = Model.Id }, new AjaxOptions() { HttpMethod = "POST", InsertionMode = InsertionMode.InsertAfter }, new { @class = "btn btn-success" })
             </div>
@@ -42,6 +43,7 @@
         </div>
 
         <div class="img-wrapper-md">
+            <label class="control-label col-md-2">Current poster</label>
             <img src='@Model.MainPosterUrl' id="coverUrl" alt="Poster" class="img-dims" />
         </div>
         <div class="form-group">
@@ -50,7 +52,8 @@
                 <input type="file" id="poster" name="poster" />
             </div>
         </div>
-        <div class="img-wrapper-md">
+        <div class="img-wrapper-sm">
+            <label class="control-label col-md-2">Current banner</label>
             <img src='@Model.BannerUrl' id="coverUrl" alt="Banner" class="img-dims" />
         </div>
         <div class="form-group">
@@ -59,7 +62,12 @@
                 <input type="file" id="banner" name="banner" />
             </div>
         </div>
-
+        <div class="form-group">
+            @Html.Label("Check to add all new languages to subtitles", htmlAttributes: new { @class = "control-label col-md-2", @for = "addsubtitles" })
+            <div class="col-md-10">
+                @Html.CheckBox("addsubtitles", new { @class = "checkbox", id = "addsubtitles" })
+            </div>
+        </div>
 
         @AppHelpers.Submit("Save")
     </div>

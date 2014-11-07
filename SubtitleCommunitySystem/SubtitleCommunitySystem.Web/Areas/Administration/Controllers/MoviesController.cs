@@ -112,7 +112,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, MovieInputModel movie, HttpPostedFileBase poster, HttpPostedFileBase banner, HttpPostedFileBase subtitlesource)
+        public ActionResult Edit(int id, MovieInputModel movie, HttpPostedFileBase poster, HttpPostedFileBase banner, HttpPostedFileBase subtitlesource, bool addsubtitles)
         {
             if (!ModelState.IsValid)
             {
@@ -179,6 +179,8 @@
             dbMovie.Description = movie.Description;
             dbMovie.Name = movie.Name;
             dbMovie.ReleaseDate = movie.ReleaseDate;
+
+            CreateSubtitlesForAllLanguages(dbMovie);
 
             this.Data.SaveChanges();
 
