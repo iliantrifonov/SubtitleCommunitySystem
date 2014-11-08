@@ -243,7 +243,15 @@
             ViewBag.Role = role;
             ViewBag.Id = id;
 
+            var team = this.Data.Teams.Find(id);
+
+            if (team == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             var users = this.Data.Users.All()
+                .Where(us => us.Languages.Any(l => l.Id == team.Language.Id))
                 .Where(u=> !u.Teams.Any(t=> t.Id == id))
                 .Where(usr => usr.TeamRoles.Any(tr => tr.Name == role))
                 .Project().To<UserOutputModel>();

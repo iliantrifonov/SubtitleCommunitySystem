@@ -15,6 +15,7 @@
             this.Teams = new HashSet<Team>();
             this.Tasks = new HashSet<SubtitleTask>();
             this.Requests = new HashSet<PromotionRequest>();
+            this.Languages = new HashSet<Language>();
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -35,5 +36,6 @@
 
         public virtual ICollection<PromotionRequest> Requests { get; set; }
 
+        public virtual ICollection<Language> Languages { get; set; }
     }
 }
