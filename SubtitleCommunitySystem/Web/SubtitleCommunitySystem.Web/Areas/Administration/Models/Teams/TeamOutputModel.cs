@@ -4,11 +4,14 @@
 
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Infrastructure.Mappings;
+    using System.ComponentModel.DataAnnotations;
 
     public class TeamOutputModel : IMapFrom<Team>, IMapTo<Team>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
+        [Required]
+        [MaxLength(50)]
         public string Name { get; set; }
 
         public string Language { get; set; }

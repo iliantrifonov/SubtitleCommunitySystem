@@ -196,6 +196,7 @@
     <Compile Include="Areas\Administration\Controllers\MoviesController.cs" />
     <Compile Include="Areas\Administration\Controllers\TeamsController.cs" />
     <Compile Include="Areas\Administration\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Administration\Models\Teams\CreateTeamViewModel.cs" />
     <Compile Include="Areas\Administration\Models\Users\EditUserViewModel.cs" />
     <Compile Include="Areas\Administration\Models\Languages\LanguageInputModel.cs" />
     <Compile Include="Areas\Administration\Models\Languages\LanguageOutputModel.cs" />
@@ -260,6 +261,7 @@
     <Content Include="Areas\Administration\Views\Teams\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Teams\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\TeamOutputModel.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\CreateTeamViewModel.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -316,6 +318,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_AdminPartial.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ListTeamViewModel.cshtml" />
+    <Content Include="Views\Shared\_BackActionLinkPartial.cshtml" />
+    <Content Include="Views\Shared\_CrudButtonsPartial.cshtml" />
+    <Content Include="Views\Shared\_DetailsButtonsPartial.cshtml" />
+    <Content Include="Views\Shared\_EditButtonsPartial.cshtml" />
+    <Content Include="Views\Shared\_CreateButtonsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

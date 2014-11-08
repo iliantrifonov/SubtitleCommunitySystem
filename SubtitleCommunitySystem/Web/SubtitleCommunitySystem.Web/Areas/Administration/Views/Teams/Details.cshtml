@@ -1,4 +1,4 @@
-﻿@model SubtitleCommunitySystem.Model.Team
+﻿@model SubtitleCommunitySystem.Web.Areas.Administration.Models.TeamViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -9,18 +9,8 @@
 <div>
     <h4>Team</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-    </dl>
+    @Html.DisplayForModel("TeamViewModel")
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @{ Html.RenderPartial("_DetailsButtonsPartial"); }
 </p>

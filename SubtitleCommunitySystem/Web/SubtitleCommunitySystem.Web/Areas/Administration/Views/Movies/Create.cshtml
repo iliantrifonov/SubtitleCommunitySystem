@@ -49,13 +49,9 @@
                 <input type="file" id="banner" name="banner" />
             </div>
         </div>
-        @AppHelpers.Submit("Create")
+        @{ Html.RenderPartial("_CreateButtonsPartial"); }
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
-</div>
 
 @section scripts
 {

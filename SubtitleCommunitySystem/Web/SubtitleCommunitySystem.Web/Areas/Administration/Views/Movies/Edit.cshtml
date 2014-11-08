@@ -69,14 +69,9 @@
             </div>
         </div>
 
-        @AppHelpers.Submit("Save")
+        @{ Html.RenderPartial("_EditButtonsPartial"); }
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
-
-</div>
 
 @section scripts
 {

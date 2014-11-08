@@ -31,6 +31,11 @@
             return View(this.Data.Users.All().Project().To<UserOutputModel>().ToList());
         }
 
+        public ActionResult Details(string id)
+        {
+            return RedirectToAction("Edit", new { id = id });
+        }
+
         // GET: Administration/Users/Edit/5
         public ActionResult Edit(string id)
         {

@@ -111,7 +111,7 @@
 
                 this.Data.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit");
             }
 
             return View(language);

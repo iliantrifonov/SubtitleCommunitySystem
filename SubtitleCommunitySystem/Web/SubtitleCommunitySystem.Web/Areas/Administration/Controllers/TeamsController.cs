@@ -27,7 +27,9 @@
         // GET: Administration/Teams
         public ActionResult Index()
         {
-            return View(this.Data.Teams.All().Project().To<TeamOutputModel>().ToList());
+            return View(this.Data.Teams.All()
+                .Project().To<TeamOutputModel>()
+                .ToList());
         }
 
         // GET: Administration/Teams/Details/5
@@ -54,7 +56,14 @@
         // GET: Administration/Teams/Create
         public ActionResult Create()
         {
-            return View();
+            var languages = this.Data.Languages.All().Select(l => new SelectListItem() { Text = l.Name, Value = l.Id.ToString() });
+
+            var createTeamModel = new CreateTeamViewModel()
+            {
+                Languages = languages,
+            };
+
+            return View(createTeamModel);
         }
 
         // POST: Administration/Teams/Create
@@ -62,17 +71,29 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Team team)
+        public ActionResult Create(CreateTeamViewModel createTeamViewModel)
         {
             if (ModelState.IsValid)
             {
-                this.Data.Teams.Add(team);
+                var language = this.Data.Languages.Find(int.Parse(createTeamViewModel.Team.LanguageId));
+
+                if (language == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                this.Data.Teams.Add(new Team()
+                {
+                    Language = language,
+                    Name = createTeamViewModel.Team.Name
+                });
+
                 this.Data.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            return View(team);
+            return View(createTeamViewModel);
         }
 
         // GET: Administration/Teams/Edit/5
@@ -85,7 +106,7 @@
 
             var team = this.Data.Teams.All()
                 .Where(t => t.Id == id)
-                .Select(TeamViewModel.FromTeam)
+                .Project().To<TeamInputModel>()
                 .FirstOrDefault();
 
             if (team == null)
@@ -93,7 +114,15 @@
                 return HttpNotFound();
             }
 
-            return View(team);
+            var languages = this.Data.Languages.All().Select(l => new SelectListItem() { Text = l.Name, Value = l.Id.ToString() });
+
+            var createTeamModel = new CreateTeamViewModel()
+            {
+                Languages = languages,
+                Team = team
+            };
+
+            return View(createTeamModel);
         }
 
         // POST: Administration/Teams/Edit/5
@@ -101,14 +130,28 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Team team)
+        public ActionResult Edit(CreateTeamViewModel createTeamModel)
         {
+            var team = createTeamModel.Team;
+
             if (ModelState.IsValid)
             {
-                //db.Entry(team).State = EntityState.Modified;
-                //db.SaveChanges();
-                return RedirectToAction("Index");
+                var dbLanguage = this.Data.Languages.Find(int.Parse(team.LanguageId));
+                if (dbLanguage == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                var dbTeam = this.Data.Teams.Find(team.Id);
+
+                dbTeam.Name = team.Name;
+                dbTeam.Language = dbLanguage;
+
+                this.Data.SaveChanges();
+               
+                return RedirectToAction("Edit");
             }
+
             return View(team);
         }
 
@@ -139,6 +182,10 @@
         public ActionResult DeleteConfirmed(int id)
         {
             Team team = this.Data.Teams.Find(id);
+
+            team.Members.Clear();
+            team.Subtitles.Clear();
+ 
             this.Data.Teams.Delete(team);
             this.Data.SaveChanges();
             return RedirectToAction("Index");
