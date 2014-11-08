@@ -201,6 +201,7 @@
     <Compile Include="Areas\Administration\Models\MovieInputModel.cs" />
     <Compile Include="Areas\Administration\Models\MovieOutputModel.cs" />
     <Compile Include="Areas\Administration\Models\TeamRoleModel.cs" />
+    <Compile Include="Areas\Administration\Models\TeamViewModel.cs" />
     <Compile Include="Areas\Administration\Models\UserInputModel.cs" />
     <Compile Include="Areas\Administration\Models\UserOutputModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -249,6 +250,7 @@
     <Content Include="Areas\Administration\Views\Users\Delete.cshtml" />
     <Content Include="Areas\Administration\Views\Users\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Users\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\TeamViewModel.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -307,10 +309,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Administration\Views\Shared\" />
+    <Folder Include="Areas\Administration\Views\Shared\DisplayTemplates\" />
     <Folder Include="Files\" />
     <Folder Include="Views\Admin\" />
-    <Folder Include="Views\Shared\DisplayTemplates\" />
     <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>

@@ -21,7 +21,21 @@ namespace SubtitleCommunitySystem.Web.Areas.Administration.Models
                     Id = u.Id,
                     UserName = u.UserName,
                     TeamRoles = u.TeamRoles.AsQueryable()
-                    .Select(t => new TeamRoleModel() { Id = t.Id, Name = t.Name }),
+                    .Select(t => new TeamRoleModel()
+                    {
+                        Id = t.Id,
+                        Name = t.Name
+                    }),
+                    Teams = u.Teams.Select(t => new TeamViewModel()
+                    {
+                        Id = t.Id,
+                        Name = t.Name,
+                        Language = new LanguageOutputModel()
+                        {
+                            Id = t.Language.Id,
+                            Name = t.Language.Name
+                        }
+                    })
                 };
             }
         }
@@ -29,6 +43,8 @@ namespace SubtitleCommunitySystem.Web.Areas.Administration.Models
         public string Id { get; set; }
 
         public string UserName { get; set; }
+
+        public IEnumerable<TeamViewModel> Teams { get; set; }
 
         public IEnumerable<TeamRoleModel> TeamRoles { get; set; }
     }
