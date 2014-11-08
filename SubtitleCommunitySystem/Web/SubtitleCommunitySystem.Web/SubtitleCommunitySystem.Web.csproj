@@ -259,6 +259,7 @@
     <Content Include="Areas\Administration\Views\Teams\Details.cshtml" />
     <Content Include="Areas\Administration\Views\Teams\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Teams\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\TeamOutputModel.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -318,7 +319,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Administration\Views\Shared\DisplayTemplates\" />
     <Folder Include="Files\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\Shared\EditorTemplates\" />
