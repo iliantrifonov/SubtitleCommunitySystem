@@ -1,0 +1,35 @@
+﻿@model IEnumerable<SubtitleCommunitySystem.Web.Areas.Administration.Models.LanguageOutputModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row text-center">
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+</div>
+<hr />
+<table class="table">
+    <tr>
+        <th colspan="2" class="text-center">Languages</th>
+    </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

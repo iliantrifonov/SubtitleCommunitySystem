@@ -13,6 +13,7 @@
             this.Messages = new HashSet<Message>();
             this.Teams = new HashSet<Team>();
             this.Tasks = new HashSet<SubtitleTask>();
+            this.Requests = new HashSet<PromotionRequest>();
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -28,5 +29,8 @@
         public virtual ICollection<Team> Teams { get; set; }
 
         public virtual ICollection<SubtitleTask> Tasks { get; set; }
+
+        public virtual ICollection<PromotionRequest> Requests { get; set; }
+
     }
 }

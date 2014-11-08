@@ -14,5 +14,7 @@
         public DateTime Date { get; set; }
 
         public RequestType Type { get; set; }
+
+        public ApplicationUser User { get; set; }
     }
 }

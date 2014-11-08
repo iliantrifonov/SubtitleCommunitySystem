@@ -228,7 +228,7 @@
         private DbFile GetDbFile(HttpPostedFileBase file, string fileName)
         {
             var extention = file.FileName.Substring(file.FileName.LastIndexOf('.'));
-            if (!FileConstants.AllowedSubtitleExtentions.Contains(extention))
+            if (!FileConstants.AllowedSourceExtentions.Contains(extention))
             {
                 throw new ArgumentException("Incorrect file extention type.");
             }

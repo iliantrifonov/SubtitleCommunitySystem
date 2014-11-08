@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\FileConstants.cs" />
+    <Compile Include="Constants\RoleConstants.cs" />
     <Compile Include="Mappings\AutoMapperConfig.cs" />
     <Compile Include="Mappings\IHaveCustomMappings.cs" />
     <Compile Include="Mappings\IMapFrom.cs" />

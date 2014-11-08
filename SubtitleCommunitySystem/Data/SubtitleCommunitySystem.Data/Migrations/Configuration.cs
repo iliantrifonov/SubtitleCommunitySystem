@@ -9,6 +9,7 @@ namespace SubtitleCommunitySystem.Data.Migrations
     using Microsoft.AspNet.Identity.EntityFramework;
 
     using SubtitleCommunitySystem.Model;
+    using SubtitleCommunitySystem.Web.Infrastructure.Constants;
 
     public sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
@@ -25,15 +26,16 @@ namespace SubtitleCommunitySystem.Data.Migrations
                 return;
             }
 
-            this.AddRole(context, "Admin");
+            this.AddRole(context, RoleConstants.Admin);
             this.AddInitialAdmin(context);
 
-            this.AddRole(context, "Moderator");
-            this.AddRole(context, "Writer");
-            this.AddRole(context, "Translator");
-            this.AddRole(context, "Sync");
-            this.AddRole(context, "ImageManager");
-            this.AddRole(context, "Revisioner");
+            this.AddRole(context, RoleConstants.Moderator);
+            this.AddRole(context, RoleConstants.Writer);
+            this.AddRole(context, RoleConstants.Translator);
+            this.AddRole(context, RoleConstants.Sync);
+            this.AddRole(context, RoleConstants.ImageManager);
+            this.AddRole(context, RoleConstants.Revisioner);
+            this.AddRole(context, RoleConstants.TeamLeader);
 
             this.AddLanguages(context);
         }
