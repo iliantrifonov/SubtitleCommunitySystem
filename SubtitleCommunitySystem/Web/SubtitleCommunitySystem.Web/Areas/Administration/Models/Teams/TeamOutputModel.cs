@@ -5,5 +5,8 @@
 
     public class TeamOutputModel : IMapFrom<Team>, IMapTo<Team>
     {
+        public int Id { get; set; }
+
+        public int Name { get; set; }
     }
 }

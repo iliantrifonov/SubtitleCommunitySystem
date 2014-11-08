@@ -9,9 +9,13 @@
     using System.Web;
     using System.Web.Mvc;
 
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
+
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Controllers;
+    using SubtitleCommunitySystem.Web.Areas.Administration.Models;
 
     public class TeamsController : AdminController
     {
@@ -20,12 +24,10 @@
 
         }
 
-        private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: Administration/Teams
         public ActionResult Index()
         {
-            return View(db.Teams.ToList());
+            return View(this.Data.Teams.All().Project().To<TeamOutputModel>().ToList());
         }
 
         // GET: Administration/Teams/Details/5
@@ -35,11 +37,17 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Team team = db.Teams.Find(id);
+
+            var team = this.Data.Teams.All()
+                .Where(t => t.Id == id)
+                .Select(TeamViewModel.FromTeam)
+                .FirstOrDefault();
+
             if (team == null)
             {
                 return HttpNotFound();
             }
+
             return View(team);
         }
 
@@ -58,8 +66,9 @@
         {
             if (ModelState.IsValid)
             {
-                db.Teams.Add(team);
-                db.SaveChanges();
+                this.Data.Teams.Add(team);
+                this.Data.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -73,11 +82,17 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Team team = db.Teams.Find(id);
+
+            var team = this.Data.Teams.All()
+                .Where(t => t.Id == id)
+                .Select(TeamViewModel.FromTeam)
+                .FirstOrDefault();
+
             if (team == null)
             {
                 return HttpNotFound();
             }
+
             return View(team);
         }
 
@@ -90,8 +105,8 @@
         {
             if (ModelState.IsValid)
             {
-                db.Entry(team).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(team).State = EntityState.Modified;
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(team);
@@ -104,11 +119,17 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Team team = db.Teams.Find(id);
+
+            var team = this.Data.Teams.All()
+                .Where(t => t.Id == id)
+                .Select(TeamViewModel.FromTeam)
+                .FirstOrDefault();
+
             if (team == null)
             {
                 return HttpNotFound();
             }
+
             return View(team);
         }
 
@@ -117,18 +138,14 @@
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Team team = db.Teams.Find(id);
-            db.Teams.Remove(team);
-            db.SaveChanges();
+            Team team = this.Data.Teams.Find(id);
+            this.Data.Teams.Delete(team);
+            this.Data.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
             base.Dispose(disposing);
         }
     }
