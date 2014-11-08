@@ -1,0 +1,30 @@
+﻿@model IEnumerable<SubtitleCommunitySystem.Web.Areas.Administration.Models.UserOutputModel>
+
+@{
+    ViewBag.Title = "Add Member";
+}
+
+<h2>
+    Users
+</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        User Name
+    </div>
+    <div class="col-md-8">
+        Operation
+    </div>
+</div>
+
+@foreach (var user in Model)
+{
+    <div class="row list-group-item">
+        <div class="col-md-4">
+            @user.UserName
+        </div>
+        <div class="col-md-8">
+            @Html.ActionLink("Add User to the Team in role " + (string)ViewBag.Role, "AddUserToTeam", new { userId = user.Id, id = (int)ViewBag.Id, role = (string)ViewBag.Role }, new { @class = "btn btn-success" })
+        </div>
+    </div>
+}

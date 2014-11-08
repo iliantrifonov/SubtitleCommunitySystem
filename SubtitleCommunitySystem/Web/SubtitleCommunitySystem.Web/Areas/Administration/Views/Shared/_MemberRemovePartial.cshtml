@@ -1,0 +1,14 @@
+﻿@model dynamic
+
+@{
+    var member = Model;
+}
+
+<div class="row">
+    <div class="col-md-3">
+        @member.UserName
+    </div>
+    <div class="col-md-9">
+        @Html.ActionLink("Remove", "RemoveUserFromTeam", new { userId = member.Id, id = ViewBag.Id }, new { @class = "btn btn-danger" })
+    </div>
+</div>

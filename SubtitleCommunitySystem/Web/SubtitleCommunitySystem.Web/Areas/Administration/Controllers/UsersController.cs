@@ -84,15 +84,18 @@
 
             user.TeamRoles.Clear();
 
-            foreach (var role in selectedGroups)
+            if (selectedGroups != null)
             {
-                var dbRole = this.Data.TeamRoles.Find(role);
-                if (dbRole == null)
+                foreach (var role in selectedGroups)
                 {
-                    continue;
-                }
+                    var dbRole = this.Data.TeamRoles.Find(role);
+                    if (dbRole == null)
+                    {
+                        continue;
+                    }
 
-                user.TeamRoles.Add(dbRole);
+                    user.TeamRoles.Add(dbRole);
+                }
             }
 
             this.Data.SaveChanges();

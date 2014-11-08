@@ -197,6 +197,7 @@
     <Compile Include="Areas\Administration\Controllers\TeamsController.cs" />
     <Compile Include="Areas\Administration\Controllers\UsersController.cs" />
     <Compile Include="Areas\Administration\Models\Teams\CreateTeamViewModel.cs" />
+    <Compile Include="Areas\Administration\Models\Teams\ManageMembersModel.cs" />
     <Compile Include="Areas\Administration\Models\Users\EditUserViewModel.cs" />
     <Compile Include="Areas\Administration\Models\Languages\LanguageInputModel.cs" />
     <Compile Include="Areas\Administration\Models\Languages\LanguageOutputModel.cs" />
@@ -262,6 +263,9 @@
     <Content Include="Areas\Administration\Views\Teams\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\TeamOutputModel.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\CreateTeamViewModel.cshtml" />
+    <Content Include="Areas\Administration\Views\Teams\ManageMembers.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\_MemberRemovePartial.cshtml" />
+    <Content Include="Areas\Administration\Views\Teams\AddMember.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />

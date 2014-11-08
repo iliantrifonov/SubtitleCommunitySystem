@@ -23,6 +23,7 @@
             </td>
             <td>
                 @{ Html.RenderPartial("_CrudButtonsPartial", item); }
+                @Html.ActionLink("Manage Members", "ManageMembers", new { id = item.Id }, new { @class = "btn btn-primary" })
             </td>
         </tr>
     }

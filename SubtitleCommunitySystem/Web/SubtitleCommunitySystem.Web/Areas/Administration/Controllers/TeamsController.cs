@@ -16,6 +16,7 @@
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Controllers;
     using SubtitleCommunitySystem.Web.Areas.Administration.Models;
+    using SubtitleCommunitySystem.Web.Infrastructure.Constants;
 
     public class TeamsController : AdminController
     {
@@ -189,6 +190,92 @@
             this.Data.Teams.Delete(team);
             this.Data.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult ManageMembers(int id)
+        {
+            var team = this.Data.Teams.Find(id);
+
+            if (team == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var dBtranslators = team.Members.Where(m => m.TeamRoles.Any(tr => tr.Name == RoleConstants.Translator));
+
+            var translators = Mapper.Map<IEnumerable<UserOutputModel>>(dBtranslators);
+
+            ManageMembersModel model = new ManageMembersModel()
+            {
+                Id = team.Id,
+                Translators = translators
+            };
+
+            return View(model);
+        }
+
+        public ActionResult RemoveUserFromTeam(int? id, string userId)
+        {
+
+            var team = this.Data.Teams.Find(id);
+
+            if (team == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+            var memberToRemove = team.Members.FirstOrDefault(u => u.Id == userId);
+            if (memberToRemove == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);                
+            }
+
+            team.Members.Remove(memberToRemove);
+
+            this.Data.SaveChanges();
+
+            return RedirectToAction("ManageMembers", new { id = id });
+        }
+
+        public ActionResult AddMember(int id, string role)
+        {
+            ViewBag.Role = role;
+            ViewBag.Id = id;
+
+            var users = this.Data.Users.All()
+                .Where(u=> !u.Teams.Any(t=> t.Id == id))
+                .Where(usr => usr.TeamRoles.Any(tr => tr.Name == role))
+                .Project().To<UserOutputModel>();
+
+            return View(users);
+        }
+
+        public ActionResult AddUserToTeam(int id, string userId, string role)
+        {
+            var team = this.Data.Teams.Find(id);
+
+            if (team == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var userToAdd = this.Data.Users.Find(userId);
+            if (userToAdd == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            if (!userToAdd.TeamRoles.Any(tr => tr.Name == role))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            team.Members.Add(userToAdd);
+
+            this.Data.SaveChanges();
+
+            return RedirectToAction("ManageMembers", new { id = id });
         }
 
         protected override void Dispose(bool disposing)

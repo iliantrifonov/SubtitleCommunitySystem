@@ -1,0 +1,29 @@
+﻿@model SubtitleCommunitySystem.Web.Areas.Administration.Models.ManageMembersModel
+
+@{
+    ViewBag.Title = "Manage Members";
+    ViewBag.Id = Model.Id;
+}
+
+<h2>Manage Members</h2>
+
+<div>
+    <h4>Team Members</h4>
+    <hr />
+
+    <div class="row">
+        <div class="row">
+            Translators:
+        </div>
+
+        @foreach (var member in Model.Translators)
+        {
+            { Html.RenderPartial("_MemberRemovePartial", member); }
+        }
+
+        <div class="row">
+            @Html.ActionLink("Add Members", "AddMember", new { id = Model.Id , role = SubtitleCommunitySystem.Web.Infrastructure.Constants.RoleConstants.Translator })
+        </div>
+    </div>
+
+</div>
