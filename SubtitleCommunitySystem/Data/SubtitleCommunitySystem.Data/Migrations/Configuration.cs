@@ -29,15 +29,27 @@ namespace SubtitleCommunitySystem.Data.Migrations
             this.AddRole(context, RoleConstants.Admin);
             this.AddInitialAdmin(context);
 
-            this.AddRole(context, RoleConstants.Moderator);
-            this.AddRole(context, RoleConstants.Writer);
-            this.AddRole(context, RoleConstants.Translator);
-            this.AddRole(context, RoleConstants.Sync);
-            this.AddRole(context, RoleConstants.ImageManager);
-            this.AddRole(context, RoleConstants.Revisioner);
-            this.AddRole(context, RoleConstants.TeamLeader);
+            this.AddTeamRole(context, RoleConstants.Moderator);
+            this.AddTeamRole(context, RoleConstants.Writer);
+            this.AddTeamRole(context, RoleConstants.Translator);
+            this.AddTeamRole(context, RoleConstants.Sync);
+            this.AddTeamRole(context, RoleConstants.ImageManager);
+            this.AddTeamRole(context, RoleConstants.Revisioner);
+            this.AddTeamRole(context, RoleConstants.TeamLeader);
 
             this.AddLanguages(context);
+        }
+
+        private void AddTeamRole(ApplicationDbContext context, string role)
+        {
+            var dbRole = new TeamRole()
+            {
+                Name = role
+            };
+
+            context.TeamRoles.Add(dbRole);
+
+            context.SaveChanges();
         }
 
         private void AddInitialAdmin(ApplicationDbContext context)

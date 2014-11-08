@@ -5,9 +5,12 @@
 
     using SubtitleCommunitySystem.Data.Repositories;
     using SubtitleCommunitySystem.Model;
+using System.Collections.Generic;
 
     public interface IApplicationData
     {
+        IRepository<TeamRole> TeamRoles { get; }
+
         IRepository<ApplicationUser> Users { get; }
 
         IRepository<Language> Languages { get; }
@@ -15,7 +18,6 @@
         IRepository<Subtitle> Subtitles { get; }
 
         IRepository<Channel> Channels { get; }
-
 
         IRepository<Message> Messages { get; }
 
@@ -30,5 +32,9 @@
         IRepository<PromotionRequest> PromotionRequests { get; }
 
         int SaveChanges();
+
+        bool RemoveRoleFromUser(ApplicationUser user, string roleName);
+
+        bool AddRoleToUser(ApplicationUser user, string role);
     }
 }

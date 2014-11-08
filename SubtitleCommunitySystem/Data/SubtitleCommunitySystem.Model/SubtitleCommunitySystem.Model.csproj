@@ -66,6 +66,7 @@
     <Compile Include="SubtitleTask.cs" />
     <Compile Include="SubtitleTaskType.cs" />
     <Compile Include="Team.cs" />
+    <Compile Include="TeamRole.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

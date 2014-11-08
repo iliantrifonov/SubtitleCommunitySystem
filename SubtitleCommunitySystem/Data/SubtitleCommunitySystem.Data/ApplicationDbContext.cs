@@ -26,6 +26,8 @@
         
         //public IDbSet<TestModelOne> Ones { get; set; }
 
+        public IDbSet<TeamRole> TeamRoles { get; set; }
+
         public IDbSet<Language> Languages { get; set; }
 
         public IDbSet<Subtitle> Subtitles { get; set; }

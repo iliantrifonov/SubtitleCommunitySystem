@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-
-using AutoMapper.QueryableExtensions;
-
-using SubtitleCommunitySystem.Data;
-using SubtitleCommunitySystem.Model;
-using SubtitleCommunitySystem.Web.Controllers;
-using SubtitleCommunitySystem.Web.Areas.Administration.Models;
-using AutoMapper;
-
-namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
+﻿namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
+
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
+
+    using SubtitleCommunitySystem.Data;
+    using SubtitleCommunitySystem.Model;
+    using SubtitleCommunitySystem.Web.Controllers;
+    using SubtitleCommunitySystem.Web.Areas.Administration.Models;
+
     public class LanguagesController : AdminController
     {
 

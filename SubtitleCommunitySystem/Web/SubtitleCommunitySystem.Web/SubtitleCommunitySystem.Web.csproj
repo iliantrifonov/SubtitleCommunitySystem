@@ -194,10 +194,15 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\LanguagesController.cs" />
     <Compile Include="Areas\Administration\Controllers\MoviesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Administration\Models\EditUserViewModel.cs" />
     <Compile Include="Areas\Administration\Models\LanguageInputModel.cs" />
     <Compile Include="Areas\Administration\Models\LanguageOutputModel.cs" />
     <Compile Include="Areas\Administration\Models\MovieInputModel.cs" />
     <Compile Include="Areas\Administration\Models\MovieOutputModel.cs" />
+    <Compile Include="Areas\Administration\Models\TeamRoleModel.cs" />
+    <Compile Include="Areas\Administration\Models\UserInputModel.cs" />
+    <Compile Include="Areas\Administration\Models\UserOutputModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -241,6 +246,9 @@
     <Content Include="Areas\Administration\Views\Languages\Details.cshtml" />
     <Content Include="Areas\Administration\Views\Languages\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Languages\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Users\Delete.cshtml" />
+    <Content Include="Areas\Administration\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Users\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />

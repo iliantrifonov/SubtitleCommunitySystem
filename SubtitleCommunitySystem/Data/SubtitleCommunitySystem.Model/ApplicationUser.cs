@@ -10,6 +10,7 @@
     {
         public ApplicationUser()
         {
+            this.TeamRoles = new HashSet<TeamRole>();
             this.Messages = new HashSet<Message>();
             this.Teams = new HashSet<Team>();
             this.Tasks = new HashSet<SubtitleTask>();
@@ -23,6 +24,8 @@
             // Add custom user claims here
             return userIdentity;
         }
+
+        public virtual ICollection<TeamRole> TeamRoles { get; set; }
 
         public virtual ICollection<Message> Messages { get; set; }
 

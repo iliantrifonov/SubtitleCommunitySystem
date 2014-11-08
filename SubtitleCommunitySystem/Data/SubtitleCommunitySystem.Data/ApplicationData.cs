@@ -27,6 +27,14 @@
         {
         }
 
+        public IRepository<TeamRole> TeamRoles
+        {
+            get
+            {
+                return GetRepository<TeamRole>();
+            }
+        }
+
         public IRepository<ApplicationUser> Users
         {
             get
