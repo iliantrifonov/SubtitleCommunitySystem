@@ -5,6 +5,12 @@
         <div class="col-md-2">Team ID:</div><div class="col-md-10">@Model.Id</div>
         <div class="col-md-2">Team name:</div><div class="col-md-10">@Model.Name</div>
         <div class="col-md-2">Team Language:</div><div class="col-md-10">@Model.Language.Name</div>
+        <div class="col-md-2">Team members</div><div class="col-md-10">
+            @foreach (var member in Model.Members)
+            {
+                <span><a href="#@member.Id">@member.UserName</a>,</span>
+            }
+        </div>
     </div>
 </div>
 

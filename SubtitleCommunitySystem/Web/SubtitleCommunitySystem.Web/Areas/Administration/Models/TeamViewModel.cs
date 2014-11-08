@@ -22,7 +22,7 @@
                             Id = t.Language.Id,
                             Name = t.Language.Name
                         },
-                        Members = t.Members.AsQueryable().Select(m => new UserInputModel()
+                        Members = t.Members.AsQueryable().Select(m => new UserOutputModel()
                         {
                             Id = m.Id,
                             UserName = m.UserName
@@ -37,6 +37,6 @@
 
         public LanguageOutputModel Language { get; set; }
 
-        public IEnumerable<UserInputModel> Members { get; set; }
+        public IEnumerable<UserOutputModel> Members { get; set; }
     }
 }

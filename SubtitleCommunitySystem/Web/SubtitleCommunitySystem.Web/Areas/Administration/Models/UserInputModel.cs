@@ -18,7 +18,7 @@
                 {
                     Id = u.Id,
                     UserName = u.UserName,
-                    TeamRoles = u.TeamRoles.AsQueryable()
+                    TeamRoles = u.TeamRoles
                     .Select(t => new TeamRoleModel()
                     {
                         Id = t.Id,

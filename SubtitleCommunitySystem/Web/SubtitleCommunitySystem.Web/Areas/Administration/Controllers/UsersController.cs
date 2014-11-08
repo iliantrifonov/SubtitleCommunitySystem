@@ -48,7 +48,7 @@
                 return HttpNotFound();
             }
 
-            var teamRoles = this.Data.TeamRoles.All().Project().To<TeamRoleModel>();
+            var teamRoles = this.Data.TeamRoles.All().Project().To<TeamRoleModel>().ToArray();
 
             var editUserViewModel = new EditUserViewModel()
             {
