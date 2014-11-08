@@ -1,0 +1,16 @@
+﻿@model IEnumerable<SubtitleCommunitySystem.Web.Areas.Administration.Models.TeamViewModel>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title text-center">Teams</h3>
+    </div>
+    <div class="panel-body">
+        @foreach (var team in Model)
+        {
+            <div class="list-group-item">
+                @Html.DisplayFor(c => team, "TeamViewModel")
+            </div>
+        }
+    </div>
+</div>
+

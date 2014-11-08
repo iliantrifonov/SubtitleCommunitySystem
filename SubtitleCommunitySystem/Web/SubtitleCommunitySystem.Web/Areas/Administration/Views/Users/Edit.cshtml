@@ -37,19 +37,7 @@
             }
         </ul>
 
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title text-center">Teams</h3>
-            </div>
-            <div class="panel-body">
-                @foreach (var team in Model.User.Teams)
-               {
-                    <div class="list-group-item">
-                        @Html.DisplayFor(c => team, "TeamViewModel")
-                    </div>
-               }
-            </div>
-        </div>
+        @Html.DisplayFor(c => Model.User.Teams, "ListTeamViewModel")
 
         <hr />
         <div class="form-group">
