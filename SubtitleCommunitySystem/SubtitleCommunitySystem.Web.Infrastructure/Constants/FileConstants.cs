@@ -1,6 +1,6 @@
-﻿namespace SubtitleCommunitySystem.Web
+﻿namespace SubtitleCommunitySystem.Web.Infrastructure.Constants
 {
-    public static class FileConstants
+    public class FileConstants
     {
         public static string[] AllowedPictureExtentions = new[] { ".jpeg", ".jpg", ".png" };
 

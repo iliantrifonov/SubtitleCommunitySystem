@@ -6,8 +6,6 @@
     using System.Reflection;
 
     using AutoMapper;
-    using SubtitleCommunitySystem.Web.Areas.Administration.Models;
-    using SubtitleCommunitySystem.Model;
 
     public class AutoMapperConfig
     {

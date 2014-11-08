@@ -47,12 +47,12 @@
       <HintPath>..\..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="AutoMapper.Net4">
-      <HintPath>...\.\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+      <HintPath>..\..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>...\.\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -203,11 +203,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Constants\FileConstants.cs" />
-    <Compile Include="Infrastructure\Mappings\AutoMapperConfig.cs" />
-    <Compile Include="Infrastructure\Mappings\IHaveCustomMappings.cs" />
-    <Compile Include="Infrastructure\Mappings\IMapFrom.cs" />
-    <Compile Include="Infrastructure\Mappings\IMapTo.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -317,6 +312,10 @@
     <ProjectReference Include="..\..\Data\SubtitleCommunitySystem.Model\SubtitleCommunitySystem.Model.csproj">
       <Project>{db33b4c7-b029-47d2-8806-7f888b930716}</Project>
       <Name>SubtitleCommunitySystem.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SubtitleCommunitySystem.Web.Infrastructure\SubtitleCommunitySystem.Web.Infrastructure.csproj">
+      <Project>{bd501b3c-2ca8-4f0f-baa4-6f2ad5f32e6b}</Project>
+      <Name>SubtitleCommunitySystem.Web.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -14,6 +14,7 @@
     using SubtitleCommunitySystem.Web.Areas.Administration.Models;
     using SubtitleCommunitySystem.Web.Controllers;
     using SubtitleCommunitySystem.Model;
+    using SubtitleCommunitySystem.Web.Infrastructure.Constants;
 
     public class MoviesController : AdminController
     {
