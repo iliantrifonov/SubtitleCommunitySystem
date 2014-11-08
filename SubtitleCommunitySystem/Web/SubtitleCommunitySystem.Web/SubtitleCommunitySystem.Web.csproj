@@ -323,6 +323,7 @@
     <Content Include="Views\Shared\_DetailsButtonsPartial.cshtml" />
     <Content Include="Views\Shared\_EditButtonsPartial.cshtml" />
     <Content Include="Views\Shared\_CreateButtonsPartial.cshtml" />
+    <Content Include="Views\Shared\_DeleteButtonsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
