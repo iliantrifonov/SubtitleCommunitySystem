@@ -1,16 +1,14 @@
-﻿
-namespace SubtitleCommunitySystem.Web.Areas.Administration.Models
+﻿namespace SubtitleCommunitySystem.Web.Areas.Administration.Models
 {
-    using SubtitleCommunitySystem.Model;
-    using SubtitleCommunitySystem.Web.Infrastructure.Mappings;
-    using System.Collections.Generic;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
-    using AutoMapper;
-    using AutoMapper.QueryableExtensions;
 
-    public class UserInputModel
+    using SubtitleCommunitySystem.Model;
+    using SubtitleCommunitySystem.Web.Infrastructure.Mappings;
+
+    public class UserInputModel : IMapFrom<ApplicationUser>, IMapTo<ApplicationUser>
     {
         public static Expression<Func<ApplicationUser, UserInputModel>> ToModel
         {
@@ -26,16 +24,7 @@ namespace SubtitleCommunitySystem.Web.Areas.Administration.Models
                         Id = t.Id,
                         Name = t.Name
                     }),
-                    Teams = u.Teams.Select(t => new TeamViewModel()
-                    {
-                        Id = t.Id,
-                        Name = t.Name,
-                        Language = new LanguageOutputModel()
-                        {
-                            Id = t.Language.Id,
-                            Name = t.Language.Name
-                        }
-                    })
+                    Teams = u.Teams.AsQueryable().Select(TeamViewModel.FromTeam)
                 };
             }
         }
