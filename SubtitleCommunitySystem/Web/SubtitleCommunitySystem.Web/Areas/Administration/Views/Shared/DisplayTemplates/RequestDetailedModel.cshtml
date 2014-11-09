@@ -1,0 +1,32 @@
+﻿@model SubtitleCommunitySystem.Web.Areas.Administration.Models.RequestDetailedModel
+
+<div class="jumbotron">
+    <div class="row">
+        <strong class="col-md-2">User:</strong>
+        <div class="col-md-4">
+            @Model.UserName
+        </div>
+    </div>
+    <div class="row">
+        <strong class="col-md-2">Request type:</strong>
+        <div class="col-md-4">
+            @Model.Type
+        </div>        
+    </div>
+    <div class="row">
+        <strong class="col-md-2">Date Created:</strong>
+        <div class="col-md-4">
+            @Model.DateCreated
+        </div>
+    </div>
+    <div class="row">
+        <strong class="col-md-2">Message:</strong>
+        <div class="col-md-4">
+            @Model.Content
+        </div>
+    </div>
+    <div class="row pull-right">
+        <a href="~/Administration/Requests/ApproveRequest/@Model.Id" class="btn btn-success">Approve</a>
+        <a href="~/Administration/Requests/DenyRequest/@Model.Id" class="btn btn-danger">Deny</a>
+    </div>
+</div>

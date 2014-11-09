@@ -30,20 +30,20 @@
 
             var pendingRequests = user.Requests.AsQueryable()
                 .Where(r => r.RequestState == RequestState.Pending)
-                .OrderBy(r => r.DateCreated)
+                .OrderByDescending(r => r.DateCreated)
                 .Project().To<RequestOutputModel>()
                 .ToList();
 
             var approvedRequests = user.Requests.AsQueryable()
                 .Where(r => r.RequestState == RequestState.Approved)
-                .OrderBy(r => r.DateCreated)
+                .OrderByDescending(r => r.DateCreated)
                 .Take(5)
                 .Project().To<RequestOutputModel>()
                 .ToList();
 
             var deniedRequests = user.Requests.AsQueryable()
                 .Where(r => r.RequestState == RequestState.Denied)
-                .OrderBy(r => r.DateCreated)
+                .OrderByDescending(r => r.DateCreated)
                 .Take(5)
                 .Project().To<RequestOutputModel>()
                 .ToList();
@@ -93,10 +93,15 @@
                     DateCreated = DateTime.Now,
                     RequestState = RequestState.Pending,
                     Type = model.Type,
-                    User = CurrentUser
                 };
 
                 this.Data.PromotionRequests.Add(request);
+
+                var userId = this.User.Identity.GetUserId();
+
+                var user = this.Data.Users.Find(userId);
+
+                user.Requests.Add(request);
 
                 this.Data.SaveChanges();
 

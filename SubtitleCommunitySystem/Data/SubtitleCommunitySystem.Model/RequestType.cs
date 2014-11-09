@@ -7,7 +7,7 @@
         ImageManager = 2,
         Revisioner = 3,
         Writer = 4,
-        Team = 5,
+        TeamLeader = 5,
         Moderator = 6
     }
 }

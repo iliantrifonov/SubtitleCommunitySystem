@@ -197,6 +197,7 @@
     <Compile Include="Areas\Administration\Controllers\RequestsController.cs" />
     <Compile Include="Areas\Administration\Controllers\TeamsController.cs" />
     <Compile Include="Areas\Administration\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Administration\Models\Requests\RequestDetailedModel.cs" />
     <Compile Include="Areas\Administration\Models\Teams\CreateTeamViewModel.cs" />
     <Compile Include="Areas\Administration\Models\Teams\ManageMembersModel.cs" />
     <Compile Include="Areas\Administration\Models\Users\EditUserViewModel.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\RoleEnumToStringConverter.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -278,10 +280,11 @@
     <Content Include="Areas\Private\Views\web.config" />
     <Content Include="Areas\Private\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Private\Views\MyRequests\Index.cshtml" />
-    <Content Include="Areas\Private\Views\Shared\_RequestPartial.cshtml" />
+    <Content Include="Views\Shared\_RequestPartial.cshtml" />
     <Content Include="Areas\Private\Views\MyRequests\Create.cshtml" />
     <Content Include="Areas\Private\Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Areas\Administration\Views\Requests\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\RequestDetailedModel.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />

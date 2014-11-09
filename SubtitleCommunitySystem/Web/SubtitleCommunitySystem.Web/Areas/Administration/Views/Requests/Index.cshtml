@@ -1,1 +1,20 @@
-﻿
+﻿@model IEnumerable<SubtitleCommunitySystem.Web.Areas.Administration.Models.RequestDetailedModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row text-center">
+    @Html.ActionLink("View Approved", "Approved", null, new { @class = "btn btn-success" })
+    @Html.ActionLink("View Pending", "Index", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("View Denied", "Denied", null, new { @class = "btn btn-danger" })
+</div>
+
+<hr />
+
+<div class="row">
+    @foreach (var req in Model)
+    {
+        <div class="container">@Html.DisplayFor(m => req, "RequestDetailedModel", req)</div>
+    }
+</div>
