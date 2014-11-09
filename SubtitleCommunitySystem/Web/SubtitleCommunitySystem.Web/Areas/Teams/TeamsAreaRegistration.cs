@@ -1,22 +1,22 @@
 ﻿using System.Web.Mvc;
 
-namespace SubtitleCommunitySystem.Web.Areas.Chat
+namespace SubtitleCommunitySystem.Web.Areas.Teams
 {
-    public class ChatAreaRegistration : AreaRegistration 
+    public class TeamsAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
             get 
             {
-                return "Chat";
+                return "Teams";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "Chat_default",
-                "Chat/{controller}/{action}/{id}",
+                "Teams_default",
+                "Teams/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
         }

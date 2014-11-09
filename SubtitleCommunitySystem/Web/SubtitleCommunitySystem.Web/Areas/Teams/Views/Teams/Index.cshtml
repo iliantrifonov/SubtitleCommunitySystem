@@ -1,0 +1,21 @@
+﻿@model IEnumerable<SubtitleCommunitySystem.Web.Areas.Teams.Models.TeamIndexOutputModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">My Teams:</h3>
+    </div>
+    <div class="panel-body">
+        @foreach (var team in Model)
+        {
+            <div class="list-group">
+                @Html.DisplayFor(m => team, team)
+            </div>
+        }
+    </div>
+</div>
+
