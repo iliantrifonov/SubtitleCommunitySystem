@@ -86,11 +86,21 @@
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                this.Data.Teams.Add(new Team()
+                var team = new Team()
                 {
                     Language = language,
                     Name = createTeamViewModel.Team.Name
-                });
+                };
+
+                this.Data.Teams.Add(team);
+
+                var chatChannel = new Channel()
+                {
+                    Name = team.Name,
+                };
+
+                chatChannel.Teams.Add(team);
+                this.Data.Channels.Add(chatChannel);
 
                 this.Data.SaveChanges();
 
