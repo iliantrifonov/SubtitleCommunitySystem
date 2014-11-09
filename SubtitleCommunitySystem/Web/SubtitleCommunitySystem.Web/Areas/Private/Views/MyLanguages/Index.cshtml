@@ -1,0 +1,25 @@
+﻿@model IEnumerable<SubtitleCommunitySystem.Web.Areas.Administration.Models.LanguageOutputModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row text-center">
+    @Html.ActionLink("Add Language", "Add", null, new { @class = "btn btn-success" })
+</div>
+<hr />
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">My Languages</h3>
+    </div>
+    <div class="panel-body">
+       @foreach (var lang in Model)
+       {
+        <div class="well">@Html.DisplayFor(model => lang, "LanguageOutputModel", lang)</div>
+       }
+    </div>
+</div>
+
+
+

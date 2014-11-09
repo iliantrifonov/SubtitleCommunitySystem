@@ -213,6 +213,7 @@
     <Compile Include="Areas\Administration\Models\Users\UserOutputModel.cs" />
     <Compile Include="Areas\Private\Controllers\MyLanguagesController.cs" />
     <Compile Include="Areas\Private\Controllers\MyRequestsController.cs" />
+    <Compile Include="Areas\Private\Models\MyLanguages\AddLanguageViewModel.cs" />
     <Compile Include="Areas\Private\Models\MyRequests\RequestInputModel.cs" />
     <Compile Include="Areas\Private\Models\MyRequests\RequestOutputModel.cs" />
     <Compile Include="Areas\Private\Models\MyRequests\RequestIndexViewModel.cs" />
@@ -285,6 +286,11 @@
     <Content Include="Areas\Private\Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Areas\Administration\Views\Requests\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\RequestDetailedModel.cshtml" />
+    <Content Include="Areas\Private\Views\MyLanguages\Index.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\DisplayTemplates\LanguageOutputModel.cshtml" />
+    <Content Include="Areas\Private\Views\MyLanguages\Add.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\EditorTemplates\LanguageInputModel.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\DisplayTemplates\AddLanguageViewModel.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -351,7 +357,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Private\Views\MyLanguages\" />
     <Folder Include="Files\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\AuthenticatedUser\" />
