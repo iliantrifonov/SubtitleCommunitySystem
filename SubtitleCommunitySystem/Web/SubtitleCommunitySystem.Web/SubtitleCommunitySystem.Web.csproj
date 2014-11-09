@@ -209,8 +209,11 @@
     <Compile Include="Areas\Administration\Models\Teams\TeamViewModel.cs" />
     <Compile Include="Areas\Administration\Models\Users\UserInputModel.cs" />
     <Compile Include="Areas\Administration\Models\Users\UserOutputModel.cs" />
+    <Compile Include="Areas\Private\Controllers\MyRequestsController.cs" />
+    <Compile Include="Areas\Private\PrivateAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AuthenticatedUserController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -267,6 +270,9 @@
     <Content Include="Areas\Administration\Views\Shared\_MemberRemovePartial.cshtml" />
     <Content Include="Areas\Administration\Views\Teams\AddMember.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\ManageMembersModel.cshtml" />
+    <Content Include="Areas\Private\Views\web.config" />
+    <Content Include="Areas\Private\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\_Layout.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -332,8 +338,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Private\Models\" />
+    <Folder Include="Areas\Private\Views\MyRequests\" />
     <Folder Include="Files\" />
     <Folder Include="Views\Admin\" />
+    <Folder Include="Views\AuthenticatedUser\" />
     <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
