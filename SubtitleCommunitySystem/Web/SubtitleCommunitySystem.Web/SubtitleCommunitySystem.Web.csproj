@@ -266,6 +266,7 @@
     <Content Include="Areas\Administration\Views\Teams\ManageMembers.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_MemberRemovePartial.cshtml" />
     <Content Include="Areas\Administration\Views\Teams\AddMember.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\ManageMembersModel.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />

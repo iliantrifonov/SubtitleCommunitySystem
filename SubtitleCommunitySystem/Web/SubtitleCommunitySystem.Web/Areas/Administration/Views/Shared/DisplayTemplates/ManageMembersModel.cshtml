@@ -1,0 +1,78 @@
+﻿@model SubtitleCommunitySystem.Web.Areas.Administration.Models.ManageMembersModel
+<div class="row">
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Team Leaders:</h3>
+        </div>
+        <div class="panel-body">
+            @foreach (var member in Model.TeamLeaders)
+            {
+                { Html.RenderPartial("_MemberRemovePartial", member); }
+            }
+        </div>
+        <div class="panel-footer">
+            @Html.ActionLink("Add Members", "AddMember", new { id = Model.Id, role = SubtitleCommunitySystem.Web.Infrastructure.Constants.RoleConstants.TeamLeader }, new { @class = "btn btn-success" })
+        </div>
+    </div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Translators:</h3>
+        </div>
+        <div class="panel-body">
+            @foreach (var member in Model.Translators)
+            {
+                { Html.RenderPartial("_MemberRemovePartial", member); }
+            }
+        </div>
+        <div class="panel-footer">
+            @Html.ActionLink("Add Members", "AddMember", new { id = Model.Id, role = SubtitleCommunitySystem.Web.Infrastructure.Constants.RoleConstants.Translator }, new { @class = "btn btn-success" })
+        </div>
+    </div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Image Managers:</h3>
+        </div>
+        <div class="panel-body">
+            @foreach (var member in Model.ImageManagers)
+            {
+                { Html.RenderPartial("_MemberRemovePartial", member); }
+            }
+        </div>
+        <div class="panel-footer">
+            @Html.ActionLink("Add Members", "AddMember", new { id = Model.Id, role = SubtitleCommunitySystem.Web.Infrastructure.Constants.RoleConstants.ImageManager }, new { @class = "btn btn-success" })
+        </div>
+    </div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Revisioners:</h3>
+        </div>
+        <div class="panel-body">
+            @foreach (var member in Model.Revisioners)
+            {
+                { Html.RenderPartial("_MemberRemovePartial", member); }
+            }
+        </div>
+        <div class="panel-footer">
+            @Html.ActionLink("Add Members", "AddMember", new { id = Model.Id, role = SubtitleCommunitySystem.Web.Infrastructure.Constants.RoleConstants.Revisioner }, new { @class = "btn btn-success" })
+        </div>
+    </div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Sync members:</h3>
+        </div>
+        <div class="panel-body">
+            @foreach (var member in Model.Syncs)
+            {
+                { Html.RenderPartial("_MemberRemovePartial", member); }
+            }
+        </div>
+        <div class="panel-footer">
+            @Html.ActionLink("Add Members", "AddMember", new { id = Model.Id, role = SubtitleCommunitySystem.Web.Infrastructure.Constants.RoleConstants.Sync }, new { @class = "btn btn-success" })
+        </div>
+    </div>
+</div>

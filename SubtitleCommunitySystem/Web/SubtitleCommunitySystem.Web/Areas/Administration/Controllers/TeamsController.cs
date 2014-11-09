@@ -203,13 +203,28 @@
             }
 
             var dBtranslators = team.Members.Where(m => m.TeamRoles.Any(tr => tr.Name == RoleConstants.Translator));
-
             var translators = Mapper.Map<IEnumerable<UserOutputModel>>(dBtranslators);
+
+            var dBImageManagers = team.Members.Where(m => m.TeamRoles.Any(tr => tr.Name == RoleConstants.ImageManager));
+            var imageManagers = Mapper.Map<IEnumerable<UserOutputModel>>(dBImageManagers);
+
+            var dbSyncs = team.Members.Where(m => m.TeamRoles.Any(tr => tr.Name == RoleConstants.Sync));
+            var syncs = Mapper.Map<IEnumerable<UserOutputModel>>(dbSyncs);
+
+            var dBRevisioners = team.Members.Where(m => m.TeamRoles.Any(tr => tr.Name == RoleConstants.Revisioner));
+            var revisioners = Mapper.Map<IEnumerable<UserOutputModel>>(dBRevisioners);
+
+            var dBTeamLeaders = team.Members.Where(m => m.TeamRoles.Any(tr => tr.Name == RoleConstants.TeamLeader));
+            var teamLeaders = Mapper.Map<IEnumerable<UserOutputModel>>(dBTeamLeaders);
 
             ManageMembersModel model = new ManageMembersModel()
             {
                 Id = team.Id,
-                Translators = translators
+                Translators = translators,
+                ImageManagers = imageManagers,
+                Syncs = syncs,
+                Revisioners = revisioners,
+                TeamLeaders = teamLeaders
             };
 
             return View(model);
