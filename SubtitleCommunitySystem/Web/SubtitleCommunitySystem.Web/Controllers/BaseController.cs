@@ -13,20 +13,35 @@
 
     public class BaseController : Controller
     {
+        private ApplicationUser currentUser;
+
         public BaseController(IApplicationData data)
         {
             this.Data = data;
-
-            if (this.User != null)
-            {
-                var userId = User.Identity.GetUserId();
-
-                this.CurrentUser = data.Users.Find(userId);
-            }
         }
 
         protected IApplicationData Data { get; set; }
 
-        protected ApplicationUser CurrentUser { get; set; }
+        protected ApplicationUser CurrentUser
+        {
+            get
+            {
+                if (this.currentUser != null)
+                {
+                    return this.currentUser;
+                }
+
+                if (this.User != null)
+                {
+                    var userId = User.Identity.GetUserId();
+
+                    this.currentUser = this.Data.Users.Find(userId);
+
+                    return this.currentUser;
+                }
+
+                return null;
+            }
+        }
     }
 }

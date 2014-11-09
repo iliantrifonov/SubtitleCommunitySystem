@@ -13,13 +13,6 @@
         public AuthenticatedUserController(IApplicationData data)
             : base(data)
         {
-            //TODO: MyRequests controller
-        }
-
-        // GET: AuthenticatedUser
-        public ActionResult Index()
-        {
-            return View();
         }
     }
 }

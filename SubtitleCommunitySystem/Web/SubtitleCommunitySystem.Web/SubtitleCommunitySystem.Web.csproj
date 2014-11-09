@@ -194,6 +194,7 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\LanguagesController.cs" />
     <Compile Include="Areas\Administration\Controllers\MoviesController.cs" />
+    <Compile Include="Areas\Administration\Controllers\RequestsController.cs" />
     <Compile Include="Areas\Administration\Controllers\TeamsController.cs" />
     <Compile Include="Areas\Administration\Controllers\UsersController.cs" />
     <Compile Include="Areas\Administration\Models\Teams\CreateTeamViewModel.cs" />
@@ -209,7 +210,11 @@
     <Compile Include="Areas\Administration\Models\Teams\TeamViewModel.cs" />
     <Compile Include="Areas\Administration\Models\Users\UserInputModel.cs" />
     <Compile Include="Areas\Administration\Models\Users\UserOutputModel.cs" />
+    <Compile Include="Areas\Private\Controllers\MyLanguagesController.cs" />
     <Compile Include="Areas\Private\Controllers\MyRequestsController.cs" />
+    <Compile Include="Areas\Private\Models\MyRequests\RequestInputModel.cs" />
+    <Compile Include="Areas\Private\Models\MyRequests\RequestOutputModel.cs" />
+    <Compile Include="Areas\Private\Models\MyRequests\RequestIndexViewModel.cs" />
     <Compile Include="Areas\Private\PrivateAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -272,7 +277,11 @@
     <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\ManageMembersModel.cshtml" />
     <Content Include="Areas\Private\Views\web.config" />
     <Content Include="Areas\Private\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Private\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Private\Views\MyRequests\Index.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\_RequestPartial.cshtml" />
+    <Content Include="Areas\Private\Views\MyRequests\Create.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Areas\Administration\Views\Requests\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -335,11 +344,11 @@
     <Content Include="Views\Shared\_EditButtonsPartial.cshtml" />
     <Content Include="Views\Shared\_CreateButtonsPartial.cshtml" />
     <Content Include="Views\Shared\_DeleteButtonsPartial.cshtml" />
+    <Content Include="Views\Shared\_MyPrivateMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Private\Models\" />
-    <Folder Include="Areas\Private\Views\MyRequests\" />
+    <Folder Include="Areas\Private\Views\MyLanguages\" />
     <Folder Include="Files\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\AuthenticatedUser\" />

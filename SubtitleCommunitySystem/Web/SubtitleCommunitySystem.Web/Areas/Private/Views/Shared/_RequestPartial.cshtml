@@ -1,0 +1,20 @@
+﻿@model SubtitleCommunitySystem.Web.Areas.Private.Models.RequestOutputModel
+
+<div class="row list-group-item">
+    <div class="row">
+        <div class="col-md-6">
+            <strong>Request type:</strong> @Model.Type
+        </div>
+        <div class="col-md-6">
+            <strong>Date Created:</strong> @Model.DateCreated
+        </div>
+    </div>
+    <div class="row well">
+        <div class="row">
+            <strong>Message:</strong>
+        </div>
+        <div class="row">
+            @Model.Content
+        </div>
+    </div>
+</div>

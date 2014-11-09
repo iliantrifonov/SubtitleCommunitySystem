@@ -8,7 +8,6 @@
         Revisioner = 3,
         Writer = 4,
         Team = 5,
-        Moderator = 6,
-        Admin = 7
+        Moderator = 6
     }
 }
