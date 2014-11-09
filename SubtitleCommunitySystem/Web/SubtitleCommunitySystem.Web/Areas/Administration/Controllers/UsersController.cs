@@ -28,7 +28,7 @@
         // GET: Administration/Users
         public ActionResult Index()
         {
-            return View(this.Data.Users.All().Project().To<UserOutputModel>().ToList());
+            return View(this.Data.Users.All().OrderBy(u => u.UserName).Project().To<UserOutputModel>().ToList());
         }
 
         public ActionResult Details(string id)

@@ -25,6 +25,7 @@
         public ActionResult Index()
         {
             return View(this.Data.Languages.All()
+                .OrderBy(l => l.Name)
                 .Project().To<LanguageOutputModel>()
                 .ToList());
         }

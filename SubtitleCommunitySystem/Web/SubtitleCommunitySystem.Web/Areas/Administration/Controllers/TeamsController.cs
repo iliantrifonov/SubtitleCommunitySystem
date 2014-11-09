@@ -29,6 +29,7 @@
         public ActionResult Index()
         {
             return View(this.Data.Teams.All()
+                .OrderBy(t => t.Name)
                 .Project().To<TeamOutputModel>()
                 .ToList());
         }
@@ -57,7 +58,9 @@
         // GET: Administration/Teams/Create
         public ActionResult Create()
         {
-            var languages = this.Data.Languages.All().Select(l => new SelectListItem() { Text = l.Name, Value = l.Id.ToString() });
+            var languages = this.Data.Languages.All()
+                .OrderBy(l => l.Name)
+                .Select(l => new SelectListItem() { Text = l.Name, Value = l.Id.ToString() });
 
             var createTeamModel = new CreateTeamViewModel()
             {
@@ -115,7 +118,9 @@
                 return HttpNotFound();
             }
 
-            var languages = this.Data.Languages.All().Select(l => new SelectListItem() { Text = l.Name, Value = l.Id.ToString() });
+            var languages = this.Data.Languages.All()
+                .OrderBy(l => l.Name)
+                .Select(l => new SelectListItem() { Text = l.Name, Value = l.Id.ToString() });
 
             var createTeamModel = new CreateTeamViewModel()
             {
@@ -269,6 +274,7 @@
                 .Where(us => us.Languages.Any(l => l.Id == team.Language.Id))
                 .Where(u=> !u.Teams.Any(t=> t.Id == id))
                 .Where(usr => usr.TeamRoles.Any(tr => tr.Name == role))
+                .OrderBy(u => u.UserName)
                 .Project().To<UserOutputModel>();
 
             return View(users);

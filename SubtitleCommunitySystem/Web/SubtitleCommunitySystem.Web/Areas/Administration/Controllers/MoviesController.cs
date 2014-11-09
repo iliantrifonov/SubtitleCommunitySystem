@@ -31,7 +31,9 @@
 
         public ActionResult Index()
         {
-            var movies = this.Data.Movies.All().OrderBy(m => m.Name).Project().To<MovieOutputModel>();
+            var movies = this.Data.Movies.All()
+                .OrderBy(m => m.Name)
+                .Project().To<MovieOutputModel>();
 
             return View(movies);
         }
