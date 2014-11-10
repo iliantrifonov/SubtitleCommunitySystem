@@ -11,6 +11,8 @@
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+    using Kendo.Mvc.UI;
+    using Kendo.Mvc.Extensions;
 
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Model;
@@ -26,9 +28,11 @@
         }
 
         // GET: Administration/Users
-        public ActionResult Index()
+        public ActionResult Index([DataSourceRequest] DataSourceRequest request)
         {
-            return View(this.Data.Users.All().OrderBy(u => u.UserName).Project().To<UserOutputModel>().ToList());
+            return View(this.Data.Users.All()
+                .Project().To<UserOutputModel>()
+                .ToDataSourceResult(request).Data);
         }
 
         public ActionResult Details(string id)

@@ -40,7 +40,8 @@
     .Columns(columns =>
         {
             columns.Bound(c => c.Name).HtmlAttributes(new { @class = "col-md-3" }).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")));
-            columns.Template(c => Html.Partial("_CrudButtonsPartial", c));
+            columns
+                .Template(c => Html.Partial("_CrudButtonsPartial", c));
         })
         .Sortable()
         .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
@@ -48,7 +49,4 @@
             .Refresh(true)
             .PageSizes(true)
             .ButtonCount(5))
-        .DataSource(data => data.Ajax().ServerOperation(false))
-
-
 )

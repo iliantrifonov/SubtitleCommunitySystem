@@ -7,6 +7,8 @@
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+    using Kendo.Mvc.UI;
+    using Kendo.Mvc.Extensions;
 
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Model;
@@ -22,12 +24,11 @@
         }
 
         // GET: Administration/Languages
-        public ActionResult Index()
+        public ActionResult Index([DataSourceRequest] DataSourceRequest request)
         {
             return View(this.Data.Languages.All()
-                .OrderBy(l => l.Name)
                 .Project().To<LanguageOutputModel>()
-                .ToList());
+                .ToDataSourceResult(request).Data);
         }
 
         // GET: Administration/Languages/Details/5

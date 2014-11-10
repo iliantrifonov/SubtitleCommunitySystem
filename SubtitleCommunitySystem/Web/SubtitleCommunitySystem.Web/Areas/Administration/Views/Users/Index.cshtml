@@ -5,7 +5,7 @@
     ViewBag.Title = "Index";
 }
 
-<table class="table">
+@*<table class="table">
     <tr>        
         <th>
             @Html.DisplayNameFor(model => model.UserName)
@@ -24,4 +24,19 @@
     </tr>
 }
 
-</table>
+</table>*@
+
+@(Html.Kendo().Grid<UserOutputModel>(Model)
+    .Name("grid")
+    .Columns(columns =>
+        {
+            columns.Bound(c => c.UserName).HtmlAttributes(new { @class = "col-md-3" }).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")));
+            columns.Template(c => Html.Partial("_CrudButtonsPartial", c));
+        })
+        .Sortable()
+        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+)
