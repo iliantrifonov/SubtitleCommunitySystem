@@ -9,50 +9,46 @@
     @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
 </div>
 <hr />
-<table class="table">
-    <tr>
-        <th colspan="2" class="text-center">Languages</th>
-    </tr>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+@*<table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @{ Html.RenderPartial("_CrudButtonsPartial", item); }
-            </td>
+            <th colspan="2" class="text-center">Languages</th>
         </tr>
-    }
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @{ Html.RenderPartial("_CrudButtonsPartial", item); }
+                </td>
+            </tr>
+        }
+
+    </table>*@
 
 
 @(Html.Kendo().Grid<LanguageOutputModel>(Model)
     .Name("grid")
     .Columns(columns =>
         {
-            columns.Bound(c => c.Id).Width(140);
-            columns.Bound(c => c.Name).Width(190);
+            columns.Bound(c => c.Name).HtmlAttributes(new { @class = "col-md-3" }).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")));
+            columns.Template(c => Html.Partial("_CrudButtonsPartial", c));
         })
-        .HtmlAttributes(new { style = "height: 380px;" })
-        .Scrollable()
-        .Groupable()
         .Sortable()
+        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
         .Pageable(pageable => pageable
             .Refresh(true)
             .PageSizes(true)
             .ButtonCount(5))
-        .DataSource(dataSource => dataSource
-            .Ajax()
-            .Read(read => read.Action("Index", "Languages"))
-        )
+        .DataSource(data => data.Ajax().ServerOperation(false))
+
 
 )
