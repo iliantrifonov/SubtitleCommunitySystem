@@ -8,7 +8,7 @@
             @using (@Ajax.BeginForm("AddMessage", new AjaxOptions() { HttpMethod = "Post" }))
             {
                 @Html.AntiForgeryToken()
-                @Html.Editor("MessageBox")
+                @Html.Editor("messageBox")
                 @AppHelpers.Submit("Send")
             }
         </h3>

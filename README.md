@@ -16,3 +16,6 @@ An ASP.NET MVC application, for adding, searching and managing subtitles. There 
 * Section for news on upcoming movies/shows/subtitles.
 * Top subtitles by downloads for the week.
 * Each user that is part of a team can view the progress of subtitles it produces.
+
+
+* DISCLAIMER: KENDO UI is a trial version, you can find out more at: http://www.telerik.com/download/aspnet-mvc

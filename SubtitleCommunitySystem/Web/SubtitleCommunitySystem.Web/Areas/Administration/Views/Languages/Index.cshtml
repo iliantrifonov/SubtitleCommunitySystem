@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SubtitleCommunitySystem.Web.Areas.Administration.Models.LanguageOutputModel>
+﻿@using SubtitleCommunitySystem.Web.Areas.Administration.Models
+@model IEnumerable<LanguageOutputModel>
 
 @{
     ViewBag.Title = "Index";
@@ -19,15 +20,39 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @{ Html.RenderPartial("_CrudButtonsPartial", item); }
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @{ Html.RenderPartial("_CrudButtonsPartial", item); }
+            </td>
+        </tr>
+    }
 
 </table>
+
+
+@(Html.Kendo().Grid<LanguageOutputModel>(Model)
+    .Name("grid")
+    .Columns(columns =>
+        {
+            columns.Bound(c => c.Id).Width(140);
+            columns.Bound(c => c.Name).Width(190);
+        })
+        .HtmlAttributes(new { style = "height: 380px;" })
+        .Scrollable()
+        .Groupable()
+        .Sortable()
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("Index", "Languages"))
+        )
+
+)

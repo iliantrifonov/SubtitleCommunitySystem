@@ -46,7 +46,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddMessage(string MessageBox)
+        public ActionResult AddMessage(string messageBox)
         {
 
             return Json("This is working..");
