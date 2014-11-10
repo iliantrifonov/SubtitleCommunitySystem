@@ -1,4 +1,6 @@
-﻿@model IEnumerable<SubtitleCommunitySystem.Web.Areas.Administration.Models.MovieOutputModel>
+﻿@using SubtitleCommunitySystem.Web.Areas.Administration.Models
+
+@model IEnumerable<MovieOutputModel>
 <div class="container">
     <div class="row text-center">
         @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
@@ -32,6 +34,38 @@
             else
             {
                 @:No movies
+                }
+
+            @(Html.Kendo().Grid<MovieOutputModel>(Model)
+                    .Name("grid")
+                    .Columns(columns =>
+                        {
+                            columns.Bound(c => c.Name)
+                                .Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")))
+                                .ClientTemplate("<a class='list-group-item' href='/Administration/Movies/Edit/#=Id#'>#:Name#</a>");
+                            columns.Bound(c => c.ReleaseDate).Format("{0:dd/MM/yyyy}");
+
+                        })
+                        .Sortable()
+                        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                        .Pageable(pageable => pageable
+                            .Refresh(true)
+                            .PageSizes(true)
+                            .ButtonCount(5))
+                        .DataSource(data => data.Ajax()
+                            .Read("Read", "Movies")
+                            .ServerOperation(true))
+            )
+
+            @section scripts {
+                <script>
+                    function onDataBound(e) {
+                        var that = this;
+                        $(that.tbody).on("click", "tr", function (e) {
+                            window.location.href = $(this).find('td:first a').attr('href');
+                        });
+                    }
+                </script>
             }
         </div>
     </div>

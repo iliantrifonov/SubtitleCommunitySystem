@@ -599,6 +599,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Administration\Views\Movies\DisplayTemplates\" />
     <Folder Include="Areas\Teams\Models\Chat\" />
     <Folder Include="Files\" />
     <Folder Include="Views\Admin\" />

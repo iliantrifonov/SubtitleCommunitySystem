@@ -8,6 +8,8 @@
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
 
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Web.Areas.Administration.Models;
@@ -36,6 +38,14 @@
                 .Project().To<MovieOutputModel>();
 
             return View(movies);
+        }
+
+        public ActionResult Read([DataSourceRequest] DataSourceRequest request)
+        {
+            var result = this.Data.Movies.All()
+                .Project().To<MovieOutputModel>();
+
+            return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
