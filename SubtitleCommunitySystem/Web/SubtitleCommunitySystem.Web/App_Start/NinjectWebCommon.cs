@@ -7,25 +7,28 @@ namespace SubtitleCommunitySystem.Web.App_Start
     using System.Web;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
     using Ninject;
     using Ninject.Web.Common;
-    using SubtitleCommunitySystem.Data;
+    using Ninject.Web.Mvc.FilterBindingSyntax;
 
-    public static class NinjectWebCommon 
+    using SubtitleCommunitySystem.Data;
+    using SubtitleCommunitySystem.Web.Filters;
+    using System.Web.Mvc;
+
+    public static class NinjectWebCommon
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
-        
+
         /// <summary>
         /// Stops the application.
         /// </summary>
@@ -33,7 +36,7 @@ namespace SubtitleCommunitySystem.Web.App_Start
         {
             bootstrapper.ShutDown();
         }
-        
+
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
@@ -63,6 +66,10 @@ namespace SubtitleCommunitySystem.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IApplicationData>().To<ApplicationData>();
-        }        
+
+            kernel.BindFilter<AuthFilter>(FilterScope.Controller, 0)
+            .WhenControllerHas<AuthAttribute>()
+            .WithConstructorArgumentFromControllerAttribute<AuthAttribute>("roles", attribute => attribute.Roles);
+        }
     }
 }

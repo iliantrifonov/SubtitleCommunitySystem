@@ -7,6 +7,8 @@
     using System.Web.Mvc;
 
     using SubtitleCommunitySystem.Data;
+    using SubtitleCommunitySystem.Web.Filters;
+    using SubtitleCommunitySystem.Web.Infrastructure.Constants;
 
     [Authorize(Roles = "Admin")]
     public abstract class AdminController : BaseController

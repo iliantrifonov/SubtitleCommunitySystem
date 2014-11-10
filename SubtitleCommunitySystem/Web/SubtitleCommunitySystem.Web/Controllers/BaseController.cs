@@ -55,7 +55,10 @@
             // Work with data before BeginExecute to prevent "NotSupportedException: A second operation started on this context before a previous asynchronous operation completed."
             var userId = requestContext.HttpContext.User.Identity.GetUserId();
 
-            IEnumerable<string> userRoles = this.Data.Users.All().Where(u => u.Id == userId).Select(usr => usr.TeamRoles.Select(r => r.Name)).FirstOrDefault();
+            IEnumerable<string> userRoles = this.Data.Users.All()
+                .Where(u => u.Id == userId)
+                .Select(usr => usr.TeamRoles.Select(r => r.Name))
+                .FirstOrDefault();
             
             this.ViewBag.UserRoles = userRoles;
 
