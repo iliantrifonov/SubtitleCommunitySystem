@@ -10,6 +10,7 @@
 
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Model;
+    using System.Web.Routing;
 
     public class BaseController : Controller
     {
@@ -42,6 +43,25 @@
 
                 return null;
             }
+        }
+
+        //protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
+        //{
+        //    return base.BeginExecute(requestContext, callback, state);
+        //}
+
+        protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
+        {
+            // Work with data before BeginExecute to prevent "NotSupportedException: A second operation started on this context before a previous asynchronous operation completed."
+            var userId = requestContext.HttpContext.User.Identity.GetUserId();
+
+            IEnumerable<string> userRoles = this.Data.Users.All().Where(u => u.Id == userId).Select(usr => usr.TeamRoles.Select(r => r.Name)).FirstOrDefault();
+            
+            this.ViewBag.UserRoles = userRoles;
+
+            // Calling BeginExecute before PrepareSystemMessages for the TempData to has values
+            var result = base.BeginExecute(requestContext, callback, state);
+            return result;
         }
     }
 }
