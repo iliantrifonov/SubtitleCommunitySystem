@@ -218,6 +218,7 @@
     <Compile Include="Areas\Private\Models\MyRequests\RequestOutputModel.cs" />
     <Compile Include="Areas\Private\Models\MyRequests\RequestIndexViewModel.cs" />
     <Compile Include="Areas\Private\PrivateAreaRegistration.cs" />
+    <Compile Include="Areas\Teams\Controllers\ChatController.cs" />
     <Compile Include="Areas\Teams\Controllers\TeamsController.cs" />
     <Compile Include="Areas\Teams\Models\Teams\TeamDetailedOutputModel.cs" />
     <Compile Include="Areas\Teams\Models\Teams\TeamIndexOutputModel.cs" />
@@ -270,6 +271,8 @@
     <Content Include="Areas\Administration\Views\Users\Delete.cshtml" />
     <Content Include="Areas\Administration\Views\Users\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Users\Index.cshtml" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Views\Shared\DisplayTemplates\TeamViewModel.cshtml" />
     <Content Include="Areas\Administration\Views\Teams\Create.cshtml" />
     <Content Include="Areas\Administration\Views\Teams\Delete.cshtml" />
@@ -302,6 +305,7 @@
     <Content Include="Areas\Teams\Views\Shared\DisplayTemplates\TeamIndexOutputModel.cshtml" />
     <Content Include="Areas\Teams\Views\Teams\Details.cshtml" />
     <Content Include="Areas\Teams\Views\Shared\DisplayTemplates\TeamDetailedOutputModel.cshtml" />
+    <Content Include="Areas\Teams\Views\Chat\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />

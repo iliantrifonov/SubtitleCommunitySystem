@@ -1,0 +1,26 @@
+﻿@model dynamic
+
+<div class="jumbotron">Wecome to @*"@Html.DisplayFor(m => m.Name)"*@ chat</div>
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            @using (@Ajax.BeginForm("AddMessage", new AjaxOptions() { HttpMethod = "Post" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Editor("MessageBox")
+                @AppHelpers.Submit("Send")
+            }
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="list-group">
+            Nothing yet
+        </div>
+    </div>
+</div>
+<div id="noes"></div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

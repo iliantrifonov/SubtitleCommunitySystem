@@ -21,6 +21,8 @@
 
         public string Language { get; set; }
 
+        public int ChatChannelId { get; set; }
+
         public IEnumerable<string> Translators { get; set; }
 
         public IEnumerable<string> ImageManagers { get; set; }
@@ -39,7 +41,8 @@
                 .ForMember(m => m.ImageManagers, opt => opt.MapFrom(u => u.Members.Where(usr => usr.TeamRoles.Any(r => r.Name == Infrastructure.Constants.RoleConstants.ImageManager)).Select(a => a.UserName)))
                 .ForMember(m => m.Syncs, opt => opt.MapFrom(u => u.Members.Where(usr => usr.TeamRoles.Any(r => r.Name == Infrastructure.Constants.RoleConstants.Sync)).Select(a => a.UserName)))
                 .ForMember(m => m.Revisioners, opt => opt.MapFrom(u => u.Members.Where(usr => usr.TeamRoles.Any(r => r.Name == Infrastructure.Constants.RoleConstants.Revisioner)).Select(a => a.UserName)))
-                .ForMember(m => m.TeamLeaders, opt => opt.MapFrom(u => u.Members.Where(usr => usr.TeamRoles.Any(r => r.Name == Infrastructure.Constants.RoleConstants.TeamLeader)).Select(a => a.UserName)));
+                .ForMember(m => m.TeamLeaders, opt => opt.MapFrom(u => u.Members.Where(usr => usr.TeamRoles.Any(r => r.Name == Infrastructure.Constants.RoleConstants.TeamLeader)).Select(a => a.UserName)))
+                .ForMember(m => m.ChatChannelId, opt => opt.MapFrom(u => u.ChatChannel.Id));
         }
     }
 }
