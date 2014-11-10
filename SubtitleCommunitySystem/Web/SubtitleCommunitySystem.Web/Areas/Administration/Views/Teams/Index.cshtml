@@ -1,4 +1,6 @@
-﻿@model IEnumerable<SubtitleCommunitySystem.Web.Areas.Administration.Models.TeamOutputModel>
+﻿@using SubtitleCommunitySystem.Web.Areas.Administration.Models
+
+@model IEnumerable<TeamOutputModel>
 
 @{
     ViewBag.Title = "Index";
@@ -8,7 +10,7 @@
     @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
 </div>
 <hr />
-<table class="table">
+@*<table class="table">
     <tr>
         <th>
             Teams
@@ -24,9 +26,28 @@
             </td>
             <td>
                 @{ Html.RenderPartial("_CrudButtonsPartial", item); }
-                @Html.ActionLink("Manage Members", "ManageMembers", new { id = item.Id }, new { @class = "btn btn-primary" })
+                
             </td>
         </tr>
     }
 
-</table>
+</table>*@
+
+@(Html.Kendo().Grid<TeamOutputModel>(Model)
+    .Name("grid")
+    .Columns(columns =>
+        {
+            columns.Bound(c => c.Name).HtmlAttributes(new { @class = "col-md-3" }).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")));
+            columns.Bound(c => c.Language).HtmlAttributes(new { @class = "col-md-3" }).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")));
+            columns
+                .Template(c => Html.Partial("_CrudButtonsPartial", c));
+            columns
+                .Template(c => @Html.ActionLink("Manage Members", "ManageMembers", new { id = c.Id }, new { @class = "btn btn-primary" }));
+        })
+        .Sortable()
+        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+)

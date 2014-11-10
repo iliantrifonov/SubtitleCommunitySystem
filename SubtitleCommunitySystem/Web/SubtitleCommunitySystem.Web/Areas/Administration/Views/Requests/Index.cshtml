@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SubtitleCommunitySystem.Web.Areas.Administration.Models.RequestDetailedModel>
+﻿@using SubtitleCommunitySystem.Web.Areas.Administration.Models
+@model IEnumerable<RequestDetailedModel>
 
 @{
     ViewBag.Title = "Index";
@@ -13,8 +14,26 @@
 <hr />
 
 <div class="row">
-    @foreach (var req in Model)
+    @*@foreach (var req in Model)
     {
         <div class="container">@Html.DisplayFor(m => req, "RequestDetailedModel", req)</div>
-    }
+    }*@
+
+    @(Html.Kendo().Grid<RequestDetailedModel>(Model)
+    .Name("grid")
+    .Columns(columns =>
+        {
+            columns.Bound(c => c.UserName);
+            columns.Bound(c => c.Type);
+            
+            columns.Bound(c => c).Sortable(false).Filterable(false);
+        })
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+        .Groupable()
+        .Sortable(c => c.SortMode(GridSortMode.SingleColumn))
+        .Filterable(c => c.Mode(GridFilterMode.Row))
+    )
 </div>

@@ -9,6 +9,8 @@
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
 
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Model;
@@ -25,32 +27,35 @@
         }
 
         // GET: Administration/Requests
-        public ActionResult Index()
+        public ActionResult Index([DataSourceRequest] DataSourceRequest request)
         {
             var requests = this.Data.PromotionRequests.All()
                 .Where(r => r.RequestState == RequestState.Pending)
                 .OrderBy(r => r.DateCreated)
-                .Project().To<RequestDetailedModel>().ToList();
+                .Project().To<RequestDetailedModel>()
+                .ToDataSourceResult(request).Data;
             
             return View(requests);
         }
 
-        public ActionResult Approved()
+        public ActionResult Approved([DataSourceRequest] DataSourceRequest request)
         {
             var requests = this.Data.PromotionRequests.All()
                 .Where(r => r.RequestState == RequestState.Approved)
                 .OrderByDescending(r => r.DateCreated)
-                .Project().To<RequestDetailedModel>().ToList();
+                .Project().To<RequestDetailedModel>()
+                .ToDataSourceResult(request).Data;
 
             return View("Index", requests);
         }
 
-        public ActionResult Denied()
+        public ActionResult Denied([DataSourceRequest] DataSourceRequest request)
         {
             var requests = this.Data.PromotionRequests.All()
                 .Where(r => r.RequestState == RequestState.Denied)
                 .OrderByDescending(r => r.DateCreated)
-                .Project().To<RequestDetailedModel>().ToList();
+                .Project().To<RequestDetailedModel>()
+                .ToDataSourceResult(request).Data;
 
             return View("Index", requests);
         }

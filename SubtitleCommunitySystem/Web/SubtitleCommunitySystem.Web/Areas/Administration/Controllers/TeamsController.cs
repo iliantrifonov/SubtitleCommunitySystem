@@ -11,6 +11,8 @@
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
 
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Model;
@@ -26,12 +28,11 @@
         }
 
         // GET: Administration/Teams
-        public ActionResult Index()
+        public ActionResult Index([DataSourceRequest] DataSourceRequest request)
         {
             return View(this.Data.Teams.All()
-                .OrderBy(t => t.Name)
                 .Project().To<TeamOutputModel>()
-                .ToList());
+                .ToDataSourceResult(request).Data);
         }
 
         // GET: Administration/Teams/Details/5
