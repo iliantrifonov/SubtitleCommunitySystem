@@ -14,6 +14,7 @@
         @Html.ActionLink("Team Chat(Check if the person is in the team!!)", "Index", "Chat", new { id = Model.ChatChannelId }, new { @class = "btn btn-info" })
         @Html.ActionLink("Team Subtitles", "TeamSubtitles", "Subtitles", new { id = Model.Id }, new { @class = "btn btn-info" })
         
+        @Html.ActionLink("Take New Subtitles", "Index", "Subtitles", new { id = Model.Id }, new { @class = "btn btn-info" })
         <a href="#" class="btn btn-info">All Subtitles(NA)</a>
     </div>
 </div>

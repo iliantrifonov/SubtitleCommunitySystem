@@ -1,0 +1,36 @@
+﻿@model IEnumerable<SubtitleOutputModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+@(Html.Kendo().Grid<SubtitleOutputModel>(Model)
+    .Name("grid")
+    .Columns(columns =>
+        {
+            columns.Bound(c => c.MovieMainPosterUrl)
+                .Template(c => "<img src='" + c.MovieMainPosterUrl + "' alt='#:MovieName#' style='max-width:80px' />")
+                .ClientTemplate("<a href='/Teams/Subtitles/Details/#=Id#?teamId=#=TeamId#'><img src='#=MovieMainPosterUrl#' alt='#:MovieName#' style='max-width:80px' /></a>")
+                .Filterable(false)
+                .Sortable(false);
+
+            columns.Bound(c => c.MovieName).HtmlAttributes(new { @class = "col-md-3" })
+                .Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")))
+                .ClientTemplate("<a class='' href='/Teams/Subtitles/Details/#=Id#?teamId=#=TeamId#'>#:MovieName#</a>");
+
+            columns.Bound(c => c.Language).HtmlAttributes(new { @class = "col-md-3" })
+                .Filterable(false)
+                .Sortable(false);
+            
+            columns.Command(c => c.Custom("Take Subtitle for the Team").Action("AddSubtitleToTeam", "Subtitles", new { teamId = ViewBag.Id }));
+        })
+        .Sortable()
+        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+        .DataSource(data => data.Server()
+            .Read("Index", "Subtitles", new { id = ViewBag.Id })
+            .Model(m => m.Id("Id")))
+)
+

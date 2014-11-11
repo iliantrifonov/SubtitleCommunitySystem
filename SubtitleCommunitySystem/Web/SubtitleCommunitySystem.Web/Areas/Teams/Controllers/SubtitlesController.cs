@@ -26,15 +26,58 @@
 
         }
 
-        // GET: Teams/Subtitles
+        public ActionResult Index([DataSourceRequest] DataSourceRequest request, int? id)
+        {
+            var error = GetErrorValidateTeamAndUser(id);
+
+            if (error != null)
+            {
+                return error;
+            }
+
+            SetViewBag(id);
+
+
+            int languageId = this.Data.Teams.All()
+                                 .Where(t => t.Id == id)
+                                 .Select(t => t.Language.Id).FirstOrDefault();
+
+            var subtitles = this.Data.Subtitles.All()
+                                .Where(s => s.Language.Id == languageId)
+                                .Where(s => s.IsFinished == false)
+                                .Where(s => s.State == SubtitleState.AwaitingTranslationTeam || s.Team == null)
+                                .Project().To<SubtitleOutputModel>()
+                                .ToDataSourceResult(request);
+
+            return View(subtitles.Data);
+        }
+
+        public ActionResult AddSubtitleToTeam(int? id, int? teamId)
+        {
+            if (id == null || teamId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);                
+            }   
+
+            var subtitle = this.Data.Subtitles.Find(id);
+            var team = this.Data.Teams.Find(teamId);
+
+            if (subtitle == null || team == null)
+            {
+                return HttpNotFound();
+            }
+
+            subtitle.Team = team;
+            subtitle.State = SubtitleState.InTranslation;
+            
+            this.Data.SaveChanges();
+            
+            return RedirectToAction("Index", new { id = teamId });
+        }
+        
         public ActionResult TeamSubtitles([DataSourceRequest] DataSourceRequest request, int? id)
         {
-            var errorResult = GetErrorValidateTeamAndUser(id);
-
-            if (errorResult != null)
-            {
-                return errorResult;
-            }
+            SetViewBag(id);
 
             return View();
         }
@@ -49,6 +92,8 @@
                 return errorResult;
             }
 
+            
+
             var subtitles = this.Data.Subtitles.All()
                 .Where(s => s.Team.Id == id)
                 .Project().To<SubtitleOutputModel>()
@@ -59,8 +104,7 @@
 
         public ActionResult Details (int? id, int? teamId)
         {
-            
-            return HttpNotFound();
+            return View();
         }
 
         private ActionResult GetErrorValidateTeamAndUser(int? id)
@@ -80,17 +124,18 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            return null;
+        }
+
+        private void SetViewBag(int? id)
+        {
             var team = this.Data.Teams.Find(id);
 
-            if (team == null)
+            if (team != null)
             {
-                return HttpNotFound();
+                ViewBag.TeamName = team.Name;
+                ViewBag.Id = team.Id;
             }
-
-            ViewBag.TeamName = team.Name;
-            ViewBag.Id = team.Id;
-
-            return null;
         }
     }
 }

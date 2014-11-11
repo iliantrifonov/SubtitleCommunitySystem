@@ -537,6 +537,7 @@
     <Content Include="Content\kendo\images\kendoui.woff" />
     <Content Include="Areas\Teams\Views\Subtitles\TeamSubtitles.cshtml" />
     <Content Include="Areas\Teams\Views\Subtitles\Details.cshtml" />
+    <Content Include="Areas\Teams\Views\Subtitles\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />

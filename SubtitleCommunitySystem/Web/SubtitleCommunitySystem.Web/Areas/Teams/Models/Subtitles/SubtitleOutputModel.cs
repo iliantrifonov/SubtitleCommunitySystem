@@ -13,7 +13,7 @@
     {
         public int Id { get; set; }
 
-        public int TeamId { get; set; }
+        public int? TeamId { get; set; }
 
         [Display(Name = "Complete")]
         public bool IsFinished { get; set; }
