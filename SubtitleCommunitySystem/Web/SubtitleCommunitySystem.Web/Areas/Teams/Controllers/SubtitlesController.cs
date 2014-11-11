@@ -33,6 +33,39 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            var userID = this.User.Identity.GetUserId();
+
+            var isInTeam = this.Data.Teams.All()
+                .Where(t => t.Id == id)
+                .Any(t => t.Members.Any(m => m.Id == userID));
+
+            if (!isInTeam)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var team = this.Data.Teams.Find(id);
+
+            if (team == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.TeamName = team.Name;
+            ViewBag.Id = team.Id;
+
+            return View();
+        }
+
+        public ActionResult ReadTeamSubtitles([DataSourceRequest] DataSourceRequest request, int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             var userID = this.User.Identity.GetUserId();
             var isInTeam = this.Data.Teams.All()
                 .Where(t => t.Id == id)
@@ -50,16 +83,12 @@
                 return HttpNotFound();
             }
 
-            var subtitles = null;
-                //this.Data.Teams.All()
-                //.Where(t => t.Id == id)
-                //.Select<Team, IQueryable<Subtitle>>(c => c.Subtitles)
-                //.Project().To<SubtitleOutputModel>()
-                //.ToDataSourceResult(request).Data;
-
-            ViewBag.TeamName = team.Name;
-
-            return View();
+            var subtitles = this.Data.Subtitles.All()
+                .Where(s => s.Team.Id == id)
+                .Project().To<SubtitleOutputModel>()
+                .ToDataSourceResult(request);
+            
+            return Json(subtitles);
         }
     }
 }
