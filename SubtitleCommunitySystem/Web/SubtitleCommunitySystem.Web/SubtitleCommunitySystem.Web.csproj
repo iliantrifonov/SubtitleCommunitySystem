@@ -223,7 +223,9 @@
     <Compile Include="Areas\Private\Models\MyRequests\RequestIndexViewModel.cs" />
     <Compile Include="Areas\Private\PrivateAreaRegistration.cs" />
     <Compile Include="Areas\Teams\Controllers\ChatController.cs" />
+    <Compile Include="Areas\Teams\Controllers\SubtitlesController.cs" />
     <Compile Include="Areas\Teams\Controllers\TeamsController.cs" />
+    <Compile Include="Areas\Teams\Models\Subtitles\SubtitleOutputModel.cs" />
     <Compile Include="Areas\Teams\Models\Teams\TeamDetailedOutputModel.cs" />
     <Compile Include="Areas\Teams\Models\Teams\TeamIndexOutputModel.cs" />
     <Compile Include="Areas\Teams\TeamsAreaRegistration.cs" />
@@ -601,6 +603,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administration\Views\Movies\DisplayTemplates\" />
     <Folder Include="Areas\Teams\Models\Chat\" />
+    <Folder Include="Areas\Teams\Views\Subtitles\" />
     <Folder Include="Files\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\AuthenticatedUser\" />

@@ -10,7 +10,6 @@
             this.Tasks = new HashSet<SubtitleTask>();
         }
 
-        [Required]
         public virtual Movie Movie { get; set; }
 
         [Required]
