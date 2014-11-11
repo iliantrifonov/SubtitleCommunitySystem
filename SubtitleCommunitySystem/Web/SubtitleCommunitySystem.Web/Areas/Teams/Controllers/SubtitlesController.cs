@@ -27,7 +27,7 @@
         }
 
         // GET: Teams/Subtitles
-        public ActionResult Index([DataSourceRequest] DataSourceRequest request, int? id)
+        public ActionResult TeamSubtitles([DataSourceRequest] DataSourceRequest request, int? id)
         {
             if (id == null)
             {
@@ -50,9 +50,16 @@
                 return HttpNotFound();
             }
 
-            var subtitles = team.Subtitles.ToDataSourceResult(request).Data;
+            var subtitles = null;
+                //this.Data.Teams.All()
+                //.Where(t => t.Id == id)
+                //.Select<Team, IQueryable<Subtitle>>(c => c.Subtitles)
+                //.Project().To<SubtitleOutputModel>()
+                //.ToDataSourceResult(request).Data;
 
-            return View(subtitles);
+            ViewBag.TeamName = team.Name;
+
+            return View();
         }
     }
 }

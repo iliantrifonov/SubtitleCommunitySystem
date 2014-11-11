@@ -1,0 +1,33 @@
+﻿@model IEnumerable<SubtitleOutputModel>
+
+@{
+    ViewBag.Title = "Team Subtitles";
+}
+
+<h2>Team "@ViewBag.TeamName" Subtitles</h2>
+
+@(Html.Kendo().Grid<SubtitleOutputModel>(Model)
+    .Name("grid")
+    .Columns(columns =>
+        {
+            columns.Bound(c => c.MovieMainPosterUrl).HtmlAttributes(new { @class = "col-md-3" });
+            columns.Bound(c => c.MovieName).HtmlAttributes(new { @class = "col-md-3" })
+                .Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")));
+            columns.Bound(c => c.State).HtmlAttributes(new { @class = "col-md-3" })
+                .Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")));
+            columns.Bound(c => c.IsFinished).HtmlAttributes(new { @class = "col-md-3" });
+            columns.Bound(c => c.Language).HtmlAttributes(new { @class = "col-md-3" })
+                .Filterable(false)
+                .Sortable(false); 
+            
+            columns
+                .Template(c => Html.Partial("_CrudButtonsPartial", c));
+        })
+        .Sortable()
+        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+)
+

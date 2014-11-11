@@ -535,6 +535,7 @@
     <Content Include="Areas\Teams\Views\Chat\Index.cshtml" />
     <Content Include="Content\kendo\images\kendoui.ttf" />
     <Content Include="Content\kendo\images\kendoui.woff" />
+    <Content Include="Areas\Teams\Views\Subtitles\TeamSubtitles.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -603,7 +604,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administration\Views\Movies\DisplayTemplates\" />
     <Folder Include="Areas\Teams\Models\Chat\" />
-    <Folder Include="Areas\Teams\Views\Subtitles\" />
     <Folder Include="Files\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\AuthenticatedUser\" />
