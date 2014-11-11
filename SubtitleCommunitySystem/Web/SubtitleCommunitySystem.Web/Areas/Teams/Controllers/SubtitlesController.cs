@@ -29,13 +29,42 @@
         // GET: Teams/Subtitles
         public ActionResult TeamSubtitles([DataSourceRequest] DataSourceRequest request, int? id)
         {
+            var errorResult = GetErrorValidateTeamAndUser(id);
+
+            if (errorResult != null)
+            {
+                return errorResult;
+            }
+
+            return View();
+        }
+
+        public ActionResult ReadTeamSubtitles([DataSourceRequest] DataSourceRequest request, int? id)
+        {
+
+            var errorResult = GetErrorValidateTeamAndUser(id);
+
+            if (errorResult != null)
+            {
+                return errorResult;
+            }
+
+            var subtitles = this.Data.Subtitles.All()
+                .Where(s => s.Team.Id == id)
+                .Project().To<SubtitleOutputModel>()
+                .ToDataSourceResult(request);
+            
+            return Json(subtitles);
+        }
+
+        private ActionResult GetErrorValidateTeamAndUser(int? id)
+        {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             var userID = this.User.Identity.GetUserId();
-
             var isInTeam = this.Data.Teams.All()
                 .Where(t => t.Id == id)
                 .Any(t => t.Members.Any(m => m.Id == userID));
@@ -55,40 +84,7 @@
             ViewBag.TeamName = team.Name;
             ViewBag.Id = team.Id;
 
-            return View();
-        }
-
-        public ActionResult ReadTeamSubtitles([DataSourceRequest] DataSourceRequest request, int? id)
-        {
-
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var userID = this.User.Identity.GetUserId();
-            var isInTeam = this.Data.Teams.All()
-                .Where(t => t.Id == id)
-                .Any(t => t.Members.Any(m => m.Id == userID));
-
-            if (!isInTeam)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var team = this.Data.Teams.Find(id);
-
-            if (team == null)
-            {
-                return HttpNotFound();
-            }
-
-            var subtitles = this.Data.Subtitles.All()
-                .Where(s => s.Team.Id == id)
-                .Project().To<SubtitleOutputModel>()
-                .ToDataSourceResult(request);
-            
-            return Json(subtitles);
+            return null;
         }
     }
 }

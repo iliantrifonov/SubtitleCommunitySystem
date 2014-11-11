@@ -22,7 +22,8 @@
             columns.Bound(c => c.State).HtmlAttributes(new { @class = "col-md-3" })
                 .Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")));
             
-            columns.Bound(c => c.IsFinished).HtmlAttributes(new { @class = "col-md-3" });
+            columns.Bound(c => c.IsFinished)
+                .ClientTemplate("<span>#= IsFinished ? 'Yes' : 'No'#</span>");
             
             columns.Bound(c => c.Language).HtmlAttributes(new { @class = "col-md-3" })
                 .Filterable(false)

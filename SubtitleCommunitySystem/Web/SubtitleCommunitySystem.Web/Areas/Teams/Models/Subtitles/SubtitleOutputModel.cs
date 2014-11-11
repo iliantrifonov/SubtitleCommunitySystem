@@ -7,19 +7,23 @@
 
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Infrastructure.Mappings;
+    using System.ComponentModel.DataAnnotations;
 
     public class SubtitleOutputModel : IMapFrom<Subtitle>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
+        [Display(Name = "Complete")]
         public bool IsFinished { get; set; }
 
         public virtual string Language { get; set; }
 
         public SubtitleState State { get; set; }
 
+        [Display(Name = "Title")]
         public string MovieName { get; set; }
 
+        [Display(Name = "Poster")]
         public string MovieMainPosterUrl { get; set; }
 
         public void CreateMappings(AutoMapper.IConfiguration configuration)
