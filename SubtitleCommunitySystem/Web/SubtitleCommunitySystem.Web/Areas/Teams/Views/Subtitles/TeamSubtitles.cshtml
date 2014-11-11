@@ -11,13 +11,13 @@
     .Columns(columns =>
         {
             columns.Bound(c => c.MovieMainPosterUrl)
-                .ClientTemplate("<a href='/Teams/Subtitles/Details/#=Id#'><img src='#=MovieMainPosterUrl#' alt='#:MovieName#' style='max-width:80px' /></a>")
+                .ClientTemplate("<a href='/Teams/Subtitles/Details/#=Id#?teamId=#=TeamId#'><img src='#=MovieMainPosterUrl#' alt='#:MovieName#' style='max-width:80px' /></a>")
                 .Filterable(false)
                 .Sortable(false);
             
             columns.Bound(c => c.MovieName).HtmlAttributes(new { @class = "col-md-3" })
                 .Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")))
-                .ClientTemplate("<a class='' href='/Teams/Subtitles/Details/#=Id#'>#:MovieName#</a>"); 
+                .ClientTemplate("<a class='' href='/Teams/Subtitles/Details/#=Id#?teamId=#=TeamId#'>#:MovieName#</a>"); 
             
             columns.Bound(c => c.State).HtmlAttributes(new { @class = "col-md-3" })
                 .Filterable(ftb => ftb.Cell(cell => cell.Operator("contains")));

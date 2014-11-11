@@ -13,6 +13,8 @@
     {
         public int Id { get; set; }
 
+        public int TeamId { get; set; }
+
         [Display(Name = "Complete")]
         public bool IsFinished { get; set; }
 
@@ -32,7 +34,7 @@
                 .ForMember(m => m.Language, opt => opt.MapFrom(u => u.Language.Name))
                 .ForMember(m => m.MovieName, opt => opt.MapFrom(u => u.Movie.Name))
                 .ForMember(m => m.MovieMainPosterUrl, opt => opt.MapFrom(u => u.Movie.MainPosterUrl))
-                ;
+                .ForMember(m => m.TeamId, opt => opt.MapFrom(u => u.Team.Id));
         }
     }
 }

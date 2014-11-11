@@ -57,6 +57,12 @@
             return Json(subtitles);
         }
 
+        public ActionResult Details (int? id, int? teamId)
+        {
+            
+            return HttpNotFound();
+        }
+
         private ActionResult GetErrorValidateTeamAndUser(int? id)
         {
             if (id == null)
