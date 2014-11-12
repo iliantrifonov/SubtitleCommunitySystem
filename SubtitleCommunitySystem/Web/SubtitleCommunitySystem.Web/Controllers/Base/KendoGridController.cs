@@ -10,7 +10,7 @@
 
     using SubtitleCommunitySystem.Data;
 
-    public abstract class KendoGridController : BaseController
+    public abstract class KendoGridController : AuthenticatedUserController
     {
         public KendoGridController(IApplicationData data)
             : base(data)

@@ -45,11 +45,6 @@
             }
         }
 
-        //protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
-        //{
-        //    return base.BeginExecute(requestContext, callback, state);
-        //}
-
         protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
         {
             // Work with data before BeginExecute to prevent "NotSupportedException: A second operation started on this context before a previous asynchronous operation completed."

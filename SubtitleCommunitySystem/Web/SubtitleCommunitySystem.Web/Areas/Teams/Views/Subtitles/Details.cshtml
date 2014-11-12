@@ -1,17 +1,100 @@
-﻿@model SubtitleOutputModel
+﻿@using SubtitleCommunitySystem.Web.Infrastructure.Constants;
+
+@model dynamic
+
 @{
     ViewBag.Title = "Details";
-}
 
+    var ControllerName = "Tasks";
+}
 <h2>Subtitle Details</h2>
+<div class="row">
+    <div class="img-container">
+        <img src="@Model.MovieMainPosterUrl" alt="@Model.MovieName" style="max-width:80px" />
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            Original Title:
+        </div>
+        <div class="col-md-6">
+            @Model.MovieName
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            Original Description:
+        </div>
+        <div class="col-md-6">
+            @Model.MovieDescription
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            Translated Title:
+        </div>
+        <div class="col-md-6">
+            @Model.Name
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            Translated Description:
+        </div>
+        <div class="col-md-6">
+            @Model.Description
+        </div>
+    </div>
+    <div class="row">
+        <button class="btn btn-danger">Download description file for tasks (NA)</button>
+    </div>
+    @{
+        var isTeamLeader = false;
+        var roles = ViewBag.UserRoles as IEnumerable<string>;
+        if (ViewBag.UserRoles != null)
+        {
+            if (roles.Contains(RoleConstants.TeamLeader))
+            {
+                isTeamLeader = true;
+            }
+        }
+    }
+
+</div>
 
 @if (Model.IsFinished)
 {
     <h2>Is Finished is a work in progress</h2>
 }
-
 @if (!Model.IsFinished)
 {
-    
+    @(Html.Kendo()
+        .Grid<SubtitleOutputModel>()
+        .Name("grid")
+        .Columns(cols =>
+        {
+            cols.Bound(pr => pr.Id);
+            //cols.Bound(pr => pr.Name);
+            //cols.Bound(pr => pr.Url);
+            //cols.Bound(pr => pr.AvailableClicks);
+            //cols.Bound(pr => pr.CreatedOn).Hidden();
+            //cols.Bound(pr => pr.ModifiedOn).Hidden();
+            cols.Command(com => com.Edit()).Title("Промяна");
+            cols.Command(com => com.Destroy()).Title("Изтриване");
+        })
+        .ColumnMenu()
+        .Pageable(page => page.Refresh(true))
+        .Sortable()
+        .Groupable()
+        .Filterable()
+        .Editable(edit => edit.Mode(GridEditMode.PopUp))
+        .ToolBar(toolbar => toolbar.Create())
+        .DataSource(data =>
+            data
+            .Ajax()
+            .Model(m => m.Id(adv => adv.Id))
+            .Read(read => read.Action("Read", ControllerName))
+            .Create(create => create.Action("Create", ControllerName))
+            .Update(update => update.Action("Update", ControllerName))
+            .Destroy(destroy => destroy.Action("Destroy", ControllerName))
+        ))
 }
-
