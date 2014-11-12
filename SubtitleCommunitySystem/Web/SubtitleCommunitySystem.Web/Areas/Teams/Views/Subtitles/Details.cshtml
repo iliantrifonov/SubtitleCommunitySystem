@@ -1,7 +1,17 @@
-﻿@model dynamic
+﻿@model SubtitleOutputModel
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>SubtitleDetails</h2>
+<h2>Subtitle Details</h2>
+
+@if (Model.IsFinished)
+{
+    <h2>Is Finished is a work in progress</h2>
+}
+
+@if (!Model.IsFinished)
+{
+    
+}
 
