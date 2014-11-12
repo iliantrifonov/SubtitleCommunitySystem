@@ -12,7 +12,7 @@
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Data.Migrations;
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -45,5 +45,19 @@
         public IDbSet<Movie> Movies { get; set; }
 
         public IDbSet<PromotionRequest> PromotionRequests { get; set; }
+
+
+        public DbContext DbContext
+        {
+            get
+            {
+                return this;
+            }
+        }
+
+        public new IDbSet<T> Set<T>() where T : class
+        {
+            return base.Set<T>();
+        }
     }       
 }

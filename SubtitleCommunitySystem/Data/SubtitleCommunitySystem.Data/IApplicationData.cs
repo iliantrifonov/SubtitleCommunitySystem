@@ -5,10 +5,11 @@
 
     using SubtitleCommunitySystem.Data.Repositories;
     using SubtitleCommunitySystem.Model;
-using System.Collections.Generic;
 
     public interface IApplicationData
     {
+        IApplicationDbContext Context { get; }
+
         IRepository<TeamRole> TeamRoles { get; }
 
         IRepository<ApplicationUser> Users { get; }

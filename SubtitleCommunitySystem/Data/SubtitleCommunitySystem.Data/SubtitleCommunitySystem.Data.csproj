@@ -81,6 +81,7 @@
     <Compile Include="ApplicationData.cs" />
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="IApplicationData.cs" />
+    <Compile Include="IApplicationDbContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EFRepository.cs" />

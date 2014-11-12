@@ -233,6 +233,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthenticatedUserController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\Base\KendoGridController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Filters\AuthAttribute.cs" />
@@ -609,6 +610,7 @@
     <Folder Include="Files\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\AuthenticatedUser\" />
+    <Folder Include="Views\KendoGrid\" />
     <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>

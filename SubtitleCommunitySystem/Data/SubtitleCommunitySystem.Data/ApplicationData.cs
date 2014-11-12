@@ -13,10 +13,10 @@
 
     public class ApplicationData : IApplicationData
     {
-        private DbContext context;
+        private IApplicationDbContext context;
         private IDictionary<Type, object> repositories;
 
-        public ApplicationData(DbContext context)
+        public ApplicationData(IApplicationDbContext context)
         {
             this.context = context;
             this.repositories = new Dictionary<Type, object>();
@@ -25,6 +25,14 @@
         public ApplicationData()
             : this(new ApplicationDbContext())
         {
+        }
+
+        public IApplicationDbContext Context
+        {
+            get
+            {
+                return this.context;
+            }
         }
 
         public IRepository<TeamRole> TeamRoles
@@ -124,7 +132,7 @@
         {
             try
             {
-                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.context));
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.context.DbContext));
                 userManager.AddToRole(user.Id, role);
             }
             catch (Exception)
