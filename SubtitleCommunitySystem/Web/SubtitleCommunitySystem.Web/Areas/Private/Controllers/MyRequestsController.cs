@@ -11,7 +11,7 @@
     using AutoMapper.QueryableExtensions;
 
     using SubtitleCommunitySystem.Data;
-    using SubtitleCommunitySystem.Web.Controllers;
+    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Web.Areas.Private.Models;
     using SubtitleCommunitySystem.Model;
 

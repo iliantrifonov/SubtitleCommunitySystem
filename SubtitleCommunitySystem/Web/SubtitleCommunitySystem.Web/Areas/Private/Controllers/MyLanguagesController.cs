@@ -12,7 +12,7 @@
 
     using SubtitleCommunitySystem.Web.Areas.Administration.Models;
     using SubtitleCommunitySystem.Web.Areas.Private.Models;
-    using SubtitleCommunitySystem.Web.Controllers;
+    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Data;
 
     public class MyLanguagesController : AuthenticatedUserController

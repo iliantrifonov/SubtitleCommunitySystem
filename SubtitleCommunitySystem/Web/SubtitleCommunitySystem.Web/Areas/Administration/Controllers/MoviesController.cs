@@ -13,7 +13,7 @@
 
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Web.Areas.Administration.Models;
-    using SubtitleCommunitySystem.Web.Controllers;
+    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Infrastructure.Constants;
 

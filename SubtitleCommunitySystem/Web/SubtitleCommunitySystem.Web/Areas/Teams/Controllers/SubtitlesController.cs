@@ -15,7 +15,7 @@
 
     using SubtitleCommunitySystem.Web.Areas.Teams.Models;
     using SubtitleCommunitySystem.Model;
-    using SubtitleCommunitySystem.Web.Controllers;
+    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Data;
 
     public class SubtitlesController : AuthenticatedUserController

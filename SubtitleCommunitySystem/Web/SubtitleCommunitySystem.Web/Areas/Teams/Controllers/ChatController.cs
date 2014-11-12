@@ -10,7 +10,7 @@
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
-    using SubtitleCommunitySystem.Web.Controllers;
+    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Web.Areas.Teams.Models;
 

@@ -1,4 +1,4 @@
-﻿namespace SubtitleCommunitySystem.Web.Controllers
+﻿namespace SubtitleCommunitySystem.Web.Controllers.Base
 {
     using System;
     using System.Collections.Generic;
