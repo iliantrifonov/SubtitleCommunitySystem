@@ -1,17 +1,18 @@
 ﻿@using SubtitleCommunitySystem.Web.Infrastructure.Constants;
 
-@model dynamic
+@model SubtitleDetailsModel
 
 @{
     ViewBag.Title = "Details";
 
-    var ControllerName = "Tasks";
+    string ControllerName = "Tasks";
 }
+
 <h2>Subtitle Details</h2>
 <div class="row">
-    <div class="img-container">
-        <img src="@Model.MovieMainPosterUrl" alt="@Model.MovieName" style="max-width:80px" />
-    </div>
+    <img src="@Model.MovieMainPosterUrl" alt="@Model.MovieName" style="max-width:80px" />
+</div>
+<div class="row">
     <div class="row">
         <div class="col-md-2">
             Original Title:
@@ -44,7 +45,7 @@
             @Model.Description
         </div>
     </div>
-    <div class="row">
+    <div class="row pull-right">
         <button class="btn btn-danger">Download description file for tasks (NA)</button>
     </div>
     @{
@@ -65,36 +66,36 @@
 {
     <h2>Is Finished is a work in progress</h2>
 }
-@if (!Model.IsFinished)
-{
-    @(Html.Kendo()
-        .Grid<SubtitleOutputModel>()
-        .Name("grid")
-        .Columns(cols =>
+    @*@if (!Model.IsFinished)
         {
-            cols.Bound(pr => pr.Id);
-            //cols.Bound(pr => pr.Name);
-            //cols.Bound(pr => pr.Url);
-            //cols.Bound(pr => pr.AvailableClicks);
-            //cols.Bound(pr => pr.CreatedOn).Hidden();
-            //cols.Bound(pr => pr.ModifiedOn).Hidden();
-            cols.Command(com => com.Edit()).Title("Промяна");
-            cols.Command(com => com.Destroy()).Title("Изтриване");
-        })
-        .ColumnMenu()
-        .Pageable(page => page.Refresh(true))
-        .Sortable()
-        .Groupable()
-        .Filterable()
-        .Editable(edit => edit.Mode(GridEditMode.PopUp))
-        .ToolBar(toolbar => toolbar.Create())
-        .DataSource(data =>
-            data
-            .Ajax()
-            .Model(m => m.Id(adv => adv.Id))
-            .Read(read => read.Action("Read", ControllerName))
-            .Create(create => create.Action("Create", ControllerName))
-            .Update(update => update.Action("Update", ControllerName))
-            .Destroy(destroy => destroy.Action("Destroy", ControllerName))
-        ))
-}
+            @(Html.Kendo()
+                .Grid<SubtitleOutputModel>()
+                .Name("grid")
+                .Columns(cols =>
+                {
+                    cols.Bound(pr => pr.Id);
+                    //cols.Bound(pr => pr.Name);
+                    //cols.Bound(pr => pr.Url);
+                    //cols.Bound(pr => pr.AvailableClicks);
+                    //cols.Bound(pr => pr.CreatedOn).Hidden();
+                    //cols.Bound(pr => pr.ModifiedOn).Hidden();
+                    cols.Command(com => com.Edit()).Title("Промяна");
+                    cols.Command(com => com.Destroy()).Title("Изтриване");
+                })
+                .ColumnMenu()
+                .Pageable(page => page.Refresh(true))
+                .Sortable()
+                .Groupable()
+                .Filterable()
+                .Editable(edit => edit.Mode(GridEditMode.PopUp))
+                .ToolBar(toolbar => toolbar.Create())
+                .DataSource(data =>
+                    data
+                    .Ajax()
+                    .Model(m => m.Id(adv => adv.Id))
+                    .Read(read => read.Action("Read", ControllerName))
+                    .Create(create => create.Action("Create", ControllerName))
+                    .Update(update => update.Action("Update", ControllerName))
+                    .Destroy(destroy => destroy.Action("Destroy", ControllerName))
+                ))
+        }*@

@@ -226,6 +226,7 @@
     <Compile Include="Areas\Teams\Controllers\SubtitlesController.cs" />
     <Compile Include="Areas\Teams\Controllers\TasksController.cs" />
     <Compile Include="Areas\Teams\Controllers\TeamsController.cs" />
+    <Compile Include="Areas\Teams\Models\Subtitles\SubtitleDetailsModel.cs" />
     <Compile Include="Areas\Teams\Models\Subtitles\SubtitleOutputModel.cs" />
     <Compile Include="Areas\Teams\Models\Tasks\TaskInputModel.cs" />
     <Compile Include="Areas\Teams\Models\Teams\TeamDetailedOutputModel.cs" />

@@ -104,7 +104,24 @@
 
         public ActionResult Details (int? id, int? teamId)
         {
-            return View();
+            var errorResult = GetErrorValidateTeamAndUser(teamId);
+
+            if (errorResult != null)
+            {
+                return errorResult;
+            }
+
+            var model = this.Data.Subtitles.All()
+                .Where(s => s.Id == id)
+                .Project().To<SubtitleDetailsModel>().FirstOrDefault();
+
+            if (model == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            
+            return View(model);
         }
 
         private ActionResult GetErrorValidateTeamAndUser(int? id)
