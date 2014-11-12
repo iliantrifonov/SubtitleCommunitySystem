@@ -1,0 +1,6 @@
+﻿@using SubtitleCommunitySystem.Model;
+
+@model SubtitleTaskType
+@Html.Kendo().DropDownListFor(m => Model).BindTo(EnumHelper.GetSelectList(typeof(SubtitleTaskType)))
+
+
