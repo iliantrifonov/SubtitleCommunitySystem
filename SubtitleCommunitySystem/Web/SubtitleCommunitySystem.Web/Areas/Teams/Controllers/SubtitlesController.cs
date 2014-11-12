@@ -56,8 +56,8 @@
         {
             if (id == null || teamId == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);                
-            }   
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
             var subtitle = this.Data.Subtitles.Find(id);
             var team = this.Data.Teams.Find(teamId);
@@ -69,12 +69,12 @@
 
             subtitle.Team = team;
             subtitle.State = SubtitleState.InTranslation;
-            
+
             this.Data.SaveChanges();
-            
+
             return RedirectToAction("Index", new { id = teamId });
         }
-        
+
         public ActionResult TeamSubtitles([DataSourceRequest] DataSourceRequest request, int? id)
         {
             SetViewBag(id);
@@ -92,17 +92,17 @@
                 return errorResult;
             }
 
-            
+
 
             var subtitles = this.Data.Subtitles.All()
                 .Where(s => s.Team.Id == id)
                 .Project().To<SubtitleOutputModel>()
                 .ToDataSourceResult(request);
-            
+
             return Json(subtitles);
         }
 
-        public ActionResult Details (int? id, int? teamId)
+        public ActionResult Details(int? id, int? teamId)
         {
             var errorResult = GetErrorValidateTeamAndUser(teamId);
 
@@ -120,7 +120,14 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            
+            var selectList = this.Data.Teams.Find(id).Members.Select(m => new SelectListItem()
+            {
+                Text = m.UserName,
+                Value = m.Id
+            }).ToList();
+
+            ViewBag.Users = selectList;
+
             return View(model);
         }
 
