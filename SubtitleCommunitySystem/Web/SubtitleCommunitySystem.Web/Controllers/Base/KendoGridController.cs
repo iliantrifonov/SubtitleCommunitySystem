@@ -31,14 +31,17 @@
         }
 
         [NonAction]
-        protected virtual T Create<T>(object model) where T : class
+        protected virtual TModel Create<TModel, TViewModel>(TViewModel model)
+            where TModel : class
+            where TViewModel : class
         {
             if (model != null && ModelState.IsValid)
             {
-                var dbModel = Mapper.Map<T>(model);
+                var dbModel = Mapper.Map<TModel>(model);
                 this.ChangeEntityStateAndSave(dbModel, EntityState.Added);
                 return dbModel;
             }
+
             return null;
         }
 

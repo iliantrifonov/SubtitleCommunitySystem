@@ -7,6 +7,8 @@
     using System.Web;
     using System.Web.Mvc;
 
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using Kendo.Mvc.UI;
 
     using SubtitleCommunitySystem.Data;
@@ -30,7 +32,9 @@
 
         protected override IEnumerable GetData()
         {
-            return this.Data.Tasks.All();
+            var data = this.Data.Tasks.All()
+                .Project().To<ViewModel>();
+            return data;
         }
 
         protected override T GetById<T>(object id)
@@ -41,7 +45,7 @@
         [HttpPost]
         public ActionResult Create([DataSourceRequest]DataSourceRequest request, ViewModel model)
         {
-            var dbModel = base.Create<Model>(model);
+            var dbModel = base.Create<Model, ViewModel>(model);
             if (dbModel != null) model.Id = dbModel.Id;
             return this.GridOperation(model, request);
         }

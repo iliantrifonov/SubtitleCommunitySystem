@@ -1,0 +1,9 @@
+﻿@model object 
+
+@if ((Model as Enum) == null)
+{
+    @Html.Kendo().TextBoxFor(model => model)
+} else
+{
+    @Html.Kendo().DropDownListFor(model => model)
+}
