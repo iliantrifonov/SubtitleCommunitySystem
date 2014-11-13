@@ -46,7 +46,13 @@
     </div>
 
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/kendo")
+        @Scripts.Render("~/bundles/kendo")
+        <script src="~/Scripts/kendo/cultures/kendo.culture.de-DE.min.js"></script>
+    <script type="text/javascript">
+        //set current to the "en-GB" culture script
+        kendo.culture("de-DE");
+    </script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

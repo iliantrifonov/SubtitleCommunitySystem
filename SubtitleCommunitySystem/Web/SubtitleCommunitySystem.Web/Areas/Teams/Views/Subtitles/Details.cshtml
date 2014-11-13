@@ -95,7 +95,7 @@
             .Sortable()
             .Groupable()
             .Filterable()
-            .Editable(edit => edit.Mode(GridEditMode.PopUp))
+            .Editable(edit => edit.Mode(GridEditMode.PopUp).TemplateName("TaskEditorTemplate"))
             .ToolBar(toolbar => toolbar.Create())
             .DataSource(data =>
                 data
@@ -111,6 +111,4 @@
                 .Update(update => update.Action("Update", ControllerName, new { subId = Model.Id }))
                 .Destroy(destroy => destroy.Action("Destroy", ControllerName))
             ))
-    
-    <h1>@Model.Id</h1>
 }

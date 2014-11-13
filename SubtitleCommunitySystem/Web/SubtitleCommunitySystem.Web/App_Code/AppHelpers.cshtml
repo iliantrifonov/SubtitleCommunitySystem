@@ -7,11 +7,11 @@
     </div>
 }
 
-@helper DateTimePickerScript(string id)
+@helper DateTimePickerScript(string selector)
 {
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#@id').datepicker({
+            $('@selector').datepicker({
                 changeMonth: true,
                 changeYear: true,
                 dateFormat: "dd/mm/yy"

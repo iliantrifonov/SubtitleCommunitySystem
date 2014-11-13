@@ -6,11 +6,13 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Reflection;
+using System.Threading;
 
 using SubtitleCommunitySystem.Data;
 using SubtitleCommunitySystem.Data.Migrations;
 using SubtitleCommunitySystem.Web.Infrastructure.Mappings;
-using System.Reflection;
+using System.Globalization;
 
 namespace SubtitleCommunitySystem.Web
 {
@@ -28,6 +30,9 @@ namespace SubtitleCommunitySystem.Web
 
             var autoMapperConfig = new AutoMapperConfig();
             autoMapperConfig.Execute(Assembly.GetExecutingAssembly());
+
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
         }
     }
 }

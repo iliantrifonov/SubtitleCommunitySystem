@@ -1,0 +1,42 @@
+﻿@model SubtitleCommunitySystem.Web.Areas.Teams.Models.TaskInputModel
+
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@Html.HiddenFor(model => model.Id)
+<div class="">
+
+    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "col-md-3" })
+    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "" } })
+    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+</div>
+<hr />
+<div class="">
+
+    @Html.LabelFor(model => model.PercentDone, htmlAttributes: new { @class = "col-md-3" })
+    @Html.EditorFor(model => model.PercentDone, new { htmlAttributes = new { @class = "" } })
+    @Html.ValidationMessageFor(model => model.PercentDone, "", new { @class = "text-danger" })
+</div>
+<hr />
+
+<div class="">
+    @Html.LabelFor(model => model.DateCreated, htmlAttributes: new { @class = "col-md-3" })
+
+    @Html.EditorFor(model => model.DateCreated, new { htmlAttributes = new { @class = "" } })
+    @Html.ValidationMessageFor(model => model.DateCreated, "", new { @class = "text-danger" })
+</div>
+<hr />
+
+<div class="">
+
+    @Html.LabelFor(model => model.DueDate, htmlAttributes: new { @class = "col-md-3" })
+    @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "" } })
+    @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
+</div>
+<hr />
+
+<div class="">
+
+    @Html.LabelFor(model => model.IsFinished, htmlAttributes: new { @class = "col-md-3" })
+    @Html.EditorFor(model => model.IsFinished)
+    @Html.ValidationMessageFor(model => model.IsFinished, "", new { @class = "text-danger" })
+</div>
