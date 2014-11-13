@@ -229,6 +229,7 @@
     <Compile Include="Areas\Teams\Models\Subtitles\SubtitleDetailsModel.cs" />
     <Compile Include="Areas\Teams\Models\Subtitles\SubtitleOutputModel.cs" />
     <Compile Include="Areas\Teams\Models\Tasks\TaskInputModel.cs" />
+    <Compile Include="Areas\Teams\Models\Tasks\UserDropDownModel.cs" />
     <Compile Include="Areas\Teams\Models\Teams\TeamDetailedOutputModel.cs" />
     <Compile Include="Areas\Teams\Models\Teams\TeamIndexOutputModel.cs" />
     <Compile Include="Areas\Teams\TeamsAreaRegistration.cs" />

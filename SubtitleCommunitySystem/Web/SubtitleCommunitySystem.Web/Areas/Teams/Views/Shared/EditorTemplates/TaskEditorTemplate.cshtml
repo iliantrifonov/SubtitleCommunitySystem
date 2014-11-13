@@ -46,5 +46,44 @@
 
 <div>
     @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "col-md-3" })
-    @Html.Kendo().DropDownListFor(m => m.Type).BindTo(EnumHelper.GetSelectList(typeof(SubtitleTaskType)))
+    @(Html.Kendo().DropDownListFor(m => m.Type)
+            .BindTo(EnumHelper.GetSelectList(typeof(SubtitleTaskType))))
 </div>
+
+<div>
+    @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "col-md-3" })
+    @(Html.Kendo().DropDownListFor(m => m.Type)
+        .Name("Type")
+            .BindTo(EnumHelper.GetSelectList(typeof(SubtitleTaskType))))
+</div>
+
+
+<script>
+    function filterType() {
+        return {
+            typeId: $("#Type").val()
+        };
+    }
+</script>
+
+<div class="users">
+    @(Html.Kendo().DropDownList()
+              .Name("Users")
+              .HtmlAttributes(new { style = "width:300px" })
+              .DataTextField("UserName")
+              .DataValueField("Id")
+              .DataSource(source =>
+              {
+                  source.Read(read =>
+                  {
+                      read.Action("GetCascadeUsers", "Tasks")
+                          .Data("filterType");
+                  })
+                  .ServerFiltering(true);
+              })
+              .Enable(false)
+              .AutoBind(false)
+              .CascadeFrom("Type"))
+</div>
+
+
