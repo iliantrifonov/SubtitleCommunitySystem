@@ -40,3 +40,10 @@
     @Html.EditorFor(model => model.IsFinished)
     @Html.ValidationMessageFor(model => model.IsFinished, "", new { @class = "text-danger" })
 </div>
+
+<div class="">
+
+    @Html.LabelFor(model => model, htmlAttributes: new { @class = "col-md-3" })
+    @Html.EditorFor(model => model.IsFinished)
+    @Html.ValidationMessageFor(model => model.IsFinished, "", new { @class = "text-danger" })
+</div>
