@@ -20,6 +20,7 @@
     using Model = SubtitleCommunitySystem.Model.SubtitleTask;
     using ViewModel = SubtitleCommunitySystem.Web.Areas.Teams.Models.TaskInputModel;
     using SubtitleCommunitySystem.Web.Areas.Teams.Models;
+    using SubtitleCommunitySystem.Model;
 
     public class TasksController : KendoGridController
     {
@@ -86,8 +87,10 @@
             return this.GridOperation(model, request);
         }
 
-        public ActionResult GetCascadeUsers(object typeId)
+        public ActionResult GetCascadeUsers(string typeId)
         {
+            SubtitleTaskType type = (SubtitleTaskType)int.Parse(typeId);
+            
             var userModels = this.Data.Users.All().Project().To<UserDropDownModel>();
             return Json(userModels, JsonRequestBehavior.AllowGet);
         }
