@@ -65,6 +65,9 @@
 @if (Model.IsFinished)
 {
     <h2>Is Finished is a work in progress</h2>
+    <div class="btn btn success">
+        Download subtitles
+    </div>
 }
 @if (!Model.IsFinished)
 {
@@ -80,13 +83,12 @@
                 cols.Bound(pr => pr.DueDate).Format("{0:dd/MM/yyyy}");
                 cols.Bound(pr => pr.IsFinished);
                 cols.Bound(pr => pr.Type);
-                //cols.Bound(pr => pr.Name);
-                //cols.Bound(pr => pr.Url);
-                //cols.Bound(pr => pr.AvailableClicks);
-                //cols.Bound(pr => pr.CreatedOn).Hidden();
-                //cols.Bound(pr => pr.ModifiedOn).Hidden();
-                cols.Command(com => com.Edit());
-                cols.Command(com => com.Destroy());
+                if (isTeamLeader)
+                {
+                    cols.Command(com => com.Edit());
+                    cols.Command(com => com.Destroy());
+                }
+                cols.Bound(pr => pr.SubtitleId);
             })
             .ColumnMenu()
             .Pageable(page => page.Refresh(true))
@@ -99,14 +101,16 @@
                 data
                 .Ajax()
                 .Model(m =>
-                { 
+                {
                     m.Id(pr => pr.Id);
                     m.Field(pr => pr.Id).Editable(false);
-                    
+                    m.Field(pr => pr.SubtitleId).Editable(false);
                 })
                 .Read(read => read.Action("Read", ControllerName))
-                .Create(create => create.Action("Create", ControllerName))
-                .Update(update => update.Action("Update", ControllerName))
+                .Create(create => create.Action("Create", ControllerName, new { subId = Model.Id }))
+                .Update(update => update.Action("Update", ControllerName, new { subId = Model.Id }))
                 .Destroy(destroy => destroy.Action("Destroy", ControllerName))
             ))
+    
+    <h1>@Model.Id</h1>
 }

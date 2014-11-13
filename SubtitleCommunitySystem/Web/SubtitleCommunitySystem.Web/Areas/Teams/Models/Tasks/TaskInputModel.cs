@@ -28,5 +28,7 @@
         public bool IsFinished { get; set; }
 
         public SubtitleTaskType Type { get; set; }
+
+        public int? SubtitleId { get; set; }
     }
 }

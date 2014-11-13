@@ -12,7 +12,9 @@
     using Kendo.Mvc.UI;
 
     using SubtitleCommunitySystem.Data;
+    using SubtitleCommunitySystem.Web.Filters;
     using SubtitleCommunitySystem.Web.Controllers.Base;
+    using SubtitleCommunitySystem.Web.Infrastructure.Constants;
 
 
     using Model = SubtitleCommunitySystem.Model.SubtitleTask;
@@ -43,26 +45,40 @@
         }
 
         [HttpPost]
-        public ActionResult Create([DataSourceRequest]DataSourceRequest request, ViewModel model)
+        [Auth(RoleConstants.TeamLeader)]
+        public ActionResult Create([DataSourceRequest]DataSourceRequest request, ViewModel model, int? subId)
         {
+            model.SubtitleId = subId;
             var dbModel = base.Create<Model, ViewModel>(model);
             if (dbModel != null) model.Id = dbModel.Id;
             return this.GridOperation(model, request);
         }
 
         [HttpPost]
-        public ActionResult Update([DataSourceRequest]DataSourceRequest request, ViewModel model)
+        [Auth(RoleConstants.TeamLeader)]
+        public ActionResult Update([DataSourceRequest]DataSourceRequest request, ViewModel model, int? subId)
         {
+            model.SubtitleId = subId;
             base.Update<Model, ViewModel>(model, model.Id);
             return this.GridOperation(model, request);
         }
 
         [HttpPost]
+        [Auth(RoleConstants.TeamLeader)]
         public ActionResult Destroy([DataSourceRequest]DataSourceRequest request, ViewModel model)
         {
             if (model != null && ModelState.IsValid)
             {
-                this.Data.Tasks.Delete(model.Id);
+                //this.Data.Tasks.Delete(model.Id);
+                var task = this.Data.Tasks.Find(model.Id);
+
+                task.Subtitle = null;
+                task.FinishedPartFile = null;
+                task.Subtitle = null;
+                task.SubtitleId = null;
+                task.User = null;
+
+                this.Data.Tasks.Delete(task);
                 this.Data.SaveChanges();
             }
 

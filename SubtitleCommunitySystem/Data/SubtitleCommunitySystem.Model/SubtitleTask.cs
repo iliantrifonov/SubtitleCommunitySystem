@@ -16,6 +16,10 @@
 
         public virtual ApplicationUser User { get; set; }
 
+        public virtual Subtitle Subtitle { get; set; }
+
+        public int? SubtitleId { get; set; }
+
         public DateTime DateCreated { get; set; }
 
         public DateTime DueDate { get; set; }
