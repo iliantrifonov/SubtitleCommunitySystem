@@ -16,6 +16,8 @@
 
         public virtual ApplicationUser User { get; set; }
 
+        public string UserId { get; set; }
+
         public virtual Subtitle Subtitle { get; set; }
 
         public int? SubtitleId { get; set; }

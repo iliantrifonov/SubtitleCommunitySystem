@@ -76,19 +76,21 @@
             .Name("grid")
             .Columns(cols =>
             {
-                cols.Bound(pr => pr.Id);
+                cols.Bound(pr => pr.Type);
+                cols.Bound(pr => pr.UserName);
+                
+                cols.Bound(pr => pr.Id).Hidden();
                 cols.Bound(pr => pr.Description);
                 cols.Bound(pr => pr.PercentDone);
                 cols.Bound(pr => pr.DateCreated).Format("{0:dd/MM/yyyy}");
                 cols.Bound(pr => pr.DueDate).Format("{0:dd/MM/yyyy}");
                 cols.Bound(pr => pr.IsFinished);
-                cols.Bound(pr => pr.Type);
                 if (isTeamLeader)
                 {
                     cols.Command(com => com.Edit());
                     cols.Command(com => com.Destroy());
                 }
-                cols.Bound(pr => pr.SubtitleId);
+                cols.Bound(pr => pr.SubtitleId).Hidden();
             })
             .ColumnMenu()
             .Pageable(page => page.Refresh(true))
@@ -106,7 +108,7 @@
                     m.Field(pr => pr.Id).Editable(false);
                     m.Field(pr => pr.SubtitleId).Editable(false);
                 })
-                .Read(read => read.Action("Read", ControllerName))
+                .Read(read => read.Action("ReadTasks", ControllerName, new { subtitleId = ViewBag.Id }))
                 .Create(create => create.Action("Create", ControllerName, new { subId = Model.Id }))
                 .Update(update => update.Action("Update", ControllerName, new { subId = Model.Id }))
                 .Destroy(destroy => destroy.Action("Destroy", ControllerName))

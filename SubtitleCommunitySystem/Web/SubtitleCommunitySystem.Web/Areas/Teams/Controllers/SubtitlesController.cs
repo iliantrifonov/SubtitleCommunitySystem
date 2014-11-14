@@ -128,6 +128,8 @@
 
             ViewBag.Users = selectList;
 
+            SetViewBag(teamId);
+
             return View(model);
         }
 
@@ -151,9 +153,9 @@
             return null;
         }
 
-        private void SetViewBag(int? id)
+        private void SetViewBag(int? teamId)
         {
-            var team = this.Data.Teams.Find(id);
+            var team = this.Data.Teams.Find(teamId);
 
             if (team != null)
             {

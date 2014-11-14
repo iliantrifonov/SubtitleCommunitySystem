@@ -8,8 +8,9 @@
 
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Infrastructure.Mappings;
+    using AutoMapper;
 
-    public class TaskInputModel : IMapFrom<SubtitleTask>, IMapTo<SubtitleTask>
+    public class TaskInputModel : IMapFrom<SubtitleTask>, IMapTo<SubtitleTask>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -27,5 +28,15 @@
         public SubtitleTaskType Type { get; set; }
 
         public int? SubtitleId { get; set; }
+
+        public string UserId { get; set; }
+
+        public string UserName { get; set; }
+
+        public void CreateMappings(IConfiguration configuration)
+        {
+            configuration.CreateMap<SubtitleTask, TaskInputModel>()
+                .ForMember(t => t.UserName, opt => opt.MapFrom(z => z.User.UserName));
+        }
     }
 }

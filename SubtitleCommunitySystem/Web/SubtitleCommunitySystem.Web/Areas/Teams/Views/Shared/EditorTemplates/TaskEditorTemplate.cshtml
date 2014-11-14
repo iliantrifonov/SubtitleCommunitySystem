@@ -1,12 +1,14 @@
-﻿@using SubtitleCommunitySystem.Model;
+﻿@using SubtitleCommunitySystem.Model
 
 @model SubtitleCommunitySystem.Web.Areas.Teams.Models.TaskInputModel
 
-
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 @Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.SubtitleId)
 <div class="">
-
+    @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "col-md-3" })
+    @Html.EditorFor(m => m.UserId)
+    <hr />
     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "col-md-3" })
     @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "" } })
     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
@@ -17,14 +19,6 @@
     @Html.LabelFor(model => model.PercentDone, htmlAttributes: new { @class = "col-md-3" })
     @Html.EditorFor(model => model.PercentDone, new { htmlAttributes = new { @class = "" } })
     @Html.ValidationMessageFor(model => model.PercentDone, "", new { @class = "text-danger" })
-</div>
-<hr />
-
-<div class="">
-    @Html.LabelFor(model => model.DateCreated, htmlAttributes: new { @class = "col-md-3" })
-
-    @Html.EditorFor(model => model.DateCreated, new { htmlAttributes = new { @class = "" } })
-    @Html.ValidationMessageFor(model => model.DateCreated, "", new { @class = "text-danger" })
 </div>
 <hr />
 
@@ -51,11 +45,11 @@
 </div>
 
 <div>
-    @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "col-md-3" })
     @(Html.Kendo().DropDownListFor(m => m.Type)
-        .Name("Type")
+        .Name("Type").HtmlAttributes(new { style = "display:none;" })
             .BindTo(EnumHelper.GetSelectList(typeof(SubtitleTaskType))))
 </div>
+<hr />
 
 
 <script>
@@ -65,25 +59,38 @@
         };
     }
 </script>
+<script>
+    function onSelectedUser() {
+        var user = $("#UserS");
+        $("#UserId").val(user.val());
+        $("#UserId").change();
+
+    }
+</script>
 
 <div class="users">
+    @Html.Label("Users", htmlAttributes: new { @class = "col-md-3" })
     @(Html.Kendo().DropDownList()
-              .Name("Users")
-              .HtmlAttributes(new { style = "width:300px" })
+              .Name("UserS")
               .DataTextField("UserName")
               .DataValueField("Id")
               .DataSource(source =>
               {
                   source.Read(read =>
                   {
-                      read.Action("GetCascadeUsers", "Tasks")
+                      read.Action("GetCascadeUsers", "Tasks", new { teamId = ViewBag.Id })
                           .Data("filterType");
                   })
                   .ServerFiltering(true);
               })
-              .Enable(false)
-              .AutoBind(false)
+                      .Events(c => c.Select("onSelectedUser"))
               .CascadeFrom("Type"))
 </div>
+
+<script>
+    kendo.culture("en-GB");
+    $('#DateCreated').removeAttr("data-val-date");
+    $('#DueDate').removeAttr("data-val-date");
+</script>
 
 

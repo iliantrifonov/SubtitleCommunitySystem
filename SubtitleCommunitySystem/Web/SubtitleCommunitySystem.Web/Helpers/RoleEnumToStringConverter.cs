@@ -10,7 +10,7 @@
 
     public class RoleEnumToStringConverter
     {
-        public static string GetRole(RequestType type)
+        public static string FromRequestType(RequestType type)
         {
             switch (type)
             {
@@ -28,6 +28,23 @@
                     return RoleConstants.TeamLeader;
                 case RequestType.Moderator:
                     return RoleConstants.Moderator;
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+        internal static string FromSubtitleTaskType(SubtitleTaskType type)
+        {
+            switch (type)
+            {
+                case SubtitleTaskType.Translate:
+                    return RoleConstants.Translator;
+                case SubtitleTaskType.Sync:
+                    return RoleConstants.Sync;
+                case SubtitleTaskType.Revision:
+                    return RoleConstants.Revisioner;
+                case SubtitleTaskType.Image:
+                    return RoleConstants.ImageManager;
                 default:
                     throw new NotImplementedException();
             }

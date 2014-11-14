@@ -9,12 +9,14 @@
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+    using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Web.Filters;
     using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Web.Infrastructure.Constants;
+    using SubtitleCommunitySystem.Web.Helpers;
 
 
     using Model = SubtitleCommunitySystem.Model.SubtitleTask;
@@ -29,9 +31,22 @@
 
         }
 
-        public ActionResult Index()
+        [HttpPost]
+        public ActionResult ReadTasks([DataSourceRequest]DataSourceRequest request, int? subtitleId)
         {
-            return View();
+            var items =
+            this.GetData(subtitleId)
+            .ToDataSourceResult(request);
+            return this.Json(items);
+        }
+
+        protected IEnumerable GetData(int? subtitleId)
+        {
+            var data = this.Data.Tasks.All()
+                .Where(t => t.SubtitleId == subtitleId)
+                .Project().To<ViewModel>();
+
+            return data;
         }
 
         protected override IEnumerable GetData()
@@ -51,6 +66,7 @@
         public ActionResult Create([DataSourceRequest]DataSourceRequest request, ViewModel model, int? subId)
         {
             model.SubtitleId = subId;
+            model.DateCreated = DateTime.Now;
             var dbModel = base.Create<Model, ViewModel>(model);
             if (dbModel != null) model.Id = dbModel.Id;
             return this.GridOperation(model, request);
@@ -69,16 +85,16 @@
         [Auth(RoleConstants.TeamLeader)]
         public ActionResult Destroy([DataSourceRequest]DataSourceRequest request, ViewModel model)
         {
-            if (model != null && ModelState.IsValid)
+            if (model != null)
             {
                 //this.Data.Tasks.Delete(model.Id);
                 var task = this.Data.Tasks.Find(model.Id);
 
-                task.Subtitle = null;
-                task.FinishedPartFile = null;
-                task.Subtitle = null;
-                task.SubtitleId = null;
-                task.User = null;
+                //task.Subtitle = null;
+                //task.FinishedPartFile = null;
+                //task.Subtitle = null;
+                //task.SubtitleId = null;
+                //task.User = null;
 
                 this.Data.Tasks.Delete(task);
                 this.Data.SaveChanges();
@@ -87,12 +103,24 @@
             return this.GridOperation(model, request);
         }
 
-        public ActionResult GetCascadeUsers(string typeId)
+        [HttpGet]
+        public ActionResult GetCascadeUsers(int? typeId, int? teamId)
         {
-            SubtitleTaskType type = (SubtitleTaskType)int.Parse(typeId);
-            
-            var userModels = this.Data.Users.All().Project().To<UserDropDownModel>();
+            SubtitleTaskType type = (SubtitleTaskType)typeId;
+
+            var roleName = RoleEnumToStringConverter.FromSubtitleTaskType(type);
+
+            var userModels = DropDownService(roleName, teamId);
+
             return Json(userModels, JsonRequestBehavior.AllowGet);
+        }
+
+        public IEnumerable DropDownService(string roleName, int? teamId)
+        {
+            return this.Data.Users.All()
+                .Where(u => u.Teams.Any(t => t.Id == teamId))
+                .Where(u => u.TeamRoles.Any(r => r.Name == roleName))
+                .Project().To<UserDropDownModel>();
         }
     }
 }

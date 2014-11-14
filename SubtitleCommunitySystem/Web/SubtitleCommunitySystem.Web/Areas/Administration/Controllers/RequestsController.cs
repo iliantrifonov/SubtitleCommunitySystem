@@ -71,7 +71,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var roleAsString = RoleEnumToStringConverter.GetRole(request.Type);
+            var roleAsString = RoleEnumToStringConverter.FromRequestType(request.Type);
 
             bool isAlreadyInRole = user.TeamRoles.Any(r => r.Name == roleAsString);
 

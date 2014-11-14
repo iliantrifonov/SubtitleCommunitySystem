@@ -4,9 +4,9 @@
     using System.Data.Entity;
     using System.Web.Mvc;
 
+    using AutoMapper;
     using Kendo.Mvc.UI;
     using Kendo.Mvc.Extensions;
-    using AutoMapper;
 
     using SubtitleCommunitySystem.Data;
 
@@ -22,7 +22,7 @@
         protected abstract T GetById<T>(object id) where T : class;
 
         [HttpPost]
-        public ActionResult Read([DataSourceRequest]DataSourceRequest request)
+        public virtual ActionResult Read([DataSourceRequest]DataSourceRequest request)
         {
             var items =
             this.GetData()
