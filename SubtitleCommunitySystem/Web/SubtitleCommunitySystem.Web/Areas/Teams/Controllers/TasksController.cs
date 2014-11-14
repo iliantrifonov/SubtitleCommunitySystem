@@ -23,12 +23,15 @@
     using ViewModel = SubtitleCommunitySystem.Web.Areas.Teams.Models.TaskInputModel;
     using SubtitleCommunitySystem.Web.Areas.Teams.Models;
     using SubtitleCommunitySystem.Model;
+    using SubtitleCommunitySystem.Web.Services;
 
     public class TasksController : KendoGridController
     {
-        public TasksController(IApplicationData data) : base(data)
-        {
+        private ICacheService cacheService;
 
+        public TasksController(IApplicationData data, ICacheService cacheService) : base(data)
+        {
+            this.cacheService = cacheService;
         }
 
         [HttpPost]
@@ -87,16 +90,15 @@
         {
             if (model != null)
             {
-                //this.Data.Tasks.Delete(model.Id);
-                var task = this.Data.Tasks.Find(model.Id);
+                try
+                {
+                    this.Data.Tasks.Delete(model.Id);
+                }
+                catch (ArgumentNullException ex)
+                {
+                    // this sometimes happens with db data before latest migration.
+                }
 
-                //task.Subtitle = null;
-                //task.FinishedPartFile = null;
-                //task.Subtitle = null;
-                //task.SubtitleId = null;
-                //task.User = null;
-
-                this.Data.Tasks.Delete(task);
                 this.Data.SaveChanges();
             }
 
@@ -110,17 +112,17 @@
 
             var roleName = RoleEnumToStringConverter.FromSubtitleTaskType(type);
 
-            var userModels = DropDownService(roleName, teamId);
+            var userModels = cacheService.GetDropDownForUsers(roleName, teamId);
 
             return Json(userModels, JsonRequestBehavior.AllowGet);
         }
 
-        public IEnumerable DropDownService(string roleName, int? teamId)
-        {
-            return this.Data.Users.All()
-                .Where(u => u.Teams.Any(t => t.Id == teamId))
-                .Where(u => u.TeamRoles.Any(r => r.Name == roleName))
-                .Project().To<UserDropDownModel>();
-        }
+        //public IEnumerable DropDownService(string roleName, int? teamId)
+        //{
+        //    return this.Data.Users.All()
+        //        .Where(u => u.Teams.Any(t => t.Id == teamId))
+        //        .Where(u => u.TeamRoles.Any(r => r.Name == roleName))
+        //        .Project().To<UserDropDownModel>();
+        //}
     }
 }

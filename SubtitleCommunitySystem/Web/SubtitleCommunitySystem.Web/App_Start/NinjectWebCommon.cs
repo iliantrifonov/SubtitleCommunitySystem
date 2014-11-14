@@ -14,6 +14,7 @@ namespace SubtitleCommunitySystem.Web.App_Start
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Web.Filters;
     using System.Web.Mvc;
+    using SubtitleCommunitySystem.Web.Services;
 
     public static class NinjectWebCommon
     {
@@ -66,6 +67,7 @@ namespace SubtitleCommunitySystem.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IApplicationData>().To<ApplicationData>();
+            kernel.Bind<ICacheService>().To<CacheService>();
 
             kernel.BindFilter<AuthFilter>(FilterScope.Controller, 0)
             .WhenControllerHas<AuthAttribute>()

@@ -9,9 +9,11 @@
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Infrastructure.Mappings;
     using AutoMapper;
+    using System.Web.Mvc;
 
     public class TaskInputModel : IMapFrom<SubtitleTask>, IMapTo<SubtitleTask>, IHaveCustomMappings
     {
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
         [MaxLength(500)]
@@ -27,8 +29,10 @@
 
         public SubtitleTaskType Type { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
         public int? SubtitleId { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
         public string UserId { get; set; }
 
         public string UserName { get; set; }

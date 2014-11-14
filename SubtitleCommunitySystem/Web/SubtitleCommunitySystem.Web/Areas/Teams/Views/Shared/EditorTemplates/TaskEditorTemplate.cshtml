@@ -6,9 +6,7 @@
 @Html.HiddenFor(model => model.Id)
 @Html.HiddenFor(model => model.SubtitleId)
 <div class="">
-    @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "col-md-3" })
     @Html.EditorFor(m => m.UserId)
-    <hr />
     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "col-md-3" })
     @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "" } })
     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
@@ -64,7 +62,6 @@
         var user = $("#UserS");
         $("#UserId").val(user.val());
         $("#UserId").change();
-
     }
 </script>
 
@@ -83,7 +80,7 @@
                   })
                   .ServerFiltering(true);
               })
-                      .Events(c => c.Select("onSelectedUser"))
+              .Events(c => c.Select("onSelectedUser").DataBound("onSelectedUser").Open("onSelectedUser").Change("onSelectedUser"))
               .CascadeFrom("Type"))
 </div>
 
