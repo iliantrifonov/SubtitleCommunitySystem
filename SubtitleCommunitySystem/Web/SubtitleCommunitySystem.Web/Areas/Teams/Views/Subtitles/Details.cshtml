@@ -150,7 +150,10 @@
 
                 cols.Bound(pr => pr.Id).Hidden();
                 cols.Bound(pr => pr.Description);
-                cols.Bound(pr => pr.PercentDone);
+                cols.Bound(pr => pr.PercentDone).ClientTemplate(@"<div class='progress progress-striped active'>
+                                                                    <div class='progress-bar progress-bar-info' style='width: #= PercentDone #%'></div>
+                                                                </div>");
+                
                 cols.Bound(pr => pr.DateCreated).Format("{0:dd/MM/yyyy}");
                 cols.Bound(pr => pr.DueDate).Format("{0:dd/MM/yyyy}");
                 cols.Bound(pr => pr.IsFinished).ClientTemplate(@"
@@ -160,7 +163,7 @@
                                                 <div class='text-center'>No</div>
                                             #}#
                                             #if(FileId){#
-                                                <div class='text-center'><a class='btn btn-success' href='/Private/File/DownloadSource/#= FileId #'>Download File</a></div>
+                                                <div class='text-center'><a class='btn btn-success btn-xs' href='/Private/File/DownloadSource/#= FileId #'>Download File</a></div>
                                             #}else{#
                                                 <div></div>
                                             #}#");

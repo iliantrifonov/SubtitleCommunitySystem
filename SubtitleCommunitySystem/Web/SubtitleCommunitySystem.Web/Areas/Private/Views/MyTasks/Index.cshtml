@@ -16,7 +16,16 @@
                 cols.Bound(pr => pr.Id).Hidden();
                 cols.Bound(pr => pr.FileId).Hidden();
                 cols.Bound(pr => pr.Description);
-                cols.Bound(pr => pr.PercentDone);
+                cols.Bound(pr => pr.PercentDone)
+                    .ClientTemplate(@"<div class='progress progress-striped active'>
+                                          <div class='progress-bar progress-bar-info' style='width: #= PercentDone #%'></div>
+                                        </div>
+                                    <form enctype='multipart/form-data'  action='/Private/MyTasks/UpdatePercent' method='post'>
+                                        <input type='hidden' value='#= Id #' name='id' />
+                                        <input class='input-xs' type='number' max='100' min='0' name='percent' value='#= PercentDone #' />
+                                        <input class='btn btn-xs btn-success' type='submit' value='Update Progress' />
+                                    </form>
+                                        ");
                 cols.Bound(pr => pr.DateCreated).Format("{0:dd/MM/yyyy}");
                 cols.Bound(pr => pr.DueDate).Format("{0:dd/MM/yyyy}");
                 cols.Bound(pr => pr.IsFinished).ClientTemplate(@"
@@ -26,14 +35,15 @@
                                                 <div class='text-center'>No</div>
                                             #}#
                                             #if(FileId){#
-                                                <div class='text-center'><a class='btn btn-success' href='/Private/File/DownloadSource/#= FileId #'>Download File</a></div>
+                                                <div class='text-center'><a class='btn btn-success btn-xs' href='/Private/File/DownloadSource/#= FileId #'>Download File</a></div>
                                             #}else{#
                                                 <div class='text-center text-danger'>No file uploaded</div>
                                             #}#");
+                
                 cols.Bound(pr => pr.FileId).ClientTemplate(@"<form enctype='multipart/form-data' class='text-center' action='/Private/MyTasks/Upload' method='post'>
     <input type='hidden' value='#= Id #' name='id' />
     <input type='file' class='btn btn-submit' name='file' />
-    <input class='btn btn-success' type='submit' value='Upload File' />
+    <input class='btn btn-xs btn-success' type='submit' value='Upload File' />
 </form>");
                 cols.Bound(pr => pr.SubtitleId).Hidden();
             })
@@ -50,10 +60,10 @@
                 )
                 ))
 
-@*<script type="text/kendo-tmpl" id="upload">
+<script type="text/kendo-tmpl" id="upload">
     <form enctype='multipart/form-data'  action='/Private/MyTasks/Upload' method='post'>
         <input type='hidden' value='#= Id #' name='id' />
-        <input type='file' name='file' />
-        <input type='submit' />
+        <input type='number' max='100' min='0' />
+        <input class='btn btn-success' type='submit' value='Update Progress' />
     </form>
-</script>*@
+</script>

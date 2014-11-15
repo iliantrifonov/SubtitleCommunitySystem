@@ -57,7 +57,7 @@
             {
                 throw new HttpException(404, "Task not found");
             }
-            
+
             DbFile dbFile = null;
 
             try
@@ -80,6 +80,32 @@
             }
 
             task.FinishedPartFile = dbFile;
+            this.Data.SaveChanges();
+
+            return this.RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult UpdatePercent(int? id, int? percent)
+        {
+            if (id == null || percent == null)
+            {
+                throw new HttpException(400, "Missing task or percent when updating percent!");
+            }
+
+            var task = this.Data.Tasks.Find(id);
+
+            if (task == null)
+            {
+                throw new HttpException(404, "No such task");
+                
+            }
+
+            if (percent < 0 || percent > 100)
+            {
+                throw new HttpException(400, "Percent value is invalid!");
+            }
+            task.PercentDone = (int)percent;
             this.Data.SaveChanges();
 
             return this.RedirectToAction("Index");
