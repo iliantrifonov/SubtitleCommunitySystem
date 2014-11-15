@@ -188,6 +188,14 @@
                 subtitle.FinalFile = dbSubtitleFile;
             }
 
+            if (subtitle.IsFinished)
+            {
+                if (subtitle.FinalFile == null)
+                {
+                    subtitle.IsFinished = false;
+                }
+            }
+
             this.Data.SaveChanges();
 
             return RedirectToAction("Details", new { id = subtitle.Id, teamId = subtitle.Team.Id });

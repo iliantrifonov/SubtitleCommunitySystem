@@ -19,6 +19,7 @@
         [MaxLength(1000)]
         public string Description { get; set; }
 
+        [MaxLength(500)]
         public string ThumbnailUrl { get; set; }
 
         public int Id { get; set; }

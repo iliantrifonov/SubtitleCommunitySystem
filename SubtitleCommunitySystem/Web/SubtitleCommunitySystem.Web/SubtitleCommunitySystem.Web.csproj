@@ -261,7 +261,8 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\MovieDetailsViewModel.cs" />
     <Compile Include="ViewModels\MovieListViewModel.cs" />
-    <Compile Include="ViewModels\SubtitleListViewModel.cs" />
+    <Compile Include="ViewModels\SubtitleDetailViewModel.cs" />
+    <Compile Include="ViewModels\SubtitleGridViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -990,6 +991,8 @@
     <Content Include="Views\Shared\_SearchPartial.cshtml" />
     <Content Include="Views\Home\MovieDetails.cshtml" />
     <Content Include="Views\Home\_SubtitlesGridViewPartial.cshtml" />
+    <Content Include="Views\Home\_SubtitleDetailsPartial.cshtml" />
+    <Content Include="Views\Home\SubtitleDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

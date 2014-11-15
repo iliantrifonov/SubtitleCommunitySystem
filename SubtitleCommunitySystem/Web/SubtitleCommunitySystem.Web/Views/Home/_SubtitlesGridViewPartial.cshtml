@@ -9,8 +9,10 @@
             .Columns(cols =>
             {
                 cols.Bound(pr => pr.Id).Hidden();                
-                cols.Bound(pr => pr.Name);
-                cols.Bound(pr => pr.Language);
+                cols.Bound(pr => pr.Name)
+                    .ClientTemplate("<a href='/Home/SubtitleDetails/#= Id #' >#: Name #</a>");
+                cols.Bound(pr => pr.Language)
+                    .ClientTemplate("<a href='/Home/SubtitleDetails/#= Id #' >#: Language #</a>");
                 cols.Bound(pr => pr.Team);               
             })
             .Pageable()

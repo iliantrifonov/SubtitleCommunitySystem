@@ -1,0 +1,20 @@
+﻿@model string
+@{
+    var subId = ViewBag.SubtitleId;
+    var fileId = @ViewBag.FileId;
+}
+@Html.Action("GetDetailsPartial", "Home", new { subtitleId = subId })
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="row text-center">
+        <button class="btn btn-warning">Log in to Download</button>
+    </div>
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="row text-center">
+        @Ajax.ActionLink("Download Subtitle", "DownloadSource", "File", new { id = fileId, area = "Private" }, new AjaxOptions() { HttpMethod = "POST", InsertionMode = InsertionMode.InsertAfter }, new { @class = "btn btn-lg btn-success" })
+    </div>
+}

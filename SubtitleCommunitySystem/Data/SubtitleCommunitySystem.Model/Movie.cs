@@ -21,14 +21,17 @@
         [MaxLength(1000)]
         public string Description { get; set; }
 
+        [MaxLength(500)]
         public string Directory { get; set; }
 
         public int Id { get; set; }
 
         public virtual ICollection<Subtitle> Subtitles { get; set; }
 
+        [MaxLength(500)]
         public string BannerUrl { get; set; }
 
+        [MaxLength(500)]
         public string MainPosterUrl { get; set; }
 
         [Required]

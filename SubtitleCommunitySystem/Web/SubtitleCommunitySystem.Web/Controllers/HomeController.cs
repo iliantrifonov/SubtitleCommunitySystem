@@ -77,10 +77,56 @@
         {
             var subtitles = this.Data.Subtitles.All()
                 .Where(s => s.Movie.Id == movieId)
+                .Where(s => s.IsFinished)
                 .Project().To<SubtitleGridViewModel>()
                 .ToList();
 
             return this.PartialView("_SubtitlesGridViewPartial", subtitles);
+        }
+
+        public ActionResult SubtitleDetails(int? id)
+        {
+            if (id == null)
+            {
+                throw new HttpException(400, "Incorrect route parameters, id cannot be null");
+            }
+
+            int? fileId = this.Data.Subtitles.All()
+                .Where(c => c.Id == id)
+                .Select(c => c.FinalFile.Id).FirstOrDefault();
+
+            if (fileId == null)
+            {
+                throw new HttpException(404, "Subtitle does not exist, or does not have a subtitle file.");                
+            }
+
+            ViewBag.SubtitleId = id;
+            ViewBag.FileId = fileId;
+
+            return View();
+        }
+
+        [HttpGet]
+        [OutputCache(Duration = (1 * 60 * 60), VaryByParam = "subtitleId")]
+        public ActionResult GetDetailsPartial(int? subtitleId)
+        {
+            
+            if (subtitleId == null)
+            {
+                throw new HttpException(400, "Incorrect route parameters, subtitleId cannot be null");
+            }
+
+            var subtitle = this.Data.Subtitles.All()
+                .Where(s => s.Id == subtitleId)
+                .Project().To<SubtitleDetailViewModel>()
+                .FirstOrDefault();
+
+            if (subtitle == null)
+            {
+                throw new HttpException(404, "Subtitle does not exist!");
+            }
+
+            return this.PartialView("_SubtitleDetailsPartial", subtitle);
         }
     }
 }
