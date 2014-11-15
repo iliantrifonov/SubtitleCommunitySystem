@@ -12,10 +12,11 @@
     using Kendo.Mvc.UI;
 
     using SubtitleCommunitySystem.Data;
+    using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Areas.Administration.Models;
     using SubtitleCommunitySystem.Web.Controllers.Base;
-    using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Infrastructure.Constants;
+    using SubtitleCommunitySystem.Web.Helpers;
 
     public class MoviesController : AdminController
     {
@@ -72,16 +73,16 @@
 
             try
             {
-                dbFile = GetDbFile(subtitlesource, "initialSubtitleSource");
+                dbFile = DatabaseFileHelper.GetDbFile(subtitlesource, "initialSubtitleSource");
 
                 if (poster != null)
                 {
-                    movie.MainPosterUrl = UploadFileToServer(poster, "poster", movie);
+                    movie.MainPosterUrl = UploadHelper.UploadPictureToServer(poster, "poster", movie);
                 }
 
                 if (banner != null)
                 {
-                    movie.BannerUrl = UploadFileToServer(banner, "banner", movie);
+                    movie.BannerUrl = UploadHelper.UploadPictureToServer(banner, "banner", movie);
                 }
             }
             catch (ArgumentException ex)
@@ -151,17 +152,17 @@
             {
                 if (subtitlesource != null)
                 {
-                    dbFile = GetDbFile(subtitlesource, "initialSubtitleSource");
+                    dbFile = DatabaseFileHelper.GetDbFile(subtitlesource, "initialSubtitleSource");
                 }
 
                 if (poster != null)
                 {
-                    movie.MainPosterUrl = UploadFileToServer(poster, "poster", movie);
+                    movie.MainPosterUrl = UploadHelper.UploadPictureToServer(poster, "poster", movie);
                 }
 
                 if (banner != null)
                 {
-                    movie.BannerUrl = UploadFileToServer(banner, "banner", movie);
+                    movie.BannerUrl = UploadHelper.UploadPictureToServer(banner, "banner", movie);
                 }
             }
             catch (ArgumentException ex)
@@ -199,65 +200,28 @@
             return RedirectToAction("Edit", new { id = dbMovie.Id });
         }
 
-        private string UploadFileToServer(HttpPostedFileBase file, string fileName, MovieInputModel movie)
-        {
-            var extention = file.FileName.Substring(file.FileName.LastIndexOf('.'));
-            if (!FileConstants.AllowedPictureExtentions.Contains(extention))
-            {
-                throw new ArgumentException("Incorrect file extention type.");
-            }
+        //public DbFile GetDbFile(HttpPostedFileBase file, string fileName)
+        //{
+        //    var extention = file.FileName.Substring(file.FileName.LastIndexOf('.'));
+        //    if (!FileConstants.AllowedSourceExtentions.Contains(extention))
+        //    {
+        //        throw new ArgumentException("Incorrect file extention type.");
+        //    }
 
-            var directoryName = "~/Files/" + movie.Name;
-            if (string.IsNullOrWhiteSpace(movie.Directory))
-            {
-                if (Directory.Exists(Server.MapPath("~/Files/" + movie.Name)))
-                {
-                    var i = 0;
-                    while (Directory.Exists(Server.MapPath("~/Files/" + movie.Name + "." + i)))
-                    {
-                        i++;
-                    }
+        //    var dbFile = new DbFile()
+        //    {
+        //        ContentType = file.ContentType,
+        //        FileName = fileName + extention,
+        //    };
 
-                    directoryName = "~/Files/" + movie.Name + "." + i;
-                }
-            }
-            else
-            {
-                directoryName = movie.Directory;
-            }
+        //    using (var memoryStream = new MemoryStream())
+        //    {
+        //        file.InputStream.CopyTo(memoryStream);
+        //        dbFile.Content = memoryStream.ToArray();
+        //    }
 
-
-            movie.Directory = directoryName;
-            var mappedDirectoryName = Server.MapPath(directoryName);
-            Directory.CreateDirectory(mappedDirectoryName);
-
-            file.SaveAs(mappedDirectoryName + "/" + fileName + extention);
-
-            return directoryName.Substring(1) + "/" + fileName + extention;
-        }
-
-        private DbFile GetDbFile(HttpPostedFileBase file, string fileName)
-        {
-            var extention = file.FileName.Substring(file.FileName.LastIndexOf('.'));
-            if (!FileConstants.AllowedSourceExtentions.Contains(extention))
-            {
-                throw new ArgumentException("Incorrect file extention type.");
-            }
-
-            var dbFile = new DbFile()
-            {
-                ContentType = file.ContentType,
-                FileName = fileName + extention,
-            };
-
-            using (var memoryStream = new MemoryStream())
-            {
-                file.InputStream.CopyTo(memoryStream);
-                dbFile.Content = memoryStream.ToArray();
-            }
-
-            return dbFile;
-        }
+        //    return dbFile;
+        //}
 
         private void CreateSubtitlesForAllLanguages(Movie movie)
         {
