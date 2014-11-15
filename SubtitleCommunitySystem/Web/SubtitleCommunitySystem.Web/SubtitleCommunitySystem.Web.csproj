@@ -222,6 +222,7 @@
     <Compile Include="Areas\Private\Models\MyRequests\RequestOutputModel.cs" />
     <Compile Include="Areas\Private\Models\MyRequests\RequestIndexViewModel.cs" />
     <Compile Include="Areas\Private\PrivateAreaRegistration.cs" />
+    <Compile Include="Areas\Private\Controllers\FileController.cs" />
     <Compile Include="Areas\Teams\Controllers\ChatController.cs" />
     <Compile Include="Areas\Teams\Controllers\SubtitlesController.cs" />
     <Compile Include="Areas\Teams\Controllers\TasksController.cs" />

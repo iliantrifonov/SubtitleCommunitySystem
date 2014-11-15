@@ -25,13 +25,6 @@
         {
         }
 
-        public ActionResult DownloadSource(int id)
-        {
-            var file = this.Data.Movies.Find(id).InitialSource;
-            Response.AddHeader("Content-Disposition", "attachment; filename=\"" + file.FileName + "\"");
-            return File(file.Content, file.ContentType);
-        }
-
         public ActionResult Index()
         {
             var movies = this.Data.Movies.All()
