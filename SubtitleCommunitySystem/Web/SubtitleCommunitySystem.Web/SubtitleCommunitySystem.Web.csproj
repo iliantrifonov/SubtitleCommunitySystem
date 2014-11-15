@@ -258,6 +258,7 @@
     <Compile Include="Services\CacheService.cs" />
     <Compile Include="Services\ICacheService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\MovieListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -983,6 +984,7 @@
     <Content Include="Views\Shared\_CreateButtonsPartial.cshtml" />
     <Content Include="Views\Shared\_DeleteButtonsPartial.cshtml" />
     <Content Include="Views\Shared\_MyPrivateMenu.cshtml" />
+    <Content Include="Views\Shared\_SearchPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

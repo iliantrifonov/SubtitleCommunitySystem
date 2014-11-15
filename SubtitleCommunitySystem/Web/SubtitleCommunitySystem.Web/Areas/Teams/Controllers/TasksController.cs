@@ -21,7 +21,6 @@
 
     using Model = SubtitleCommunitySystem.Model.SubtitleTask;
     using ViewModel = SubtitleCommunitySystem.Web.Areas.Teams.Models.TaskInputModel;
-    using SubtitleCommunitySystem.Web.Areas.Teams.Models;
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Services;
 
