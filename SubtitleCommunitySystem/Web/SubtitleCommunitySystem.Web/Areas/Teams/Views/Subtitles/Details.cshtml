@@ -84,7 +84,17 @@
                 cols.Bound(pr => pr.PercentDone);
                 cols.Bound(pr => pr.DateCreated).Format("{0:dd/MM/yyyy}");
                 cols.Bound(pr => pr.DueDate).Format("{0:dd/MM/yyyy}");
-                cols.Bound(pr => pr.IsFinished);
+                cols.Bound(pr => pr.IsFinished).ClientTemplate(@"
+                                            #if(IsFinished){#
+                                                <div class='text-center'>Yes</div>
+                                            #}else{#
+                                                <div class='text-center'>No</div>
+                                            #}#
+                                            #if(FileId){#
+                                                <div class='text-center'><a class='btn btn-success' href='/Private/File/DownloadSource/#= FileId #'>Download File</a></div>
+                                            #}else{#
+                                                <div></div>
+                                            #}#");
                 if (isTeamLeader)
                 {
                     cols.Command(com => com.Edit());

@@ -37,10 +37,13 @@
 
         public string UserName { get; set; }
 
+        public int? FileId { get; set; }
+
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<SubtitleTask, TaskInputModel>()
-                .ForMember(t => t.UserName, opt => opt.MapFrom(z => z.User.UserName));
+                .ForMember(t => t.UserName, opt => opt.MapFrom(z => z.User.UserName))
+                .ForMember(t => t.FileId, opt => opt.MapFrom(z => z.FinishedPartFile.Id));
         }
     }
 }
