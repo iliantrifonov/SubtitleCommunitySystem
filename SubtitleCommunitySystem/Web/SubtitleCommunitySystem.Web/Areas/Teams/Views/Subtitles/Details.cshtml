@@ -8,34 +8,46 @@
     string ControllerName = "Tasks";
 }
 
+@{
+    var isTeamLeader = false;
+    var roles = ViewBag.UserRoles as IEnumerable<string>;
+    if (ViewBag.UserRoles != null)
+    {
+        if (roles.Contains(RoleConstants.TeamLeader))
+        {
+            isTeamLeader = true;
+        }
+    }
+}
+
 <h2>Subtitle Details</h2>
 <div class="row">
     <img src="@Model.MovieMainPosterUrl" alt="@Model.MovieName" style="max-width:80px" />
 </div>
 <div class="row">
     <div class="row">
-        <div class="col-md-2">
+        <h2 class="col-md-2">
             Original Title:
-        </div>
-        <div class="col-md-6">
+        </h2>
+        <h2 class="col-md-6">
             @Model.MovieName
-        </div>
+        </h2>
     </div>
     <div class="row">
-        <div class="col-md-2">
+        <h4 class="col-md-2">
             Original Description:
-        </div>
-        <div class="col-md-6">
+        </h4>
+        <h4 class="col-md-6">
             @Model.MovieDescription
-        </div>
+        </h4>
     </div>
     <div class="row">
-        <div class="col-md-2">
+        <h4 class="col-md-2">
             Translated Title:
-        </div>
-        <div class="col-md-6">
+        </h4>
+        <h4 class="col-md-6">
             @Model.Name
-        </div>
+        </h4>
     </div>
     <div class="row">
         <div class="col-md-2">
@@ -45,29 +57,86 @@
             @Model.Description
         </div>
     </div>
-    <div class="row pull-right">
-        <button class="btn btn-danger">Download description file for tasks (NA)</button>
+    <hr />
+    <div class="row">
+        @Ajax.ActionLink("Download description file for tasks", "DownloadSource", "File", new { id = Model.DescriptionFileId, area = "Private" }, new AjaxOptions() { HttpMethod = "POST", InsertionMode = InsertionMode.InsertAfter }, new { @class = "btn btn-success" })
     </div>
-    @{
-        var isTeamLeader = false;
-        var roles = ViewBag.UserRoles as IEnumerable<string>;
-        if (ViewBag.UserRoles != null)
-        {
-            if (roles.Contains(RoleConstants.TeamLeader))
-            {
-                isTeamLeader = true;
-            }
-        }
-    }
-
+    <hr />
 </div>
+@if (isTeamLeader)
+{
+    <div class="row">
+        <button class="btn btn-primary" onclick="toggleForm()">Toggle Edit Form</button>
+    </div>
+    <div class="row" id="update-form">
+        @using (Html.BeginForm("Update", "Subtitles", new { id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsFinished, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.IsFinished, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.IsFinished, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="descriptionFile" class="control-label col-md-2">Upload Description File</label>
+                <div class="col-md-10">
+                    <input type="file" id="descriptionFile" name="descriptionFile" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="subtitleFile" class="control-label col-md-2"><span class="text-success">Upload Subtitle File</span></label>
+                <div class="col-md-10">
+                    <input type="file" id="subtitleFile" name="subtitleFile" class="form-control" />
+                </div>
+            </div>
+
+
+            @AppHelpers.Submit()
+        }
+    </div>
+
+    <script>
+        $("#update-form").hide();
+
+        function toggleForm() {
+            $("#update-form").toggle();
+        }
+    </script>
+}
+
+<hr />
 
 @if (Model.IsFinished)
 {
-    <h2>Is Finished is a work in progress</h2>
-    <div class="btn btn success">
-        Download subtitles
-    </div>
+    if (Model.SubtitleFileId != null)
+    {
+        @Ajax.ActionLink("Download Subtitles", "DownloadSource", "File", new { id = Model.SubtitleFileId, area = "Private" }, new AjaxOptions() { HttpMethod = "POST", InsertionMode = InsertionMode.InsertAfter }, new { @class = "btn btn-success" })
+    }
+    else
+    {
+        <h2 class="text-danger">Subtitles for this movie are not uploaded, however it is mark as finished!</h2>
+    }
+
 }
 @if (!Model.IsFinished)
 {
@@ -78,7 +147,7 @@
             {
                 cols.Bound(pr => pr.Type);
                 cols.Bound(pr => pr.UserName);
-                
+
                 cols.Bound(pr => pr.Id).Hidden();
                 cols.Bound(pr => pr.Description);
                 cols.Bound(pr => pr.PercentDone);

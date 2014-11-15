@@ -17,6 +17,7 @@
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Data;
+    using SubtitleCommunitySystem.Web.Helpers;
 
     public class SubtitlesController : AuthenticatedUserController
     {
@@ -131,6 +132,62 @@
             SetViewBag(teamId);
 
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(int id, SubtitleDetailsModel model, HttpPostedFileBase descriptionFile, HttpPostedFileBase subtitleFile)
+        {
+            var subtitle = this.Data.Subtitles.Find(id);
+
+            if (subtitle == null)
+            {
+                throw new HttpException(404, "Subtitle not found!");
+            }
+
+            DbFile dbFile = null;
+            DbFile dbSubtitleFile = null;
+
+            try
+            {
+                if (descriptionFile != null)
+                {
+                    dbFile = DatabaseFileHelper.GetDbFile(descriptionFile, "TaskDescription");
+                }
+
+                if (subtitleFile != null)
+                {
+                    dbSubtitleFile = DatabaseFileHelper.GetSubtitleDbFile(subtitleFile, "Subtitles");
+                }
+
+            }
+            catch (ArgumentException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View("Details", subtitle);
+            }
+
+            subtitle.Description = model.Description;
+            subtitle.Name = model.Name;
+            subtitle.IsFinished = model.IsFinished;
+
+            if (dbFile != null)
+            {
+                subtitle.PartialFile = dbFile;
+            }
+
+            if (dbSubtitleFile != null)
+            {
+                subtitle.FinalFile = dbSubtitleFile;
+            }
+
+            this.Data.SaveChanges();
+
+            return RedirectToAction("Details", new { id = subtitle.Id, teamId = subtitle.Team.Id });
         }
 
         private ActionResult GetErrorValidateTeamAndUser(int? id)

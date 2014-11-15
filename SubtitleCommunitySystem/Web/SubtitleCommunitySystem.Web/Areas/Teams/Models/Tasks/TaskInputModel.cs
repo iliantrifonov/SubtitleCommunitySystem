@@ -37,6 +37,7 @@
 
         public string UserName { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
         public int? FileId { get; set; }
 
         public void CreateMappings(IConfiguration configuration)

@@ -14,11 +14,27 @@
         public static DbFile GetDbFile(HttpPostedFileBase file, string fileName)
         {
             var extention = file.FileName.Substring(file.FileName.LastIndexOf('.'));
-            if (!FileConstants.AllowedSourceExtentions.Contains(extention))
+            if (!FileConstants.AllowedNonSubtitleExtentions.Contains(extention))
             {
                 throw new ArgumentException("Incorrect file extention type.");
             }
 
+            return CreateDbFile(file, fileName, extention);
+        }
+
+        public static DbFile GetSubtitleDbFile(HttpPostedFileBase file, string fileName)
+        {
+            var extention = file.FileName.Substring(file.FileName.LastIndexOf('.'));
+            if (!FileConstants.AllowedSubtitleExtentions.Contains(extention))
+            {
+                throw new ArgumentException("Incorrect file extention type.");
+            }
+
+            return CreateDbFile(file, fileName, extention);
+        }
+
+        private static DbFile CreateDbFile(HttpPostedFileBase file, string fileName, string extention)
+        {
             var dbFile = new DbFile()
             {
                 ContentType = file.ContentType,

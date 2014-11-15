@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
+    using System.Web.Mvc;
 
     using AutoMapper;
 
@@ -13,6 +14,7 @@
 
     public class TeamDetailedOutputModel : IMapFrom<Team>, IHaveCustomMappings
     {
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
         [Required]
@@ -21,6 +23,7 @@
 
         public string Language { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
         public int ChatChannelId { get; set; }
 
         public IEnumerable<string> Translators { get; set; }

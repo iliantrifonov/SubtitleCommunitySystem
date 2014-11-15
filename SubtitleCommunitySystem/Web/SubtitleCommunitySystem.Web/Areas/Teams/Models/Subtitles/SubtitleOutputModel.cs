@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
+    using System.Web.Mvc;
 
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Infrastructure.Mappings;
@@ -11,8 +12,10 @@
 
     public class SubtitleOutputModel : IMapFrom<Subtitle>, IHaveCustomMappings
     {
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
         public int? TeamId { get; set; }
 
         [Display(Name = "Complete")]
