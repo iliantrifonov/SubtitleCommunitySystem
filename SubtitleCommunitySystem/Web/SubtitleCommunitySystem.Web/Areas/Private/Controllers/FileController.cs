@@ -20,7 +20,13 @@
         [HttpGet]
         public ActionResult DownloadSource(int id)
         {
-            var file = this.Data.Movies.Find(id).InitialSource;
+            var file = this.Data.Files.Find(id);
+
+            if (file == null)
+            {
+                throw new HttpException(404, "Could not file your file");
+            }
+
             Response.AddHeader("Content-Disposition", "attachment; filename=\"" + file.FileName + "\"");
             return File(file.Content, file.ContentType);
         }

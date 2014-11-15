@@ -5,10 +5,12 @@
     using System.Linq;
     using System.ComponentModel.DataAnnotations;
 
+    using AutoMapper;
+
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Infrastructure.Mappings;
 
-    public class MovieInputModel : IMapFrom<Movie>, IMapTo<Movie>
+    public class MovieInputModel : IMapFrom<Movie>, IMapTo<Movie>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -27,5 +29,13 @@
         [Required]
         [Display(Name = "Released on:")]
         public DateTime ReleaseDate { get; set; }
+
+        public int InitialSourceId { get; set; }
+
+        public void CreateMappings(IConfiguration configuration)
+        {
+            configuration.CreateMap<Movie, MovieInputModel>()
+                .ForMember(m => m.InitialSourceId, opt => opt.MapFrom(c => c.InitialSource.Id));
+        }
     }
 }
