@@ -1,0 +1,59 @@
+﻿@using SubtitleCommunitySystem.Web.Areas.Private.Models;
+@model IEnumerable<TaskOutputModel>
+
+@{
+    var ControllerName = "MyTasks";
+}
+
+<h1 class="jumbotron">My Tasks</h1>
+
+@(Html.Kendo().Grid<TaskOutputModel>()
+            .Name("grid")
+            .Columns(cols =>
+            {
+                cols.Bound(pr => pr.Type);
+
+                cols.Bound(pr => pr.Id).Hidden();
+                cols.Bound(pr => pr.FileId).Hidden();
+                cols.Bound(pr => pr.Description);
+                cols.Bound(pr => pr.PercentDone);
+                cols.Bound(pr => pr.DateCreated).Format("{0:dd/MM/yyyy}");
+                cols.Bound(pr => pr.DueDate).Format("{0:dd/MM/yyyy}");
+                cols.Bound(pr => pr.IsFinished).ClientTemplate(@"
+                                            #if(IsFinished){#
+                                                <div class='text-center'>Yes</div>
+                                            #}else{#
+                                                <div class='text-center'>No</div>
+                                            #}#
+                                            #if(FileId){#
+                                                <div class='text-center'><a class='btn btn-success' href='/Private/File/DownloadSource/#= FileId #'>Download File</a></div>
+                                            #}else{#
+                                                <div class='text-center text-danger'>No file uploaded</div>
+                                            #}#");
+                cols.Bound(pr => pr.FileId).ClientTemplate(@"<form enctype='multipart/form-data' class='text-center' action='/Private/MyTasks/Upload' method='post'>
+    <input type='hidden' value='#= Id #' name='id' />
+    <input type='file' class='btn btn-submit' name='file' />
+    <input class='btn btn-success' type='submit' value='Upload File' />
+</form>");
+                cols.Bound(pr => pr.SubtitleId).Hidden();
+            })
+            .ColumnMenu()
+            .Pageable(page => page.Refresh(true))
+            .Sortable()
+            .Groupable()
+            .Filterable()
+            .DataSource(data => 
+            data.Ajax()
+                .Model(m => m.Id(pr => pr.Id))
+                .Read(read =>
+                        read.Action("ReadTasks", ControllerName)
+                )
+                ))
+
+@*<script type="text/kendo-tmpl" id="upload">
+    <form enctype='multipart/form-data'  action='/Private/MyTasks/Upload' method='post'>
+        <input type='hidden' value='#= Id #' name='id' />
+        <input type='file' name='file' />
+        <input type='submit' />
+    </form>
+</script>*@

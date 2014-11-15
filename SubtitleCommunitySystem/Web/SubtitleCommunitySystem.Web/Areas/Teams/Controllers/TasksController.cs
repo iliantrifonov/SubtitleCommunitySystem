@@ -116,13 +116,5 @@
 
             return Json(userModels, JsonRequestBehavior.AllowGet);
         }
-
-        //public IEnumerable DropDownService(string roleName, int? teamId)
-        //{
-        //    return this.Data.Users.All()
-        //        .Where(u => u.Teams.Any(t => t.Id == teamId))
-        //        .Where(u => u.TeamRoles.Any(r => r.Name == roleName))
-        //        .Project().To<UserDropDownModel>();
-        //}
     }
 }

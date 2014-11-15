@@ -217,10 +217,12 @@
     <Compile Include="Areas\Administration\Models\Users\UserOutputModel.cs" />
     <Compile Include="Areas\Private\Controllers\MyLanguagesController.cs" />
     <Compile Include="Areas\Private\Controllers\MyRequestsController.cs" />
+    <Compile Include="Areas\Private\Controllers\MyTasksController.cs" />
     <Compile Include="Areas\Private\Models\MyLanguages\AddLanguageViewModel.cs" />
     <Compile Include="Areas\Private\Models\MyRequests\RequestInputModel.cs" />
     <Compile Include="Areas\Private\Models\MyRequests\RequestOutputModel.cs" />
     <Compile Include="Areas\Private\Models\MyRequests\RequestIndexViewModel.cs" />
+    <Compile Include="Areas\Private\Models\MyTasks\TaskOutputModel.cs" />
     <Compile Include="Areas\Private\PrivateAreaRegistration.cs" />
     <Compile Include="Areas\Private\Controllers\FileController.cs" />
     <Compile Include="Areas\Teams\Controllers\ChatController.cs" />
@@ -917,6 +919,7 @@
     <Content Include="Areas\Teams\Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Areas\Teams\Views\Shared\EditorTemplates\SubtitleTaskType.cshtml" />
     <Content Include="Areas\Teams\Views\Shared\EditorTemplates\TaskEditorTemplate.cshtml" />
+    <Content Include="Areas\Private\Views\MyTasks\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
