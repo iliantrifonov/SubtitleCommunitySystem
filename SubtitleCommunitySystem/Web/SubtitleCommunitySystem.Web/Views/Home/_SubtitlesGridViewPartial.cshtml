@@ -1,0 +1,21 @@
+﻿@using SubtitleCommunitySystem.Web.ViewModels
+@model IEnumerable<SubtitleGridViewModel>
+
+
+
+@(Html.Kendo()
+            .Grid<SubtitleGridViewModel>(Model)
+            .Name("grid")
+            .Columns(cols =>
+            {
+                cols.Bound(pr => pr.Id).Hidden();                
+                cols.Bound(pr => pr.Name);
+                cols.Bound(pr => pr.Language);
+                cols.Bound(pr => pr.Team);               
+            })
+            .Pageable()
+            .DataSource(data => 
+                data.Ajax()
+                .ServerOperation(false)
+                )
+            )

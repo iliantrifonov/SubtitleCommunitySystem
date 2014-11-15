@@ -245,6 +245,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Filters\AuthAttribute.cs" />
     <Compile Include="Filters\AuthFilter.cs" />
+    <Compile Include="Filters\ParameterNameAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -258,7 +259,9 @@
     <Compile Include="Services\CacheService.cs" />
     <Compile Include="Services\ICacheService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\MovieDetailsViewModel.cs" />
     <Compile Include="ViewModels\MovieListViewModel.cs" />
+    <Compile Include="ViewModels\SubtitleListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -985,6 +988,8 @@
     <Content Include="Views\Shared\_DeleteButtonsPartial.cshtml" />
     <Content Include="Views\Shared\_MyPrivateMenu.cshtml" />
     <Content Include="Views\Shared\_SearchPartial.cshtml" />
+    <Content Include="Views\Home\MovieDetails.cshtml" />
+    <Content Include="Views\Home\_SubtitlesGridViewPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
