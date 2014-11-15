@@ -18,6 +18,8 @@
     using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Web.Helpers;
+    using SubtitleCommunitySystem.Web.Filters;
+    using SubtitleCommunitySystem.Web.Infrastructure.Constants;
 
     public class SubtitlesController : AuthenticatedUserController
     {
@@ -53,6 +55,7 @@
             return View(subtitles.Data);
         }
 
+        [Auth(RoleConstants.TeamLeader)]
         public ActionResult AddSubtitleToTeam(int? id, int? teamId)
         {
             if (id == null || teamId == null)
@@ -121,7 +124,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var selectList = this.Data.Teams.Find(id).Members.Select(m => new SelectListItem()
+            var selectList = this.Data.Teams.Find(teamId).Members.Select(m => new SelectListItem()
             {
                 Text = m.UserName,
                 Value = m.Id

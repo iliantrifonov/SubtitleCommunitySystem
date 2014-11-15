@@ -36,10 +36,19 @@
         [HiddenInput(DisplayValue = false)]
         public int? FileId { get; set; }
 
+        public string Language { get; set; }
+
+        public string TeamName { get; set; }
+
+        public string MovieName { get; set; }
+
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<SubtitleTask, TaskOutputModel>()
-                .ForMember(t => t.FileId, opt => opt.MapFrom(z => z.FinishedPartFile.Id));
+                .ForMember(t => t.FileId, opt => opt.MapFrom(z => z.FinishedPartFile.Id))
+                .ForMember(t => t.Language, opt => opt.MapFrom(z => z.Subtitle.Language.Name))
+                .ForMember(t => t.MovieName, opt => opt.MapFrom(z => z.Subtitle.Movie.Name))
+                .ForMember(t => t.TeamName, opt => opt.MapFrom(z => z.Subtitle.Team.Name));
         }
     }
 }

@@ -1,6 +1,19 @@
-﻿@model IEnumerable<SubtitleOutputModel>
+﻿@using SubtitleCommunitySystem.Web.Infrastructure.Constants;
+
+@model IEnumerable<SubtitleOutputModel>
 @{
     ViewBag.Title = "Index";
+}
+@{
+    var isTeamLeader = false;
+    var roles = ViewBag.UserRoles as IEnumerable<string>;
+    if (ViewBag.UserRoles != null)
+    {
+        if (roles.Contains(RoleConstants.TeamLeader))
+        {
+            isTeamLeader = true;
+        }
+    }
 }
 
 @(Html.Kendo().Grid<SubtitleOutputModel>(Model)
@@ -20,8 +33,10 @@
             columns.Bound(c => c.Language).HtmlAttributes(new { @class = "col-md-3" })
                 .Filterable(false)
                 .Sortable(false);
-            
-            columns.Command(c => c.Custom("Take Subtitle for the Team").Action("AddSubtitleToTeam", "Subtitles", new { teamId = ViewBag.Id }));
+            if (isTeamLeader)
+            {
+                columns.Command(c => c.Custom("Take Subtitle for the Team").Action("AddSubtitleToTeam", "Subtitles", new { teamId = ViewBag.Id }));                
+            }
         })
         .Sortable()
         .Filterable(ftb => ftb.Mode(GridFilterMode.Row))

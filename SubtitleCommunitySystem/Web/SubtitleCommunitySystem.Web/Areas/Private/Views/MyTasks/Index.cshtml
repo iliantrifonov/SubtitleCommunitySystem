@@ -12,9 +12,11 @@
             .Columns(cols =>
             {
                 cols.Bound(pr => pr.Type);
+                cols.Bound(pr => pr.TeamName);
+                cols.Bound(pr => pr.MovieName);
+                cols.Bound(pr => pr.Language);
 
                 cols.Bound(pr => pr.Id).Hidden();
-                cols.Bound(pr => pr.FileId).Hidden();
                 cols.Bound(pr => pr.Description);
                 cols.Bound(pr => pr.PercentDone)
                     .ClientTemplate(@"<div class='progress progress-striped active'>
@@ -26,7 +28,7 @@
                                         <input class='btn btn-xs btn-success' type='submit' value='Update Progress' />
                                     </form>
                                         ");
-                cols.Bound(pr => pr.DateCreated).Format("{0:dd/MM/yyyy}");
+                cols.Bound(pr => pr.DateCreated).Format("{0:dd/MM/yyyy}").Hidden();
                 cols.Bound(pr => pr.DueDate).Format("{0:dd/MM/yyyy}");
                 cols.Bound(pr => pr.IsFinished).ClientTemplate(@"
                                             #if(IsFinished){#
@@ -44,7 +46,7 @@
     <input type='hidden' value='#= Id #' name='id' />
     <input type='file' class='btn btn-submit' name='file' />
     <input class='btn btn-xs btn-success' type='submit' value='Upload File' />
-</form>");
+</form>").Title("File Status").Hidden();
                 cols.Bound(pr => pr.SubtitleId).Hidden();
             })
             .ColumnMenu()

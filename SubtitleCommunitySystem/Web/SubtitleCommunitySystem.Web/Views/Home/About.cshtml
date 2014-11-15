@@ -2,6 +2,130 @@
     ViewBag.Title = "About";
 }
 <h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<h4>My name is Ilian Trifonov, and this is my project for Telerik Academy MVC course</h4>
+
+<h6>It consists of:</h6>
+<ul>
+    <li>
+        Main Features:
+        <ul>
+            <li>
+                Team management (with 7 roles + 1 for the administrator), each role can handle certain tasks. Administration can add members to teams.
+            </li>
+            <li>
+                Requests => Each registered user can make a request to the administrator to become any of the 7 roles.
+            </li>
+            <li>
+                Movies, subtitles, file upload for posters/banners (kept on the server), and subtitles (kept in the database)
+            </li>
+            <li>
+                Tasks => Each user can be assigned tasks based on the team, language and role he is in.
+            </li>
+            <li>
+                Languages => Each user can add languages they know, to join teams with those languages.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Administration:
+        <ul>
+            <li>
+                Create, modify and manage movies and subtitles.
+            </li>
+            <li>
+                Upload posters and banners.
+            </li>
+            <li>
+                Automatic creating of subtitles when each movie is created, as well as an option to add new languages later, with a press of a button.
+            </li>
+            <li>
+                Create, edit and delete languages.
+            </li>
+            <li>
+                Editing user names and priveleges. Adding and removing roles for each user.
+            </li>
+            <li>
+                Creating, and editing teams, where each team has a language, and many teams can translate the same language.
+            </li>
+            <li>
+                Adding members to teams based on roles and language.
+            </li>
+            <li>
+                Request management with a single button click. Adding roles automatically. Can see pending, approved and denied requests for any users.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Private area:
+        <ul>
+            <li>
+                Adding languages that you know to yourself.
+            </li>
+            <li>
+                Creating requests and seing denied/approved latest requests. Cannot make the same request where there is still one of the same type pending.
+            </li>
+            <li>
+                Task management => View tasks for any team/language/movie that is assinged to you. Upload files to the tasks, and mark your progress on each task. See the date of creating and due date of each task. You can also see if a task is finished or not (as only Team Leaders can make that decision). Download the latest file for each task.
+                See description of each task, as well as its type (based on the roles you have you will only be assined those tasks you are suited for.)
+            </li>
+        </ul>
+    </li>
+    <li>
+        Team area:
+        <ul>
+            <li>
+                See all of your teams (Both name and language)
+            </li>
+            <li>
+                See each member of the team that you are in, and their role.
+            </li>
+            <li>
+                See all subtitles your team can take, and take them (only if administrator)
+            </li>
+            <li>
+                See the team subtitles.
+            </li>
+            <li>
+                View Details for each subtitle.
+                <ul>
+                    <li>
+                        If it is finished no tasks will be displayed only a download button for the final version.If the subtitle is ready but nothing is uploaded as a final version, an error message will be show.
+                    </li>
+                    <li>
+                        Team leader can edit the title/description of the subtitle to translate it to the correct language.
+                    </li>
+                    <li>
+                        Team leader upload the final version of the subtitles, and a detailed task description for all tasks, that all team members can download.
+                    </li>
+                    <li>
+                        Team leader can choose when the subtitles are finished.
+                    </li>
+                    <li>
+                        Team leader can add tasks, and due dates for each task.
+                    </li>
+                    <li>
+                        Creating and editing tasks is done with cascading dropdown lists for task types and users that can take them, that are cached on the server.
+                    </li>
+                    <li>
+                        A short description can be given for each task. These tasks after being assinged will go to the team member that is chosen, and he will be able to manipulate them from his private area.
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        Public area:
+        <ul>
+            <li>
+                See all movies with paging (first page is cached).
+            </li>
+            <li>
+                See details for subtitle, with the current translated subtitles for it.
+            </li>
+            <li>
+                Search for subtitle by name, on all languages, cached on the server in a trie for fast searching.
+            </li>
+        </ul>
+    </li>
+</ul>
