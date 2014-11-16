@@ -1,0 +1,9 @@
+﻿@model string
+
+@{
+    var search = ViewBag.SearchQuery;
+}
+<h2>Search results for: "@search"</h2>
+<div class="container">
+    @Html.Action("GetResults", new { searchString = search })
+</div>

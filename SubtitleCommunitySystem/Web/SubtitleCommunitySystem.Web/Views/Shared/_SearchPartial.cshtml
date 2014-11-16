@@ -1,6 +1,7 @@
-﻿@using (Ajax.BeginForm("Search", "Search", new { }, new AjaxOptions() { 
-    
-        }, null))
-{
-    
-}
+﻿<div class="navbar-form navbar-left">
+    @using (Ajax.BeginForm("Index", "Search", new { }, new AjaxOptions() { HttpMethod = "Get", InsertionMode = InsertionMode.InsertAfter, }, null))
+    {
+        <input type="text" class="form-control col-lg-8" name="q" placeholder="Search">
+        <input type="submit" value="Search" class="btn btn-submit" />
+    }
+</div>

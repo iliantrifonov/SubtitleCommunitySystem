@@ -1,0 +1,32 @@
+﻿@using SubtitleCommunitySystem.Web.ViewModels
+
+@model IEnumerable<SubtitleCacheSearchViewModel>
+
+<script type="text/x-kendo-tmpl" id="template">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h4><a href="/Home/MovieDetails/#= MovieId #">Original Title: "#: MovieName #"</a></h4>
+        </div>
+        <div class="panel-body">
+            <h5 class="col-md-8 text-info">
+                <strong><a href="/Home/SubtitleDetails/#= Id #">Local Name: #:Name#</a></strong>
+            </h5>
+            <div class="row">
+                Language:<em> #:Language#</em>
+            </div>
+        </div>
+    </div>
+</script>
+
+<div class="list-group">
+    @(Html.Kendo().ListView<SubtitleCacheSearchViewModel>(Model)
+    .Name("listView")
+    .TagName("div")
+    .ClientTemplateId("template")
+    .DataSource(dataSource =>
+    {
+        dataSource.PageSize(1);
+        dataSource.ServerOperation(false);
+    })
+    .Pageable())
+</div>

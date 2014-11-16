@@ -6,5 +6,7 @@
     public interface ICacheService
     {
         IEnumerable GetDropDownForUsers(string roleName, int? teamId);
+
+        IEnumerable GetTop200SearchResults(string searchString);
     }
 }

@@ -45,6 +45,9 @@
             <li>
                 <a href="http://getglimpse.com/">Glimpse</a>
             </li>
+            <li>
+                <a href="https://trienet.codeplex.com/">Trie.Net, .NET Data Structures for Substring Search, Auto-completion and Intelli-sense</a>
+            </li>
         </ul>
     </li>
     <li>
@@ -141,10 +144,30 @@
                 See all movies with paging (first page is cached).
             </li>
             <li>
-                See details for subtitle, with the current translated subtitles for it.
+                See details for each movie, with the current translated subtitles for it.
             </li>
             <li>
-                Search for subtitle by name, on all languages, cached on the server in a trie for fast searching.
+                See details for the subtitle, with download link. If you are not logged in it will ask you to log in to download.
+            </li>
+            <li>
+                Search:
+                <ul>
+                    <li>
+                        Implemented server side with double caching. 
+                    </li>
+                    <li>
+                        It pulls all subtitles with a bare bones view model, inserts it in a Trie, and caches the trie for 1 hour.
+                    </li>
+                    <li>
+                        Searches are performed on the trie with key words from the user, and each result is capped at 200, and cached with Output cache.
+                    </li>
+                    <li>
+                        Searches are based on Language, Movie name, and translated movie name automatically on all 3.
+                    </li>
+                    <li>
+                        Links are provided for both the movie and the subtitle.
+                    </li>
+                </ul>
             </li>
         </ul>
     </li>
