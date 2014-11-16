@@ -3,19 +3,186 @@ SubtitleCommunitySystem
 
 An ASP.NET MVC application, for adding, searching and managing subtitles. There are teams, and each team has users with roles that are part of the subtitle creating process, with a workflow for them.
 
+This is a bare bones description. Inside the application, on the About page, there 
+
 * Display of the latest subtitles on the main page, with links to details for each one.
 * Search by name of the subtitles.
 * Languages.
 * Workflow for teams:
 * Roles in each team: Translator, Sync, ImageManager, Revisioner (approves the final subtitle, and writes a summary)
-* Site roles: Standard (each user, can apply to be a part of a team for certain language/series/movie ), Moderator (has the ability to edit the content of each subtitle post, edit news etc.), Admin (can promote users to the various roles, has access to the chats of all teams, and has access to all functionality of all roles).
-* Roles for news: Writer
-* Chat: Each team has a chat channel, where they can discuss the various parts of the project.
-* Each subtitle has stages that it passes on the workflow, so it can be seen on what stage of development each subtitle is.
-* Calendar for scheduled releases.
-* Section for news on upcoming movies/shows/subtitles.
-* Top subtitles by downloads for the week.
+* Site roles: Standard (each user, can apply to be a part of a team for certain language/series/movie ), Admin (can promote users to the various roles, has access to the chats of all teams, and has access to all functionality of all roles).
 * Each user that is part of a team can view the progress of subtitles it produces.
 
 
 * DISCLAIMER: KENDO UI is a trial version, you can find out more at: http://www.telerik.com/download/aspnet-mvc
+
+<h4>The projects consists of:</h4>
+<ul>
+    <li>
+        Main Features:
+        <ul>
+            <li>
+                Team management (with 7 roles + 1 for the administrator), each role can handle certain tasks. Administration can add members to teams.
+            </li>
+            <li>
+                Requests => Each registered user can make a request to the administrator to become any of the 7 roles.
+            </li>
+            <li>
+                Movies, subtitles, file upload for posters/banners (kept on the server), and subtitles (kept in the database).
+            </li>
+            <li>
+                Tasks => Each user can be assigned tasks based on the team, language and role he is in.
+            </li>
+            <li>
+                Languages => Each user can add languages they know, to join teams with those languages.
+            </li>
+            <li>
+                Filters for custom roles and for parameters with special symbols in the URL.
+            </li>
+            <li>
+                Unit Tests.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Components used:
+        <ul>
+            <li>
+                Kendo (Trial version, you can find out more at <a href="http://www.telerik.com/campaigns/aspnet-mvc">Telerik ASP.NET MVC</a>)
+            </li>
+            <li>
+                 <a href="https://github.com/AutoMapper/AutoMapper">Automapper</a>
+            </li>
+            <li>
+                <a href="https://www.nuget.org/packages/Ninject.MVC5/">Ninject</a>
+            </li>
+            <li>
+                <a href="http://getglimpse.com/">Glimpse</a>
+            </li>
+            <li>
+                <a href="https://trienet.codeplex.com/">Trie.Net, .NET Data Structures for Substring Search, Auto-completion and Intelli-sense</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        Administration:
+        <ul>
+            <li>
+                Create, modify and manage movies and subtitles.
+            </li>
+            <li>
+                Upload posters and banners.
+            </li>
+            <li>
+                Automatic creating of subtitles when each movie is created, as well as an option to add new languages later, with a press of a button.
+            </li>
+            <li>
+                Create, edit and delete languages.
+            </li>
+            <li>
+                Editing user names and priveleges. Adding and removing roles for each user.
+            </li>
+            <li>
+                Creating, and editing teams, where each team has a language, and many teams can translate the same language.
+            </li>
+            <li>
+                Adding members to teams based on roles and language.
+            </li>
+            <li>
+                Request management with a single button click. Adding roles automatically. Can see pending, approved and denied requests for any users.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Private area:
+        <ul>
+            <li>
+                Adding languages that you know to yourself.
+            </li>
+            <li>
+                Creating requests and seing denied/approved latest requests. Cannot make the same request where there is still one of the same type pending.
+            </li>
+            <li>
+                Task management => View tasks for any team/language/movie that is assinged to you. Upload files to the tasks, and mark your progress on each task. See the date of creating and due date of each task. You can also see if a task is finished or not (as only Team Leaders can make that decision). Download the latest file for each task.
+                See description of each task, as well as its type (based on the roles you have you will only be assined those tasks you are suited for.)
+            </li>
+        </ul>
+    </li>
+    <li>
+        Team area:
+        <ul>
+            <li>
+                See all of your teams (Both name and language)
+            </li>
+            <li>
+                See each member of the team that you are in, and their role.
+            </li>
+            <li>
+                See all subtitles your team can take, and take them (only if administrator)
+            </li>
+            <li>
+                See the team subtitles.
+            </li>
+            <li>
+                View Details for each subtitle.
+                <ul>
+                    <li>
+                        If it is finished no tasks will be displayed only a download button for the final version.If the subtitle is ready but nothing is uploaded as a final version, an error message will be show.
+                    </li>
+                    <li>
+                        Team leader can edit the title/description of the subtitle to translate it to the correct language.
+                    </li>
+                    <li>
+                        Team leader upload the final version of the subtitles, and a detailed task description for all tasks, that all team members can download.
+                    </li>
+                    <li>
+                        Team leader can choose when the subtitles are finished.
+                    </li>
+                    <li>
+                        Team leader can add tasks, and due dates for each task.
+                    </li>
+                    <li>
+                        Creating and editing tasks is done with cascading dropdown lists for task types and users that can take them, that are cached on the server.
+                    </li>
+                    <li>
+                        A short description can be given for each task. These tasks after being assinged will go to the team member that is chosen, and he will be able to manipulate them from his private area.
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        Public area:
+        <ul>
+            <li>
+                See all movies with paging (first page is cached).
+            </li>
+            <li>
+                See details for each movie, with the current translated subtitles for it.
+            </li>
+            <li>
+                See details for the subtitle, with download link. If you are not logged in it will ask you to log in to download.
+            </li>
+            <li>
+                Search:
+                <ul>
+                    <li>
+                        Implemented server side with double caching.
+                    </li>
+                    <li>
+                        It pulls all subtitles with a bare bones view model, inserts it in a Trie, and caches the trie for 1 hour.
+                    </li>
+                    <li>
+                        Searches are performed on the trie with key words from the user, and each result is capped at 200, and cached with Output cache.
+                    </li>
+                    <li>
+                        Searches are based on Language, Movie name, and translated movie name automatically on all 3.
+                    </li>
+                    <li>
+                        Links are provided for both the movie and the subtitle.
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>

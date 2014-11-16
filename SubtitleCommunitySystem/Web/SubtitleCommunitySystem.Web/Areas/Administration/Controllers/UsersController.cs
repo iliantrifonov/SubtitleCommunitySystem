@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net;
+    using System.Web;
     using System.Web.Mvc;
 
     using AutoMapper;
@@ -39,7 +39,7 @@
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             var user = this.Data.Users.All()
@@ -68,7 +68,7 @@
         {
             if (editModel == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             var user = this.Data.Users.Find(editModel.User.Id);
@@ -107,7 +107,7 @@
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             ApplicationUser applicationUser = this.Data.Users.Find(id);

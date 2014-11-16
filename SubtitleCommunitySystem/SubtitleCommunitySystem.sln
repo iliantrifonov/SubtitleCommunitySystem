@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitleCommunitySystem.Web
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitleCommunitySystem.Web.Infrastructure", "Web\SubtitleCommunitySystem.Web.Infrastructure\SubtitleCommunitySystem.Web.Infrastructure.csproj", "{BD501B3C-2CA8-4F0F-BAA4-6F2AD5F32E6B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitleCommunitySystem.Test.Web", "Tests\SubtitleCommunitySystem.Test.Web\SubtitleCommunitySystem.Test.Web.csproj", "{3BC537E7-D03B-4C53-8549-687D13E3EE61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{BD501B3C-2CA8-4F0F-BAA4-6F2AD5F32E6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD501B3C-2CA8-4F0F-BAA4-6F2AD5F32E6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD501B3C-2CA8-4F0F-BAA4-6F2AD5F32E6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BC537E7-D03B-4C53-8549-687D13E3EE61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BC537E7-D03B-4C53-8549-687D13E3EE61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BC537E7-D03B-4C53-8549-687D13E3EE61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BC537E7-D03B-4C53-8549-687D13E3EE61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,5 +54,6 @@ Global
 		{DB33B4C7-B029-47D2-8806-7F888B930716} = {69AF40CF-C315-4399-B80C-91EBE37596F5}
 		{5B42CEAC-849D-4DC3-86CD-D3605584040F} = {67F7A116-0CF2-4E0B-BABE-F6C474E8DF43}
 		{BD501B3C-2CA8-4F0F-BAA4-6F2AD5F32E6B} = {67F7A116-0CF2-4E0B-BABE-F6C474E8DF43}
+		{3BC537E7-D03B-4C53-8549-687D13E3EE61} = {3EA01F31-9C16-41D3-BDA6-3B904603B7E4}
 	EndGlobalSection
 EndGlobal

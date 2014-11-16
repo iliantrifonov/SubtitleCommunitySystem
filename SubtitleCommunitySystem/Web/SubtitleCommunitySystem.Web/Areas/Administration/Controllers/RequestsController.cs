@@ -2,11 +2,14 @@
 {
     using System;
     using System.Linq;
-    using System.Net;
+    using System.Web;
     using System.Web.Mvc;
+
     using AutoMapper.QueryableExtensions;
+
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
+
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Areas.Administration.Models;
@@ -62,7 +65,7 @@
 
             if (request == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             var roleAsString = RoleEnumToStringConverter.FromRequestType(request.Type);
@@ -81,7 +84,7 @@
 
             if (role == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             user.TeamRoles.Add(role);
@@ -98,7 +101,7 @@
 
             if (request == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             request.RequestState = RequestState.Denied;

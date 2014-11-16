@@ -2,7 +2,7 @@
 {
     using System;
     using System.Linq;
-    using System.Net;
+    using System.Web;
     using System.Web.Mvc;
 
     using SubtitleCommunitySystem.Data;
@@ -19,19 +19,19 @@
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             var chat = this.Data.Channels.Find(id);
 
             if (chat == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             if (!this.CurrentUser.Teams.Any(t => t.ChatChannel.Id == id))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             return this.View(chat);

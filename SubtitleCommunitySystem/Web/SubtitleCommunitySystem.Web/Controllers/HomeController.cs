@@ -75,6 +75,11 @@
         [OutputCache(VaryByParam = "movieId;page", Duration = (1 * 60 * 60), Order = 2)]
         public ActionResult SubtitleList(int? movieId, string page)
         {
+            if (movieId == null)
+            {
+                throw new HttpException(404, "Movie Id is not valid!");
+            }
+
             var subtitles = this.Data.Subtitles.All()
                 .Where(s => s.Movie.Id == movieId)
                 .Where(s => s.IsFinished)
@@ -95,7 +100,7 @@
                 .Where(c => c.Id == id)
                 .Select(c => c.FinalFile.Id).FirstOrDefault();
 
-            if (fileId == null)
+            if (fileId == null || fileId == 0)
             {
                 throw new HttpException(404, "Subtitle does not exist, or does not have a subtitle file.");                
             }

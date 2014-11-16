@@ -54,7 +54,7 @@
         {
             if (id == null || teamId == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             var subtitle = this.Data.Subtitles.Find(id);
@@ -114,7 +114,7 @@
 
             if (model == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             var selectList = this.Data.Teams.Find(teamId).Members.Select(m => new SelectListItem()
@@ -207,7 +207,7 @@
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             var userID = this.User.Identity.GetUserId();
@@ -217,7 +217,7 @@
 
             if (!isInTeam)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             return null;

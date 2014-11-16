@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net;
+    using System.Web;
     using System.Web.Mvc;
 
     using AutoMapper;
@@ -36,7 +36,7 @@
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             var team = this.Data.Teams.All()
@@ -80,7 +80,7 @@
 
                 if (language == null)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    throw new HttpException(404, "Incorrect input data!");
                 }
 
                 var team = new Team()
@@ -112,7 +112,7 @@
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             var team = this.Data.Teams.All()
@@ -152,7 +152,7 @@
                 var dbLanguage = this.Data.Languages.Find(int.Parse(team.LanguageId));
                 if (dbLanguage == null)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    throw new HttpException(404, "Incorrect input data!");
                 }
 
                 var dbTeam = this.Data.Teams.Find(team.Id);
@@ -174,7 +174,7 @@
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             var team = this.Data.Teams.All()
@@ -212,7 +212,7 @@
 
             if (team == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             var dBtranslators = team.Members.Where(m => m.TeamRoles.Any(tr => tr.Name == RoleConstants.Translator));
@@ -249,13 +249,13 @@
 
             if (team == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             var memberToRemove = team.Members.FirstOrDefault(u => u.Id == userId);
             if (memberToRemove == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             team.Members.Remove(memberToRemove);
@@ -274,7 +274,7 @@
 
             if (team == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             var users = this.Data.Users.All()
@@ -293,18 +293,18 @@
 
             if (team == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             var userToAdd = this.Data.Users.Find(userId);
             if (userToAdd == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             if (!userToAdd.TeamRoles.Any(tr => tr.Name == role))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             team.Members.Add(userToAdd);

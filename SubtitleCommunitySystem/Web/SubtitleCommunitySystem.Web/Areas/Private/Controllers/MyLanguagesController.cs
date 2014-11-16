@@ -2,7 +2,7 @@
 {
     using System;
     using System.Linq;
-    using System.Net;
+    using System.Web;
     using System.Web.Mvc;
 
     using AutoMapper.QueryableExtensions;
@@ -50,7 +50,7 @@
 
             if (language == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             var alreadyHasLanguage = this.CurrentUser.Languages.Any(l => l.Id == language.Id);

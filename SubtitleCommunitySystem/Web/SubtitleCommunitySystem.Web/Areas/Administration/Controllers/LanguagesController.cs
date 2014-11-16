@@ -15,6 +15,7 @@
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Areas.Administration.Models;
     using SubtitleCommunitySystem.Web.Controllers.Base;
+    using System.Web;
 
     public class LanguagesController : AdminController
     {
@@ -34,7 +35,7 @@
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             var language = this.Data.Languages.All()
@@ -79,7 +80,7 @@
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
             var language = this.Data.Languages.Find(id);
             if (language == null)
@@ -125,7 +126,7 @@
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             Language language = this.Data.Languages.Find(id);

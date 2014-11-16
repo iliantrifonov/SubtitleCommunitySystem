@@ -2,7 +2,7 @@
 {
     using System;
     using System.Linq;
-    using System.Net;
+    using System.Web;
     using System.Web.Mvc;
 
     using AutoMapper.QueryableExtensions;
@@ -31,7 +31,7 @@
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new HttpException(404, "Incorrect input data!");
             }
 
             var teamExists = this.Data.Teams.All().Any(t => t.Id == id);

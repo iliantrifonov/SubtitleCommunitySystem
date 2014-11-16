@@ -32,5 +32,11 @@
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
         }
+
+        public static void ConfigureAutoMapper()
+        {
+            var autoMapperConfig = new AutoMapperConfig();
+            autoMapperConfig.Execute(Assembly.GetExecutingAssembly());
+        }
     }
 }
