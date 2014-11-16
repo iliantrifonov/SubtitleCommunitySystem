@@ -2,37 +2,33 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
-    using System.Data.Entity;
     using System.Linq;
     using System.Net;
-    using System.Web;
     using System.Web.Mvc;
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
+
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Model;
-    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Web.Areas.Administration.Models;
+    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Web.Infrastructure.Constants;
 
     public class TeamsController : AdminController
     {
         public TeamsController(IApplicationData data) : base(data)
         {
-
         }
 
         // GET: Administration/Teams
-        public ActionResult Index([DataSourceRequest] DataSourceRequest request)
+        public ActionResult Index([DataSourceRequest]
+                                  DataSourceRequest request)
         {
-            return View(this.Data.Teams.All()
-                .Project().To<TeamOutputModel>()
-                .ToDataSourceResult(request).Data);
+            return this.View(this.Data.Teams.All().Project().To<TeamOutputModel>().ToDataSourceResult(request).Data);
         }
 
         // GET: Administration/Teams/Details/5
@@ -44,31 +40,31 @@
             }
 
             var team = this.Data.Teams.All()
-                .Where(t => t.Id == id)
-                .Select(TeamViewModel.FromTeam)
-                .FirstOrDefault();
+                           .Where(t => t.Id == id)
+                           .Select(TeamViewModel.FromTeam)
+                           .FirstOrDefault();
 
             if (team == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
 
-            return View(team);
+            return this.View(team);
         }
 
         // GET: Administration/Teams/Create
         public ActionResult Create()
         {
             var languages = this.Data.Languages.All()
-                .OrderBy(l => l.Name)
-                .Select(l => new SelectListItem() { Text = l.Name, Value = l.Id.ToString() });
+                                .OrderBy(l => l.Name)
+                                .Select(l => new SelectListItem() { Text = l.Name, Value = l.Id.ToString() });
 
             var createTeamModel = new CreateTeamViewModel()
             {
                 Languages = languages,
             };
 
-            return View(createTeamModel);
+            return this.View(createTeamModel);
         }
 
         // POST: Administration/Teams/Create
@@ -78,7 +74,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateTeamViewModel createTeamViewModel)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var language = this.Data.Languages.Find(int.Parse(createTeamViewModel.Team.LanguageId));
 
@@ -105,10 +101,10 @@
 
                 this.Data.SaveChanges();
 
-                return RedirectToAction("Index");
+                return this.RedirectToAction("Index");
             }
 
-            return View(createTeamViewModel);
+            return this.View(createTeamViewModel);
         }
 
         // GET: Administration/Teams/Edit/5
@@ -120,18 +116,18 @@
             }
 
             var team = this.Data.Teams.All()
-                .Where(t => t.Id == id)
-                .Project().To<TeamInputModel>()
-                .FirstOrDefault();
+                           .Where(t => t.Id == id)
+                           .Project().To<TeamInputModel>()
+                           .FirstOrDefault();
 
             if (team == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
 
             var languages = this.Data.Languages.All()
-                .OrderBy(l => l.Name)
-                .Select(l => new SelectListItem() { Text = l.Name, Value = l.Id.ToString() });
+                                .OrderBy(l => l.Name)
+                                .Select(l => new SelectListItem() { Text = l.Name, Value = l.Id.ToString() });
 
             var createTeamModel = new CreateTeamViewModel()
             {
@@ -139,7 +135,7 @@
                 Team = team
             };
 
-            return View(createTeamModel);
+            return this.View(createTeamModel);
         }
 
         // POST: Administration/Teams/Edit/5
@@ -151,7 +147,7 @@
         {
             var team = createTeamModel.Team;
 
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var dbLanguage = this.Data.Languages.Find(int.Parse(team.LanguageId));
                 if (dbLanguage == null)
@@ -165,12 +161,12 @@
                 dbTeam.Language = dbLanguage;
 
                 this.Data.SaveChanges();
-                TempData["Success"] = "Team is updated!";
+                this.TempData["Success"] = "Team is updated!";
 
-                return RedirectToAction("Edit");
+                return this.RedirectToAction("Edit");
             }
 
-            return View(team);
+            return this.View(team);
         }
 
         // GET: Administration/Teams/Delete/5
@@ -182,16 +178,16 @@
             }
 
             var team = this.Data.Teams.All()
-                .Where(t => t.Id == id)
-                .Select(TeamViewModel.FromTeam)
-                .FirstOrDefault();
+                           .Where(t => t.Id == id)
+                           .Select(TeamViewModel.FromTeam)
+                           .FirstOrDefault();
 
             if (team == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
 
-            return View(team);
+            return this.View(team);
         }
 
         // POST: Administration/Teams/Delete/5
@@ -203,10 +199,10 @@
 
             team.Members.Clear();
             team.Subtitles.Clear();
- 
+
             this.Data.Teams.Delete(team);
             this.Data.SaveChanges();
-            return RedirectToAction("Index");
+            return this.RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -244,36 +240,35 @@
                 TeamLeaders = teamLeaders
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         public ActionResult RemoveUserFromTeam(int? id, string userId)
         {
-
             var team = this.Data.Teams.Find(id);
 
             if (team == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             var memberToRemove = team.Members.FirstOrDefault(u => u.Id == userId);
             if (memberToRemove == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);                
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             team.Members.Remove(memberToRemove);
 
             this.Data.SaveChanges();
 
-            return RedirectToAction("ManageMembers", new { id = id });
+            return this.RedirectToAction("ManageMembers", new { id = id });
         }
 
         public ActionResult AddMember(int id, string role)
         {
-            ViewBag.Role = role;
-            ViewBag.Id = id;
+            this.ViewBag.Role = role;
+            this.ViewBag.Id = id;
 
             var team = this.Data.Teams.Find(id);
 
@@ -283,13 +278,13 @@
             }
 
             var users = this.Data.Users.All()
-                .Where(us => us.Languages.Any(l => l.Id == team.Language.Id))
-                .Where(u=> !u.Teams.Any(t=> t.Id == id))
-                .Where(usr => usr.TeamRoles.Any(tr => tr.Name == role))
-                .OrderBy(u => u.UserName)
-                .Project().To<UserOutputModel>();
+                            .Where(us => us.Languages.Any(l => l.Id == team.Language.Id))
+                            .Where(u => !u.Teams.Any(t => t.Id == id))
+                            .Where(usr => usr.TeamRoles.Any(tr => tr.Name == role))
+                            .OrderBy(u => u.UserName)
+                            .Project().To<UserOutputModel>();
 
-            return View(users);
+            return this.View(users);
         }
 
         public ActionResult AddUserToTeam(int id, string userId, string role)
@@ -316,7 +311,7 @@
 
             this.Data.SaveChanges();
 
-            return RedirectToAction("ManageMembers", new { id = id });
+            return this.RedirectToAction("ManageMembers", new { id = id });
         }
 
         protected override void Dispose(bool disposing)

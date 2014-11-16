@@ -38,7 +38,6 @@
                 directoryName = movie.Directory;
             }
 
-
             movie.Directory = directoryName;
             var mappedDirectoryName = HttpContext.Current.Server.MapPath(directoryName);
             Directory.CreateDirectory(mappedDirectoryName);

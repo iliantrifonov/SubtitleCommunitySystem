@@ -15,7 +15,6 @@
     {
         public AdminController(IApplicationData data) : base(data)
         {
-
         }
     }
 }

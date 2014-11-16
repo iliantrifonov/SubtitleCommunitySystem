@@ -1,7 +1,6 @@
 ﻿namespace SubtitleCommunitySystem.Web.Areas.Private.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
@@ -14,7 +13,6 @@
         public FileController(IApplicationData data)
             : base(data)
         {
-
         }
 
         [HttpGet]
@@ -28,7 +26,7 @@
             }
 
             Response.AddHeader("Content-Disposition", "attachment; filename=\"" + file.FileName + "\"");
-            return File(file.Content, file.ContentType);
+            return this.File(file.Content, file.ContentType);
         }
     }
 }

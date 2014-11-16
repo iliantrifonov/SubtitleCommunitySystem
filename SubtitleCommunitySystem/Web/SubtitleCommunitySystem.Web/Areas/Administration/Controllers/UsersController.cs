@@ -2,11 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
-    using System.Data.Entity;
     using System.Linq;
     using System.Net;
-    using System.Web;
     using System.Web.Mvc;
 
     using AutoMapper;
@@ -24,20 +21,17 @@
         public UsersController(IApplicationData data)
             : base(data)
         {
-
         }
 
         // GET: Administration/Users
         public ActionResult Index([DataSourceRequest] DataSourceRequest request)
         {
-            return View(this.Data.Users.All()
-                .Project().To<UserOutputModel>()
-                .ToDataSourceResult(request).Data);
+            return this.View(this.Data.Users.All().Project().To<UserOutputModel>().ToDataSourceResult(request).Data);
         }
 
         public ActionResult Details(string id)
         {
-            return RedirectToAction("Edit", new { id = id });
+            return this.RedirectToAction("Edit", new { id = id });
         }
 
         // GET: Administration/Users/Edit/5
@@ -54,7 +48,7 @@
 
             if (user == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
 
             var teamRoles = this.Data.TeamRoles.All().Project().To<TeamRoleModel>().ToArray();
@@ -65,7 +59,7 @@
                 User = user
             };
 
-            return View(editUserViewModel);
+            return this.View(editUserViewModel);
         }
 
         [HttpPost]
@@ -81,7 +75,7 @@
 
             if (user == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
 
             user.UserName = editModel.User.UserName;
@@ -104,13 +98,11 @@
 
             this.Data.SaveChanges();
 
-            TempData["Success"] = "User is updated!";
+            this.TempData["Success"] = "User is updated!";
 
-            return RedirectToAction("Edit");
+            return this.RedirectToAction("Edit");
         }
 
-
-        // GET: Administration/Users/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -121,10 +113,10 @@
             ApplicationUser applicationUser = this.Data.Users.Find(id);
             if (applicationUser == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
 
-            return View(Mapper.Map<UserOutputModel>(applicationUser));
+            return this.View(Mapper.Map<UserOutputModel>(applicationUser));
         }
 
         // POST: Administration/Users/Delete/5
@@ -135,7 +127,7 @@
             ApplicationUser applicationUser = this.Data.Users.Find(id);
             if (applicationUser == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
 
             applicationUser.Messages.Clear();
@@ -147,7 +139,7 @@
             this.Data.Users.Delete(applicationUser);
             this.Data.SaveChanges();
 
-            return RedirectToAction("Index");
+            return this.RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

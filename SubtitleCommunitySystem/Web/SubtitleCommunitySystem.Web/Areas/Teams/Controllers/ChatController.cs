@@ -1,24 +1,17 @@
 ﻿namespace SubtitleCommunitySystem.Web.Areas.Teams.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Net;
     using System.Web.Mvc;
 
-    using AutoMapper;
-    using AutoMapper.QueryableExtensions;
-
-    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Data;
-    using SubtitleCommunitySystem.Web.Areas.Teams.Models;
+    using SubtitleCommunitySystem.Web.Controllers.Base;
 
     public class ChatController : AuthenticatedUserController
     {
         public ChatController(IApplicationData data) : base(data)
         {
-
         }
 
         // GET: Teams/Chat/id
@@ -41,15 +34,14 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return View(chat);
+            return this.View(chat);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddMessage(string messageBox)
         {
-
-            return Json("This is working..");
+            return this.Json("This is working..");
         }
     }
 }

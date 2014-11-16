@@ -3,14 +3,13 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
+    using System.Web.Routing;
 
     using Microsoft.AspNet.Identity;
 
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Model;
-    using System.Web.Routing;
 
     public class BaseController : Controller
     {
@@ -34,7 +33,7 @@
 
                 if (this.User != null)
                 {
-                    var userId = User.Identity.GetUserId();
+                    var userId = this.User.Identity.GetUserId();
 
                     this.currentUser = this.Data.Users.Find(userId);
 

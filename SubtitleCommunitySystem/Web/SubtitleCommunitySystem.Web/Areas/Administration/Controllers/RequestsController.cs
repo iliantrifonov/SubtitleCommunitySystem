@@ -1,21 +1,16 @@
 ﻿namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Net;
     using System.Web.Mvc;
-
-    using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
-
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Model;
-    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Web.Areas.Administration.Models;
+    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Web.Helpers;
 
     public class RequestsController : AdminController
@@ -23,7 +18,6 @@
         public RequestsController(IApplicationData data)
             : base(data)
         {
-
         }
 
         // GET: Administration/Requests
@@ -35,7 +29,7 @@
                 .Project().To<RequestDetailedModel>()
                 .ToDataSourceResult(request).Data;
             
-            return View(requests);
+            return this.View(requests);
         }
 
         public ActionResult Approved([DataSourceRequest] DataSourceRequest request)
@@ -46,7 +40,7 @@
                 .Project().To<RequestDetailedModel>()
                 .ToDataSourceResult(request).Data;
 
-            return View("Index", requests);
+            return this.View("Index", requests);
         }
 
         public ActionResult Denied([DataSourceRequest] DataSourceRequest request)
@@ -57,7 +51,7 @@
                 .Project().To<RequestDetailedModel>()
                 .ToDataSourceResult(request).Data;
 
-            return View("Index", requests);
+            return this.View("Index", requests);
         }
 
         public ActionResult ApproveRequest(int id)
@@ -80,7 +74,7 @@
                 request.RequestState = RequestState.Approved;
 
                 this.Data.SaveChanges();
-                return RedirectToAction("Index");
+                return this.RedirectToAction("Index");
             }
 
             var role = this.Data.TeamRoles.All().FirstOrDefault(r => r.Name == roleAsString);
@@ -95,7 +89,7 @@
 
             this.Data.SaveChanges();
 
-            return RedirectToAction("Index");
+            return this.RedirectToAction("Index");
         }
 
         public ActionResult DenyRequest(int id)
@@ -111,7 +105,7 @@
 
             this.Data.SaveChanges();
 
-            return RedirectToAction("Index");
+            return this.RedirectToAction("Index");
         }
     }
 }

@@ -1,51 +1,47 @@
 ﻿namespace SubtitleCommunitySystem.Web.Areas.Administration.Controllers
 {
     using System;
-    using System.IO;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
-
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
-
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Areas.Administration.Models;
     using SubtitleCommunitySystem.Web.Controllers.Base;
-    using SubtitleCommunitySystem.Web.Infrastructure.Constants;
     using SubtitleCommunitySystem.Web.Helpers;
 
     public class MoviesController : AdminController
     {
-        public MoviesController(IApplicationData data)
-            : base(data)
+        public MoviesController(IApplicationData data) : base(data)
         {
         }
 
         public ActionResult Index()
         {
             var movies = this.Data.Movies.All()
-                .OrderBy(m => m.Name)
-                .Project().To<MovieOutputModel>();
+                             .OrderBy(m => m.Name)
+                             .Project().To<MovieOutputModel>();
 
-            return View(movies);
+            return this.View(movies);
         }
 
-        public ActionResult Read([DataSourceRequest] DataSourceRequest request)
+        public ActionResult Read([DataSourceRequest]
+                                 DataSourceRequest request)
         {
             var result = this.Data.Movies.All()
-                .Project().To<MovieOutputModel>();
+                             .Project().To<MovieOutputModel>();
 
-            return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            return this.Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            return this.View();
         }
 
         [HttpPost]
@@ -54,12 +50,12 @@
         {
             if (subtitlesource == null)
             {
-                ModelState.AddModelError("", "Subtitle source is required, please upload a file.");
+                this.ModelState.AddModelError(string.Empty, "Subtitle source is required, please upload a file.");
             }
 
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(movie);
+                return this.View(movie);
             }
 
             DbFile dbFile = null;
@@ -80,12 +76,12 @@
             }
             catch (ArgumentException ex)
             {
-                ModelState.AddModelError("", ex.Message);
+                this.ModelState.AddModelError(string.Empty, ex.Message);
             }
 
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(movie);
+                return this.View(movie);
             }
 
             this.Data.Files.Add(dbFile);
@@ -93,14 +89,13 @@
             var dbMovie = Mapper.Map<Movie>(movie);
             dbMovie.InitialSource = dbFile;
 
-
             this.Data.Movies.Add(dbMovie);
 
-            CreateSubtitlesForAllLanguages(dbMovie);
+            this.CreateSubtitlesForAllLanguages(dbMovie);
 
             this.Data.SaveChanges();
 
-            return RedirectToAction("Edit", new { id = dbMovie.Id });
+            return this.RedirectToAction("Edit", new { id = dbMovie.Id });
         }
 
         [HttpGet]
@@ -110,33 +105,33 @@
 
             if (movie == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
 
-            return View(movie);
+            return this.View(movie);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, MovieInputModel movie, HttpPostedFileBase poster, HttpPostedFileBase banner, HttpPostedFileBase subtitlesource, bool addsubtitles)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(movie);
+                return this.View(movie);
             }
 
             var dbMovie = this.Data.Movies.Find(id);
 
             if (dbMovie == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
 
             movie.Directory = dbMovie.Directory;
 
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(movie);
+                return this.View(movie);
             }
 
             DbFile dbFile = null;
@@ -160,12 +155,12 @@
             }
             catch (ArgumentException ex)
             {
-                ModelState.AddModelError("", ex.Message);
+                this.ModelState.AddModelError(string.Empty, ex.Message);
             }
 
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(movie);
+                return this.View(movie);
             }
 
             if (dbFile != null)
@@ -186,13 +181,13 @@
             dbMovie.Name = movie.Name;
             dbMovie.ReleaseDate = movie.ReleaseDate;
 
-            CreateSubtitlesForAllLanguages(dbMovie);
+            this.CreateSubtitlesForAllLanguages(dbMovie);
 
             this.Data.SaveChanges();
 
-            TempData["Success"] = "Movie is updated!";
+            this.TempData["Success"] = "Movie is updated!";
 
-            return RedirectToAction("Edit", new { id = dbMovie.Id });
+            return this.RedirectToAction("Edit", new { id = dbMovie.Id });
         }
         
         private void CreateSubtitlesForAllLanguages(Movie movie)
@@ -222,7 +217,6 @@
                 var languages = this.Data.Languages.All();
                 foreach (var lang in languages)
                 {
-
                     if (subtitleLanguageIds.Contains(lang.Id))
                     {
                         continue;

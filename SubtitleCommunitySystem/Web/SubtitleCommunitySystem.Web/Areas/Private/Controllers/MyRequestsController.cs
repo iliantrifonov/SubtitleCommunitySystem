@@ -1,32 +1,26 @@
 ﻿namespace SubtitleCommunitySystem.Web.Areas.Private.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
-
-    using Microsoft.AspNet.Identity;
-    using AutoMapper;
     using AutoMapper.QueryableExtensions;
-
+    using Microsoft.AspNet.Identity;
     using SubtitleCommunitySystem.Data;
-    using SubtitleCommunitySystem.Web.Controllers.Base;
-    using SubtitleCommunitySystem.Web.Areas.Private.Models;
     using SubtitleCommunitySystem.Model;
+    using SubtitleCommunitySystem.Web.Areas.Private.Models;
+    using SubtitleCommunitySystem.Web.Controllers.Base;
 
     public class MyRequestsController : AuthenticatedUserController
     {
         public MyRequestsController(IApplicationData data)
             : base(data)
         {
-
         }
 
         // GET: Private/MyRequests
         public ActionResult Index()
         {
-            var user = CurrentUser;
+            var user = this.CurrentUser;
 
             var pendingRequests = user.Requests.AsQueryable()
                 .Where(r => r.RequestState == RequestState.Pending)
@@ -55,7 +49,7 @@
                 DeniedRequests = deniedRequests
             };
 
-            return View(indexViewModel);
+            return this.View(indexViewModel);
         }
 
         public ActionResult Create()
@@ -65,7 +59,7 @@
                 Content = "Your message here..",
                 Type = RequestType.Translator
             };
-            return View(model);
+            return this.View(model);
         }
 
         // POST: Administration/Languages/Create
@@ -82,10 +76,10 @@
 
             if (hasPending)
             {
-                ModelState.AddModelError("", "You already have a request of this type pending");
+                this.ModelState.AddModelError(string.Empty, "You already have a request of this type pending");
             }
 
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var request = new PromotionRequest()
                 {
@@ -105,10 +99,10 @@
 
                 this.Data.SaveChanges();
 
-                return RedirectToAction("Index");
+                return this.RedirectToAction("Index");
             }
 
-            return View(model);
+            return this.View(model);
         }
     }
 }

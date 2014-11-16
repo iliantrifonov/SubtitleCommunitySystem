@@ -1,13 +1,11 @@
 ﻿namespace SubtitleCommunitySystem.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
 
-    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Data;
+    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Web.Services;
 
     public class SearchController : BaseController
@@ -22,8 +20,8 @@
 
         public ActionResult Index(string q)
         {
-            ViewBag.SearchQuery = q;
-            return View();
+            this.ViewBag.SearchQuery = q;
+            return this.View();
         }
 
         [ChildActionOnly]
@@ -32,7 +30,7 @@
         {
             var searchResults = this.cacheService.GetTop200SearchResults(searchString);
 
-            return PartialView("_SearchResultsPartial", searchResults);
+            return this.PartialView("_SearchResultsPartial", searchResults);
         }
     }
 }

@@ -2,12 +2,9 @@
 {
     using System;
     using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
 
-    using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
@@ -17,18 +14,18 @@
     using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Web.Infrastructure.Constants;
     using SubtitleCommunitySystem.Web.Helpers;
-
+    using SubtitleCommunitySystem.Model;
+    using SubtitleCommunitySystem.Web.Services;
 
     using Model = SubtitleCommunitySystem.Model.SubtitleTask;
     using ViewModel = SubtitleCommunitySystem.Web.Areas.Teams.Models.TaskInputModel;
-    using SubtitleCommunitySystem.Model;
-    using SubtitleCommunitySystem.Web.Services;
 
     public class TasksController : KendoGridController
     {
         private ICacheService cacheService;
 
-        public TasksController(IApplicationData data, ICacheService cacheService) : base(data)
+        public TasksController(IApplicationData data, ICacheService cacheService)
+            : base(data)
         {
             this.cacheService = cacheService;
         }
@@ -42,27 +39,6 @@
             return this.Json(items);
         }
 
-        protected IEnumerable GetData(int? subtitleId)
-        {
-            var data = this.Data.Tasks.All()
-                .Where(t => t.SubtitleId == subtitleId)
-                .Project().To<ViewModel>();
-
-            return data;
-        }
-
-        protected override IEnumerable GetData()
-        {
-            var data = this.Data.Tasks.All()
-                .Project().To<ViewModel>();
-            return data;
-        }
-
-        protected override T GetById<T>(object id)
-        {
-            return this.Data.Tasks.Find(id) as T;
-        }
-
         [HttpPost]
         [Auth(RoleConstants.TeamLeader)]
         public ActionResult Create([DataSourceRequest]DataSourceRequest request, ViewModel model, int? subId)
@@ -70,7 +46,11 @@
             model.SubtitleId = subId;
             model.DateCreated = DateTime.Now;
             var dbModel = base.Create<Model, ViewModel>(model);
-            if (dbModel != null) model.Id = dbModel.Id;
+            if (dbModel != null)
+            {
+                model.Id = dbModel.Id;
+            }
+
             return this.GridOperation(model, request);
         }
 
@@ -93,7 +73,7 @@
                 {
                     this.Data.Tasks.Delete(model.Id);
                 }
-                catch (ArgumentNullException ex)
+                catch (ArgumentNullException)
                 {
                     // this sometimes happens with db data before latest migration.
                 }
@@ -111,9 +91,30 @@
 
             var roleName = RoleEnumToStringConverter.FromSubtitleTaskType(type);
 
-            var userModels = cacheService.GetDropDownForUsers(roleName, teamId);
+            var userModels = this.cacheService.GetDropDownForUsers(roleName, teamId);
 
-            return Json(userModels, JsonRequestBehavior.AllowGet);
+            return this.Json(userModels, JsonRequestBehavior.AllowGet);
+        }
+
+        protected IEnumerable GetData(int? subtitleId)
+        {
+            var data = this.Data.Tasks.All()
+                .Where(t => t.SubtitleId == subtitleId)
+                .Project().To<ViewModel>();
+
+            return data;
+        }
+
+        protected override IEnumerable GetData()
+        {
+            var data = this.Data.Tasks.All()
+                .Project().To<ViewModel>();
+            return data;
+        }
+
+        protected override T GetById<T>(object id)
+        {
+            return this.Data.Tasks.Find(id) as T;
         }
     }
 }

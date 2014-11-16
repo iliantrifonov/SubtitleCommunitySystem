@@ -1,5 +1,4 @@
-﻿
-namespace SubtitleCommunitySystem.Model
+﻿namespace SubtitleCommunitySystem.Model
 {
     using System;
     using System.Collections.Generic;

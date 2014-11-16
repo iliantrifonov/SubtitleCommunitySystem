@@ -1,16 +1,12 @@
 ﻿namespace SubtitleCommunitySystem.Data
 {
     using System;
-    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     using Microsoft.AspNet.Identity.EntityFramework;
 
     using SubtitleCommunitySystem.Model;
-    using SubtitleCommunitySystem.Data.Migrations;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
@@ -18,14 +14,7 @@
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
         
-        //public IDbSet<TestModelOne> Ones { get; set; }
-
         public IDbSet<TeamRole> TeamRoles { get; set; }
 
         public IDbSet<Language> Languages { get; set; }
@@ -46,13 +35,17 @@
 
         public IDbSet<PromotionRequest> PromotionRequests { get; set; }
 
-
         public DbContext DbContext
         {
             get
             {
                 return this;
             }
+        }
+
+        public static ApplicationDbContext Create()
+        {
+            return new ApplicationDbContext();
         }
 
         public new IDbSet<T> Set<T>() where T : class

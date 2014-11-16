@@ -1,45 +1,43 @@
 ﻿namespace SubtitleCommunitySystem.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
 
-    using AutoMapper;
     using AutoMapper.QueryableExtensions;
-    using Kendo.Mvc.UI;
-    using Kendo.Mvc.Extensions;
 
-    using SubtitleCommunitySystem.Web.Controllers.Base;
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
+
     using SubtitleCommunitySystem.Data;
-    using SubtitleCommunitySystem.Web.ViewModels;
+    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Web.Filters;
+    using SubtitleCommunitySystem.Web.ViewModels;
 
     public class HomeController : BaseController
     {
         public HomeController(IApplicationData data) : base(data)
         {
-
         }
 
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            this.ViewBag.Message = "Your application description page.";
 
-            return View();
+            return this.View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            this.ViewBag.Message = "Your contact page.";
 
-            return View();
+            return this.View();
         }
 
         [HttpPost]
@@ -49,7 +47,7 @@
             var data = this.Data.Movies.All()
                 .Project().To<MovieListViewModel>()
                 .ToDataSourceResult(request);
-            return Json(data);
+            return this.Json(data);
         }
 
         public ActionResult MovieDetails(int? id)
@@ -69,7 +67,7 @@
                 throw new HttpException(404, "Movie not found!");
             }
 
-            return View(movie);
+            return this.View(movie);
         }
 
         [ChildActionOnly]
@@ -102,17 +100,16 @@
                 throw new HttpException(404, "Subtitle does not exist, or does not have a subtitle file.");                
             }
 
-            ViewBag.SubtitleId = id;
-            ViewBag.FileId = fileId;
+            this.ViewBag.SubtitleId = id;
+            this.ViewBag.FileId = fileId;
 
-            return View();
+            return this.View();
         }
 
         [HttpGet]
         [OutputCache(Duration = (1 * 60 * 60), VaryByParam = "subtitleId")]
         public ActionResult GetDetailsPartial(int? subtitleId)
-        {
-            
+        {            
             if (subtitleId == null)
             {
                 throw new HttpException(400, "Incorrect route parameters, subtitleId cannot be null");

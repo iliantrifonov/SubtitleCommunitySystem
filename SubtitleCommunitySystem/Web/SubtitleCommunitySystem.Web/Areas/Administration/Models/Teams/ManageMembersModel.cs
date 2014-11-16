@@ -12,6 +12,7 @@
             this.Revisioners = new HashSet<UserOutputModel>();
             this.TeamLeaders = new HashSet<UserOutputModel>();
         }
+
         public int Id { get; set; }
 
         public IEnumerable<UserOutputModel> Translators { get; set; }
@@ -23,6 +24,5 @@
         public IEnumerable<UserOutputModel> Revisioners { get; set; }
 
         public IEnumerable<UserOutputModel> TeamLeaders { get; set; }
-        
     }
 }

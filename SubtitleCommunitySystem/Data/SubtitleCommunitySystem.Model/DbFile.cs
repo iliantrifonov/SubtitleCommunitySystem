@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-namespace SubtitleCommunitySystem.Model
+﻿namespace SubtitleCommunitySystem.Model
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class DbFile
     {
         public int Id { get; set; }

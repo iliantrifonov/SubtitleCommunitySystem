@@ -1,5 +1,4 @@
-﻿
-namespace SubtitleCommunitySystem.Web.Infrastructure.Mappings
+﻿namespace SubtitleCommunitySystem.Web.Infrastructure.Mappings
 {
     using AutoMapper;
 

@@ -2,10 +2,10 @@
 {
     using System;
     using System.Linq;
+    using System.Web.Mvc;
 
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Infrastructure.Mappings;
-    using System.Web.Mvc;
 
     public class UserDropDownModel : IMapFrom<ApplicationUser>
     {

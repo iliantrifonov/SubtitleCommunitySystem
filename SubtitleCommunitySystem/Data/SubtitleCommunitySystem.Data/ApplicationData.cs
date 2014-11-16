@@ -1,13 +1,12 @@
 ﻿namespace SubtitleCommunitySystem.Data
 {
-
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Data.Entity;
 
     using SubtitleCommunitySystem.Data.Repositories;
     using SubtitleCommunitySystem.Model;
+
     using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity;
 
@@ -22,8 +21,7 @@
             this.repositories = new Dictionary<Type, object>();
         }
 
-        public ApplicationData()
-            : this(new ApplicationDbContext())
+        public ApplicationData() : this(new ApplicationDbContext())
         {
         }
 
@@ -39,7 +37,7 @@
         {
             get
             {
-                return GetRepository<TeamRole>();
+                return this.GetRepository<TeamRole>();
             }
         }
 
@@ -47,7 +45,7 @@
         {
             get
             {
-                return GetRepository<ApplicationUser>();
+                return this.GetRepository<ApplicationUser>();
             }
         }
 
@@ -55,7 +53,7 @@
         {
             get
             {
-                return GetRepository<Language>();
+                return this.GetRepository<Language>();
             }
         }
 
@@ -63,7 +61,7 @@
         {
             get
             {
-                return GetRepository<Channel>();
+                return this.GetRepository<Channel>();
             }
         }
 
@@ -71,7 +69,7 @@
         {
             get
             {
-                return GetRepository<Message>();
+                return this.GetRepository<Message>();
             }
         }
 
@@ -79,7 +77,7 @@
         {
             get
             {
-                return GetRepository<Subtitle>();
+                return this.GetRepository<Subtitle>();
             }
         }
 
@@ -87,7 +85,7 @@
         {
             get
             {
-                return GetRepository<Team>();
+                return this.GetRepository<Team>();
             }
         }
 
@@ -95,7 +93,7 @@
         {
             get
             {
-                return GetRepository<DbFile>();
+                return this.GetRepository<DbFile>();
             }
         }
 
@@ -103,7 +101,7 @@
         {
             get
             {
-                return GetRepository<SubtitleTask>();
+                return this.GetRepository<SubtitleTask>();
             }
         }
 
@@ -111,7 +109,7 @@
         {
             get
             {
-                return GetRepository<Movie>();
+                return this.GetRepository<Movie>();
             }
         }
 
@@ -119,7 +117,7 @@
         {
             get
             {
-                return GetRepository<PromotionRequest>();
+                return this.GetRepository<PromotionRequest>();
             }
         }
 
@@ -145,7 +143,7 @@
 
         public bool RemoveRoleFromUser(ApplicationUser user, string roleName)
         {
-            var identityContext = context as IdentityDbContext<ApplicationUser>;
+            var identityContext = this.context as IdentityDbContext<ApplicationUser>;
             var role = identityContext.Roles.FirstOrDefault(r => r.Name == roleName);
             if (role == null)
             {
@@ -174,6 +172,7 @@
                 var newRepository = Activator.CreateInstance(typeof(EFRepository<T>), this.context);
                 this.repositories.Add(typeOfRepository, newRepository);
             }
+
             return (IRepository<T>)this.repositories[typeOfRepository];
         }
     }

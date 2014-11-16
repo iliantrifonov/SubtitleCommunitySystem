@@ -195,7 +195,9 @@
     <Compile Include="App_Start\EngineConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
-    <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="App_Start\NinjectWebCommon.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
@@ -239,13 +241,17 @@
     <Compile Include="Areas\Teams\Models\Teams\TeamDetailedOutputModel.cs" />
     <Compile Include="Areas\Teams\Models\Teams\TeamIndexOutputModel.cs" />
     <Compile Include="Areas\Teams\TeamsAreaRegistration.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountController.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Controllers\Base\AdminController.cs" />
     <Compile Include="Controllers\Base\AuthenticatedUserController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
     <Compile Include="Controllers\Base\KendoGridController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ManageController.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Filters\AuthAttribute.cs" />
     <Compile Include="Filters\AuthFilter.cs" />

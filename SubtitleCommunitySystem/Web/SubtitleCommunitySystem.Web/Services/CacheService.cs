@@ -1,6 +1,7 @@
 ﻿namespace SubtitleCommunitySystem.Web.Services
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections;
     using System.Linq;
     using System.Web.Caching;
@@ -12,7 +13,6 @@
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Web.Areas.Teams.Models;
     using SubtitleCommunitySystem.Web.ViewModels;
-    using System.Collections.Generic;
 
     public class CacheService : ICacheService
     {
@@ -36,7 +36,7 @@
             var users = HttpContext.Current.Cache.Get(cacheKey);
             if (users == null)
             {
-                users = GetUsersDropDownForCaching(roleName, teamId);
+                users = this.GetUsersDropDownForCaching(roleName, teamId);
                 HttpContext.Current.Cache.Add(cacheKey, users, null, DateTime.Now.AddMinutes(1), Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
             }
 
@@ -73,25 +73,25 @@
 
         private void PopulateTrieWithSubtitleSearch(IList<SubtitleCacheSearchViewModel> subtitleModels)
         {
-            this.Trie = CreateTrie();
+            this.Trie = this.CreateTrie();
             for (int i = 0; i < subtitleModels.Count; i++)
             {
                 var currentModel = subtitleModels[i];
                 
                 var currentLanguageToLowerInvariant = currentModel.Language.ToLowerInvariant();
-                Trie.Add(currentLanguageToLowerInvariant, currentModel);
+                this.Trie.Add(currentLanguageToLowerInvariant, currentModel);
 
                 var currentMovieNameToLowerInvariant = currentModel.MovieName.ToLowerInvariant();
-                Trie.Add(currentMovieNameToLowerInvariant, currentModel);
+                this.Trie.Add(currentMovieNameToLowerInvariant, currentModel);
 
                 var currentSubNameToLowerInvariant = currentModel.Name.ToLowerInvariant();
-                Trie.Add(currentSubNameToLowerInvariant, currentModel);
+                this.Trie.Add(currentSubNameToLowerInvariant, currentModel);
             }
         }
 
         private void OnRemoveCallback(string key, object value, CacheItemRemovedReason reason)
         {
-            CacheSubtitlesSearch();
+            this.CacheSubtitlesSearch();
         }
 
         private void CacheSubtitlesSearch()
@@ -103,8 +103,8 @@
                     .Project().To<SubtitleCacheSearchViewModel>()
                     .ToList();
 
-                PopulateTrieWithSubtitleSearch(subtitleModels);
-                HttpContext.Current.Cache.Insert(SubtitleSearchCacheKey, Trie, null, DateTime.Now.AddMinutes(60), Cache.NoSlidingExpiration, CacheItemPriority.Default, OnRemoveCallback);
+                this.PopulateTrieWithSubtitleSearch(subtitleModels);
+                HttpContext.Current.Cache.Insert(SubtitleSearchCacheKey, this.Trie, null, DateTime.Now.AddMinutes(60), Cache.NoSlidingExpiration, CacheItemPriority.Default, this.OnRemoveCallback);
             }
         }
     }

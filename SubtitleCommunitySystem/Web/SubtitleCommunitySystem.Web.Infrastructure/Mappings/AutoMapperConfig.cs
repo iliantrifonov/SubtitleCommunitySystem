@@ -11,19 +11,11 @@
     {
         public void Execute(Assembly assembly)
         {
-            //var types = Assembly.GetExecutingAssembly().GetExportedTypes();
             var types = assembly.GetExportedTypes();
 
             LoadStandardMappings(types);
 
             LoadCustomMappings(types);
-
-            LoadApplicationCustomMappings();
-        }
-
-        private void LoadApplicationCustomMappings()
-        {
-            //Mapper.CreateMap<MovieInputModel, Movie>();
         }
 
         private static void LoadStandardMappings(IEnumerable<Type> types)

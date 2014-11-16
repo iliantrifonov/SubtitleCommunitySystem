@@ -1,14 +1,12 @@
 ﻿namespace SubtitleCommunitySystem.Web.Areas.Teams.Models
 {
     using System;
-    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
 
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Infrastructure.Mappings;
-    using System.ComponentModel.DataAnnotations;
 
     public class SubtitleOutputModel : IMapFrom<Subtitle>, IHaveCustomMappings
     {

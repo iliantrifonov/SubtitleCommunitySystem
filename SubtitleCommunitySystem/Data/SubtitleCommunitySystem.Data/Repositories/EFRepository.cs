@@ -34,24 +34,24 @@
 
         public void Add(T entity)
         {
-            ChangeState(entity, EntityState.Added);
+            this.ChangeState(entity, EntityState.Added);
         }
 
         public void Update(T entity)
         {
-            ChangeState(entity, EntityState.Modified);
+            this.ChangeState(entity, EntityState.Modified);
         }
 
         public T Delete(T entity)
         {
-            ChangeState(entity, EntityState.Deleted);
+            this.ChangeState(entity, EntityState.Deleted);
             return entity;
         }
 
         public T Delete(object id)
         {
             var entity = this.set.Find(id);
-            ChangeState(entity, EntityState.Deleted);
+            this.ChangeState(entity, EntityState.Deleted);
             return entity;
         }
 

@@ -1,20 +1,19 @@
 ﻿namespace SubtitleCommunitySystem.Web.Areas.Private.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
 
-    using AutoMapper;
     using AutoMapper.QueryableExtensions;
-    using Kendo.Mvc.UI;
-    using Kendo.Mvc.Extensions;
 
-    using SubtitleCommunitySystem.Web.Controllers.Base;
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
+
     using SubtitleCommunitySystem.Data;
-    using SubtitleCommunitySystem.Web.Areas.Private.Models;
     using SubtitleCommunitySystem.Model;
+    using SubtitleCommunitySystem.Web.Areas.Private.Models;
+    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Web.Helpers;
 
     public class MyTasksController : AuthenticatedUserController
@@ -22,13 +21,11 @@
         public MyTasksController(IApplicationData data)
             : base(data)
         {
-
         }
 
         public ActionResult Index()
         {
-
-            return View();
+            return this.View();
         }
 
         [HttpPost]
@@ -62,21 +59,19 @@
 
             try
             {
-
                 if (file != null)
                 {
                     dbFile = DatabaseFileHelper.GetSubtitleDbFile(file, "Subtitles");
                 }
-
             }
             catch (ArgumentException ex)
             {
-                ModelState.AddModelError("", ex.Message);
+                this.ModelState.AddModelError(string.Empty, ex.Message);
             }
 
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View("Index");
+                return this.View("Index");
             }
 
             task.FinishedPartFile = dbFile;
@@ -98,13 +93,13 @@
             if (task == null)
             {
                 throw new HttpException(404, "No such task");
-                
             }
 
             if (percent < 0 || percent > 100)
             {
                 throw new HttpException(400, "Percent value is invalid!");
             }
+
             task.PercentDone = (int)percent;
             this.Data.SaveChanges();
 

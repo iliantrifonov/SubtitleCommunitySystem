@@ -1,35 +1,30 @@
 ﻿namespace SubtitleCommunitySystem.Web.Areas.Teams.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Net;
     using System.Web.Mvc;
 
-    using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
-    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Web.Areas.Teams.Models;
+    using SubtitleCommunitySystem.Web.Controllers.Base;
 
     public class TeamsController : AuthenticatedUserController
     {
         public TeamsController(IApplicationData data)
             : base(data)
         {
-
         }
 
-        // GET: Teams/Teams
         public ActionResult Index()
         {
             var teams = this.CurrentUser.Teams
                 .OrderBy(t => t.Name)
                 .AsQueryable().Project().To<TeamIndexOutputModel>().ToList();
 
-            return View(teams);
+            return this.View(teams);
         }
 
         public ActionResult Details(int? id)
@@ -43,7 +38,7 @@
 
             if (!teamExists)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
 
             var teamModel = this.Data.Teams.All()
@@ -51,7 +46,7 @@
                 .Project().To<TeamDetailedOutputModel>()
                 .FirstOrDefault();
 
-            return View(teamModel);
+            return this.View(teamModel);
         }
     }
 }

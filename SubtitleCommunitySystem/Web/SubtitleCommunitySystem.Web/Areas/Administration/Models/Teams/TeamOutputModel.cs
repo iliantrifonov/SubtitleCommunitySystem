@@ -1,10 +1,11 @@
 ﻿namespace SubtitleCommunitySystem.Web.Areas.Administration.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     using AutoMapper;
 
     using SubtitleCommunitySystem.Model;
     using SubtitleCommunitySystem.Web.Infrastructure.Mappings;
-    using System.ComponentModel.DataAnnotations;
 
     public class TeamOutputModel : IMapFrom<Team>, IMapTo<Team>, IHaveCustomMappings
     {

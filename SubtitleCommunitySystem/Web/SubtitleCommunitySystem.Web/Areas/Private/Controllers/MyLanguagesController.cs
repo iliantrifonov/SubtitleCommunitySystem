@@ -1,26 +1,22 @@
 ﻿namespace SubtitleCommunitySystem.Web.Areas.Private.Controllers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Net;
     using System.Linq;
-    using System.Web;
+    using System.Net;
     using System.Web.Mvc;
 
-    using AutoMapper;
     using AutoMapper.QueryableExtensions;
 
+    using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Web.Areas.Administration.Models;
     using SubtitleCommunitySystem.Web.Areas.Private.Models;
     using SubtitleCommunitySystem.Web.Controllers.Base;
-    using SubtitleCommunitySystem.Data;
 
     public class MyLanguagesController : AuthenticatedUserController
     {
         public MyLanguagesController(IApplicationData data)
             : base(data)
         {
-
         }
 
         // GET: Private/MyLanguages
@@ -31,7 +27,7 @@
                 .Project().To<LanguageOutputModel>()
                 .ToList();
 
-            return View(languages);
+            return this.View(languages);
         }
 
         [HttpGet]
@@ -39,13 +35,12 @@
         {
             var languages = this.Data.Languages.All().Select(l => new SelectListItem() { Text = l.Name, Value = l.Id.ToString() });
 
-
             var model = new AddLanguageViewModel()
             {
                 Languages = languages
             };
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
@@ -62,13 +57,13 @@
 
             if (alreadyHasLanguage)
             {
-                return RedirectToAction("Index");
+                return this.RedirectToAction("Index");
             }
 
             this.CurrentUser.Languages.Add(language);
             this.Data.SaveChanges();
 
-            return RedirectToAction("Index");
+            return this.RedirectToAction("Index");
         }
     }
 }

@@ -7,28 +7,26 @@
 
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
-    using Kendo.Mvc.UI;
+
     using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
 
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Model;
-    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Web.Areas.Administration.Models;
+    using SubtitleCommunitySystem.Web.Controllers.Base;
 
     public class LanguagesController : AdminController
     {
-
         public LanguagesController(IApplicationData data) : base(data)
         {
-
         }
 
         // GET: Administration/Languages
-        public ActionResult Index([DataSourceRequest] DataSourceRequest request)
+        public ActionResult Index([DataSourceRequest]
+                                  DataSourceRequest request)
         {
-            return View(this.Data.Languages.All()
-                .Project().To<LanguageOutputModel>()
-                .ToDataSourceResult(request).Data);
+            return this.View(this.Data.Languages.All().Project().To<LanguageOutputModel>().ToDataSourceResult(request).Data);
         }
 
         // GET: Administration/Languages/Details/5
@@ -40,21 +38,21 @@
             }
 
             var language = this.Data.Languages.All()
-                .Where(l => l.Id == (int)id)
-                .Project().To<LanguageOutputModel>().FirstOrDefault();
+                               .Where(l => l.Id == (int)id)
+                               .Project().To<LanguageOutputModel>().FirstOrDefault();
 
             if (language == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
 
-            return View(language);
+            return this.View(language);
         }
 
         // GET: Administration/Languages/Create
         public ActionResult Create()
         {
-            return View();
+            return this.View();
         }
 
         // POST: Administration/Languages/Create
@@ -62,17 +60,18 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] LanguageInputModel language)
+        public ActionResult Create([Bind(Include = "Id,Name")]
+                                   LanguageInputModel language)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 this.Data.Languages.Add(Mapper.Map<Language>(language));
                 this.Data.SaveChanges();
 
-                return RedirectToAction("Index");
+                return this.RedirectToAction("Index");
             }
 
-            return View(language);
+            return this.View(language);
         }
 
         // GET: Administration/Languages/Edit/5
@@ -85,12 +84,12 @@
             var language = this.Data.Languages.Find(id);
             if (language == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
 
             var inputLanguage = Mapper.Map<LanguageInputModel>(language);
 
-            return View(inputLanguage);
+            return this.View(inputLanguage);
         }
 
         // POST: Administration/Languages/Edit/5
@@ -98,26 +97,27 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] LanguageInputModel language)
+        public ActionResult Edit([Bind(Include = "Id,Name")]
+                                 LanguageInputModel language)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 var dbLanguage = this.Data.Languages.Find(language.Id);
 
                 if (dbLanguage == null)
                 {
-                    return HttpNotFound();                    
+                    return this.HttpNotFound();                    
                 }
 
                 dbLanguage.Name = language.Name;
 
                 this.Data.SaveChanges();
-                TempData["Success"] = "Language is updated!";
+                this.TempData["Success"] = "Language is updated!";
 
-                return RedirectToAction("Edit");
+                return this.RedirectToAction("Edit");
             }
 
-            return View(language);
+            return this.View(language);
         }
 
         // GET: Administration/Languages/Delete/5
@@ -132,10 +132,10 @@
 
             if (language == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
 
-            return View(Mapper.Map<LanguageInputModel>(language));
+            return this.View(Mapper.Map<LanguageInputModel>(language));
         }
 
         // POST: Administration/Languages/Delete/5
@@ -151,7 +151,7 @@
             this.Data.Languages.Delete(language);
             this.Data.SaveChanges();
 
-            return RedirectToAction("Index");
+            return this.RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

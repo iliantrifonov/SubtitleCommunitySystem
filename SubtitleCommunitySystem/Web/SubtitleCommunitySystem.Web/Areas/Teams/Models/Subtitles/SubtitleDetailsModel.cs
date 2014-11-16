@@ -48,7 +48,6 @@
                 .ForMember(m => m.SubtitleFileId, opt => opt.MapFrom(u => u.FinalFile.Id))
                 .ForMember(m => m.MovieDescription, opt => opt.MapFrom(u => u.Movie.Description))
                 .ForMember(m => m.MovieMainPosterUrl, opt => opt.MapFrom(u => u.Movie.MainPosterUrl));
-       
         }
     }
 }

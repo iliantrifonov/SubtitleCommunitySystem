@@ -1,45 +1,39 @@
 ﻿namespace SubtitleCommunitySystem.Web.Areas.Teams.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Net;
     using System.Web;
     using System.Web.Mvc;
-
-    using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
     using Microsoft.AspNet.Identity;
-
-    using SubtitleCommunitySystem.Web.Areas.Teams.Models;
-    using SubtitleCommunitySystem.Model;
-    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Data;
-    using SubtitleCommunitySystem.Web.Helpers;
+    using SubtitleCommunitySystem.Model;
+    using SubtitleCommunitySystem.Web.Areas.Teams.Models;
+    using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Web.Filters;
+    using SubtitleCommunitySystem.Web.Helpers;
     using SubtitleCommunitySystem.Web.Infrastructure.Constants;
 
     public class SubtitlesController : AuthenticatedUserController
     {
-        public SubtitlesController(IApplicationData data)
-            : base(data)
+        public SubtitlesController(IApplicationData data) : base(data)
         {
-
         }
 
-        public ActionResult Index([DataSourceRequest] DataSourceRequest request, int? id)
+        public ActionResult Index([DataSourceRequest]
+                                  DataSourceRequest request, int? id)
         {
-            var error = GetErrorValidateTeamAndUser(id);
+            var error = this.GetErrorValidateTeamAndUser(id);
 
             if (error != null)
             {
                 return error;
             }
 
-            SetViewBag(id);
-
+            this.SetViewBag(id);
 
             int languageId = this.Data.Teams.All()
                                  .Where(t => t.Id == id)
@@ -52,7 +46,7 @@
                                 .Project().To<SubtitleOutputModel>()
                                 .ToDataSourceResult(request);
 
-            return View(subtitles.Data);
+            return this.View(subtitles.Data);
         }
 
         [Auth(RoleConstants.TeamLeader)]
@@ -68,7 +62,7 @@
 
             if (subtitle == null || team == null)
             {
-                return HttpNotFound();
+                return this.HttpNotFound();
             }
 
             subtitle.Team = team;
@@ -76,39 +70,38 @@
 
             this.Data.SaveChanges();
 
-            return RedirectToAction("Index", new { id = teamId });
+            return this.RedirectToAction("Index", new { id = teamId });
         }
 
-        public ActionResult TeamSubtitles([DataSourceRequest] DataSourceRequest request, int? id)
+        public ActionResult TeamSubtitles([DataSourceRequest]
+                                          DataSourceRequest request, int? id)
         {
-            SetViewBag(id);
+            this.SetViewBag(id);
 
-            return View();
+            return this.View();
         }
 
-        public ActionResult ReadTeamSubtitles([DataSourceRequest] DataSourceRequest request, int? id)
+        public ActionResult ReadTeamSubtitles([DataSourceRequest]
+                                              DataSourceRequest request, int? id)
         {
-
-            var errorResult = GetErrorValidateTeamAndUser(id);
+            var errorResult = this.GetErrorValidateTeamAndUser(id);
 
             if (errorResult != null)
             {
                 return errorResult;
             }
 
-
-
             var subtitles = this.Data.Subtitles.All()
-                .Where(s => s.Team.Id == id)
-                .Project().To<SubtitleOutputModel>()
-                .ToDataSourceResult(request);
+                                .Where(s => s.Team.Id == id)
+                                .Project().To<SubtitleOutputModel>()
+                                .ToDataSourceResult(request);
 
-            return Json(subtitles);
+            return this.Json(subtitles);
         }
 
         public ActionResult Details(int? id, int? teamId)
         {
-            var errorResult = GetErrorValidateTeamAndUser(teamId);
+            var errorResult = this.GetErrorValidateTeamAndUser(teamId);
 
             if (errorResult != null)
             {
@@ -116,8 +109,8 @@
             }
 
             var model = this.Data.Subtitles.All()
-                .Where(s => s.Id == id)
-                .Project().To<SubtitleDetailsModel>().FirstOrDefault();
+                            .Where(s => s.Id == id)
+                            .Project().To<SubtitleDetailsModel>().FirstOrDefault();
 
             if (model == null)
             {
@@ -130,11 +123,11 @@
                 Value = m.Id
             }).ToList();
 
-            ViewBag.Users = selectList;
+            this.ViewBag.Users = selectList;
 
-            SetViewBag(teamId);
+            this.SetViewBag(teamId);
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]
@@ -162,16 +155,15 @@
                 {
                     dbSubtitleFile = DatabaseFileHelper.GetSubtitleDbFile(subtitleFile, "Subtitles");
                 }
-
             }
             catch (ArgumentException ex)
             {
-                ModelState.AddModelError("", ex.Message);
+                this.ModelState.AddModelError(string.Empty, ex.Message);
             }
 
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View("Details", subtitle);
+                return this.View("Details", subtitle);
             }
 
             subtitle.Description = model.Description;
@@ -193,7 +185,7 @@
                 if (subtitle.FinalFile == null)
                 {
                     subtitle.IsFinished = false;
-                    TempData["Error"] = "Cannot finish a subtitle without uploading the final subtitle file!";
+                    this.TempData["Error"] = "Cannot finish a subtitle without uploading the final subtitle file!";
                 }
                 else
                 {
@@ -208,7 +200,7 @@
 
             this.Data.SaveChanges();
 
-            return RedirectToAction("Details", new { id = subtitle.Id, teamId = subtitle.Team.Id });
+            return this.RedirectToAction("Details", new { id = subtitle.Id, teamId = subtitle.Team.Id });
         }
 
         private ActionResult GetErrorValidateTeamAndUser(int? id)
@@ -220,8 +212,8 @@
 
             var userID = this.User.Identity.GetUserId();
             var isInTeam = this.Data.Teams.All()
-                .Where(t => t.Id == id)
-                .Any(t => t.Members.Any(m => m.Id == userID));
+                               .Where(t => t.Id == id)
+                               .Any(t => t.Members.Any(m => m.Id == userID));
 
             if (!isInTeam)
             {
@@ -237,8 +229,8 @@
 
             if (team != null)
             {
-                ViewBag.TeamName = team.Name;
-                ViewBag.Id = team.Id;
+                this.ViewBag.TeamName = team.Name;
+                this.ViewBag.Id = team.Id;
             }
         }
     }

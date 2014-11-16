@@ -1,10 +1,10 @@
 ﻿namespace SubtitleCommunitySystem.Data
 {
     using System;
+    using System.Data.Entity.Infrastructure;
     using System.Data.Entity;
 
     using SubtitleCommunitySystem.Model;
-    using System.Data.Entity.Infrastructure;
 
     public interface IApplicationDbContext 
     {

@@ -5,8 +5,9 @@
     using System.Web.Mvc;
 
     using AutoMapper;
-    using Kendo.Mvc.UI;
+
     using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
 
     using SubtitleCommunitySystem.Data;
 
@@ -16,10 +17,6 @@
             : base(data)
         {
         }
-
-        protected abstract IEnumerable GetData();
-
-        protected abstract T GetById<T>(object id) where T : class;
 
         [HttpPost]
         public virtual ActionResult Read([DataSourceRequest]DataSourceRequest request)
@@ -35,7 +32,7 @@
             where TModel : class
             where TViewModel : class
         {
-            if (model != null && ModelState.IsValid)
+            if (model != null && this.ModelState.IsValid)
             {
                 var dbModel = Mapper.Map<TModel>(model);
                 this.ChangeEntityStateAndSave(dbModel, EntityState.Added);
@@ -50,7 +47,7 @@
             where TModel : class
             where TViewModel : class
         {
-            if (model != null && ModelState.IsValid)
+            if (model != null && this.ModelState.IsValid)
             {
                 var dbModel = this.GetById<TModel>(id);
                 Mapper.Map<TViewModel, TModel>(model, dbModel);
@@ -60,8 +57,12 @@
 
         protected JsonResult GridOperation<T>(T model, [DataSourceRequest]DataSourceRequest request)
         {
-            return Json(new[] { model }.ToDataSourceResult(request, ModelState));
+            return this.Json(new[] { model }.ToDataSourceResult(request, this.ModelState));
         }
+
+        protected abstract IEnumerable GetData();
+
+        protected abstract T GetById<T>(object id) where T : class;
 
         private void ChangeEntityStateAndSave(object dbModel, EntityState state)
         {

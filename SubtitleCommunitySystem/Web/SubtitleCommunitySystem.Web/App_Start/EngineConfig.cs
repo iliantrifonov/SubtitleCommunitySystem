@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace SubtitleCommunitySystem.Web
+﻿namespace SubtitleCommunitySystem.Web
 {
+    using System;
+    using System.Linq;
+    using System.Web.Mvc;
+
     public class EngineConfig
     {
         public static void RegisterEngines(ViewEngineCollection viewEngineCollection)
