@@ -6,6 +6,16 @@
     ViewBag.Title = "Home Page";
 }
 
+<div class="row">
+    <img src="/ResourceFiles/banner.jpg" style="width:100%" />
+</div>
+
+<br />
+<h2 class="text-info text-center">
+    Welcome to Subtitle World! We hope you enjoy your stay with us  <span class="glyphicon glyphicon-ok-sign"></span>
+</h2>
+<br />
+<br />
 <script type="text/x-kendo-tmpl" id="template">
     <a href="/Home/MovieDetails/#= Id #">
         <div class="pull-left col-md-offset-2" style="padding:30px 0;">
@@ -16,6 +26,8 @@
         </div>
     </a>
 </script>
+
+
 
 @(Html.Kendo().ListView<MovieListViewModel>()
     .Name("listView")

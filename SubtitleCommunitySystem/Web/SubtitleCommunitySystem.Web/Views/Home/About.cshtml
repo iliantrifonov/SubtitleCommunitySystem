@@ -3,9 +3,13 @@
 }
 <h2>@ViewBag.Title.</h2>
 
+<hr />
+
 <h4>My name is Ilian Trifonov, and this is my project for Telerik Academy MVC course</h4>
 
-<h6>It consists of:</h6>
+<a href="/ResourceFiles/ASP.NET-MVC-Project-Assignment-November-2014.docx" class="btn btn-info">Download the assignment details</a>
+
+<h4>The projects consists of:</h4>
 <ul>
     <li>
         Main Features:
@@ -17,7 +21,7 @@
                 Requests => Each registered user can make a request to the administrator to become any of the 7 roles.
             </li>
             <li>
-                Movies, subtitles, file upload for posters/banners (kept on the server), and subtitles (kept in the database)
+                Movies, subtitles, file upload for posters/banners (kept on the server), and subtitles (kept in the database).
             </li>
             <li>
                 Tasks => Each user can be assigned tasks based on the team, language and role he is in.
@@ -26,7 +30,10 @@
                 Languages => Each user can add languages they know, to join teams with those languages.
             </li>
             <li>
-                Filters for custom roles and for parameters with special symbols in the URL
+                Filters for custom roles and for parameters with special symbols in the URL.
+            </li>
+            <li>
+                Unit Tests.
             </li>
         </ul>
     </li>
@@ -153,7 +160,7 @@
                 Search:
                 <ul>
                     <li>
-                        Implemented server side with double caching. 
+                        Implemented server side with double caching.
                     </li>
                     <li>
                         It pulls all subtitles with a bare bones view model, inserts it in a Trie, and caches the trie for 1 hour.

@@ -42,6 +42,8 @@
             return View();
         }
 
+        [HttpPost]
+        [OutputCache(Duration = (10 * 60), VaryByParam = "page")]
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
             var data = this.Data.Movies.All()

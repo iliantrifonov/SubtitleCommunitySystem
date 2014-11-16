@@ -495,7 +495,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Library\Gma.DataStructures.StringSearch.dll" />
     <Content Include="Library\Kendo.Mvc.dll" />
+    <Content Include="ResourceFiles\banner.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Administration\Views\web.config" />
@@ -931,6 +933,7 @@
     <Content Include="Areas\Teams\Views\Shared\EditorTemplates\TaskEditorTemplate.cshtml" />
     <Content Include="Areas\Private\Views\MyTasks\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\SuccessMessage.cshtml" />
+    <Content Include="ResourceFiles\ASP.NET-MVC-Project-Assignment-November-2014.docx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
