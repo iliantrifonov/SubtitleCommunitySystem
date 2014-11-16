@@ -104,6 +104,8 @@
 
             this.Data.SaveChanges();
 
+            TempData["Success"] = "User is updated!";
+
             return RedirectToAction("Edit");
         }
 

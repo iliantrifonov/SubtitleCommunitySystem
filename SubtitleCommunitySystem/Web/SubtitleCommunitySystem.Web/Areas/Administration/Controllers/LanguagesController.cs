@@ -112,6 +112,7 @@
                 dbLanguage.Name = language.Name;
 
                 this.Data.SaveChanges();
+                TempData["Success"] = "Language is updated!";
 
                 return RedirectToAction("Edit");
             }

@@ -25,6 +25,13 @@
     </div>
 }
 
+@section messages {
+    @if (TempData["Success"] != null)
+    {
+        @Html.DisplayFor(c => TempData["Success"], "SuccessMessage")
+    }
+}
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -165,7 +165,8 @@
                 dbTeam.Language = dbLanguage;
 
                 this.Data.SaveChanges();
-               
+                TempData["Success"] = "Team is updated!";
+
                 return RedirectToAction("Edit");
             }
 

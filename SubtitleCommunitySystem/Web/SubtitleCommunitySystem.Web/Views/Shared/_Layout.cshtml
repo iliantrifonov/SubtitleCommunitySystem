@@ -37,6 +37,9 @@
             </div>
         </div>
     </div>
+    <div class="error-message-container container">
+        @RenderSection("messages", required: false)
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />

@@ -190,32 +190,11 @@
 
             this.Data.SaveChanges();
 
+            TempData["Success"] = "Movie is updated!";
+
             return RedirectToAction("Edit", new { id = dbMovie.Id });
         }
-
-        //public DbFile GetDbFile(HttpPostedFileBase file, string fileName)
-        //{
-        //    var extention = file.FileName.Substring(file.FileName.LastIndexOf('.'));
-        //    if (!FileConstants.AllowedSourceExtentions.Contains(extention))
-        //    {
-        //        throw new ArgumentException("Incorrect file extention type.");
-        //    }
-
-        //    var dbFile = new DbFile()
-        //    {
-        //        ContentType = file.ContentType,
-        //        FileName = fileName + extention,
-        //    };
-
-        //    using (var memoryStream = new MemoryStream())
-        //    {
-        //        file.InputStream.CopyTo(memoryStream);
-        //        dbFile.Content = memoryStream.ToArray();
-        //    }
-
-        //    return dbFile;
-        //}
-
+        
         private void CreateSubtitlesForAllLanguages(Movie movie)
         {
             if (!movie.Subtitles.Any())

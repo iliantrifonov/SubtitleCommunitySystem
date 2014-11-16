@@ -73,6 +73,13 @@
     </div>
 }
 
+@section messages {
+    @if (TempData["Success"] != null)
+    {
+        @Html.DisplayFor(c => TempData["Success"], "SuccessMessage")
+    }
+}
+
 @section scripts
 {
     @Scripts.Render("//code.jquery.com/ui/1.11.2/jquery-ui.js")
