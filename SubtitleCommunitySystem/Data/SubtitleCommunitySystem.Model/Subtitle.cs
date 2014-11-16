@@ -1,5 +1,6 @@
 ﻿namespace SubtitleCommunitySystem.Model
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -37,5 +38,7 @@
         public virtual DbFile FinalFile { get; set; }
 
         public virtual ICollection<SubtitleTask> Tasks { get; set; }
+
+        public DateTime? DateCompleted { get; set; }
     }
 }

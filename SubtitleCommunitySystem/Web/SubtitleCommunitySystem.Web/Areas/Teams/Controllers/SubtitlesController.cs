@@ -194,6 +194,15 @@
                 {
                     subtitle.IsFinished = false;
                 }
+                else
+                {
+                    subtitle.DateCompleted = DateTime.Now;
+                }
+            }
+
+            if (!subtitle.IsFinished)
+            {
+                subtitle.DateCompleted = null;
             }
 
             this.Data.SaveChanges();
