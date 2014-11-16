@@ -20,6 +20,13 @@
     }
 }
 
+@section messages {
+    @if (TempData["Error"] != null)
+    {
+        @Html.DisplayFor(c => TempData["Error"], "ErrorMessage")
+    }
+}
+
 <h2>Subtitle Details</h2>
 <div class="row">
     <img src="@Model.MovieMainPosterUrl" alt="@Model.MovieName" style="max-width:80px" />

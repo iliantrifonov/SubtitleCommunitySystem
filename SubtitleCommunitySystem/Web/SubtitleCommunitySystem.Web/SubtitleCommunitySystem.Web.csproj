@@ -934,6 +934,7 @@
     <Content Include="Areas\Private\Views\MyTasks\Index.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\SuccessMessage.cshtml" />
     <Content Include="ResourceFiles\ASP.NET-MVC-Project-Assignment-November-2014.docx" />
+    <Content Include="Areas\Teams\Views\Shared\DisplayTemplates\ErrorMessage.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -1032,7 +1033,7 @@
       <Project>{db33b4c7-b029-47d2-8806-7f888b930716}</Project>
       <Name>SubtitleCommunitySystem.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\SubtitleCommunitySystem.Web.Infrastructure\SubtitleCommunitySystem.Web.Infrastructure.csproj">
+    <ProjectReference Include="..\SubtitleCommunitySystem.Web.Infrastructure\SubtitleCommunitySystem.Web.Infrastructure.csproj">
       <Project>{bd501b3c-2ca8-4f0f-baa4-6f2ad5f32e6b}</Project>
       <Name>SubtitleCommunitySystem.Web.Infrastructure</Name>
     </ProjectReference>

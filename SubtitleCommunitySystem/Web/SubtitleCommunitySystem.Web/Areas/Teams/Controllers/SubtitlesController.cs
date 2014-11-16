@@ -193,6 +193,7 @@
                 if (subtitle.FinalFile == null)
                 {
                     subtitle.IsFinished = false;
+                    TempData["Error"] = "Cannot finish a subtitle without uploading the final subtitle file!";
                 }
                 else
                 {

@@ -92,7 +92,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SubtitleCommunitySystem.Web.Infrastructure\SubtitleCommunitySystem.Web.Infrastructure.csproj">
+    <ProjectReference Include="..\..\Web\SubtitleCommunitySystem.Web.Infrastructure\SubtitleCommunitySystem.Web.Infrastructure.csproj">
       <Project>{bd501b3c-2ca8-4f0f-baa4-6f2ad5f32e6b}</Project>
       <Name>SubtitleCommunitySystem.Web.Infrastructure</Name>
     </ProjectReference>

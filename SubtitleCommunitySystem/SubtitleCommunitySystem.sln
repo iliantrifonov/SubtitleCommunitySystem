@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitleCommunitySystem.Mod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitleCommunitySystem.Web", "Web\SubtitleCommunitySystem.Web\SubtitleCommunitySystem.Web.csproj", "{5B42CEAC-849D-4DC3-86CD-D3605584040F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitleCommunitySystem.Web.Infrastructure", "SubtitleCommunitySystem.Web.Infrastructure\SubtitleCommunitySystem.Web.Infrastructure.csproj", "{BD501B3C-2CA8-4F0F-BAA4-6F2AD5F32E6B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubtitleCommunitySystem.Web.Infrastructure", "Web\SubtitleCommunitySystem.Web.Infrastructure\SubtitleCommunitySystem.Web.Infrastructure.csproj", "{BD501B3C-2CA8-4F0F-BAA4-6F2AD5F32E6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
