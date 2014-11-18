@@ -3,10 +3,13 @@
     using System;
     using System.Linq;
     using System.Web.Mvc;
+
     using AutoMapper.QueryableExtensions;
     using Microsoft.AspNet.Identity;
+
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Model;
+    using SubtitleCommunitySystem.Web.Helpers;
     using SubtitleCommunitySystem.Web.Areas.Private.Models;
     using SubtitleCommunitySystem.Web.Controllers.Base;
 
@@ -17,7 +20,7 @@
         {
         }
 
-        // GET: Private/MyRequests
+        
         public ActionResult Index()
         {
             var user = this.CurrentUser;
@@ -52,6 +55,7 @@
             return this.View(indexViewModel);
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             var model = new RequestInputModel()
@@ -77,6 +81,15 @@
             if (hasPending)
             {
                 this.ModelState.AddModelError(string.Empty, "You already have a request of this type pending");
+            }
+
+            var modelRole = RoleEnumToStringConverter.FromRequestType(model.Type);
+
+            var hasRoleAlready = this.CurrentUser.TeamRoles.Any(r => r.Name == modelRole);
+
+            if (hasRoleAlready)
+            {
+                this.ModelState.AddModelError(string.Empty, "You already have that role!");
             }
 
             if (this.ModelState.IsValid)

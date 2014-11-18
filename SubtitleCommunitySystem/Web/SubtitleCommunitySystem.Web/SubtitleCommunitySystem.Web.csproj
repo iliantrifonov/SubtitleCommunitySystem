@@ -952,6 +952,7 @@
     <Content Include="ResourceFiles\ASP.NET-MVC-Project-Assignment-November-2014.docx" />
     <Content Include="Areas\Teams\Views\Shared\DisplayTemplates\ErrorMessage.cshtml" />
     <Content Include="Areas\Teams\Views\Chat\Index.cshtml" />
+    <Content Include="Areas\Private\Views\MyRequests\_RolesPartial.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />

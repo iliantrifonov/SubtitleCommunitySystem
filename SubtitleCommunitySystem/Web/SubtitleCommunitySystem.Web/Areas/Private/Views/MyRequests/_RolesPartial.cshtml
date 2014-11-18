@@ -1,0 +1,14 @@
+﻿
+
+<div class="alert alert-success">
+    <strong>My roles: </strong>
+    @{
+        var roles = ViewBag.UserRoles as IEnumerable<string>;
+    }
+
+    @foreach (var item in roles)
+    {
+        <span>@item, </span>
+    }
+</div>
+

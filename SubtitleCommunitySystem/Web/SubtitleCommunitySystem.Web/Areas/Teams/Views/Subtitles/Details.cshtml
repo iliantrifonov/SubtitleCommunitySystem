@@ -65,9 +65,20 @@
         </div>
     </div>
     <hr />
-    <div class="row">
-        @Ajax.ActionLink("Download description file for tasks", "DownloadSource", "File", new { id = Model.DescriptionFileId, area = "Private" }, new AjaxOptions() { HttpMethod = "POST", InsertionMode = InsertionMode.InsertAfter }, new { @class = "btn btn-success" })
-    </div>
+    @if (Model.DescriptionFileId != null)
+    {
+        <div class="row">
+            @Ajax.ActionLink("Download description file for tasks", "DownloadSource", "File", new { id = Model.DescriptionFileId, area = "Private" }, new AjaxOptions() { HttpMethod = "POST", InsertionMode = InsertionMode.InsertAfter }, new { @class = "btn btn-success" })
+        </div>
+    }
+    
+    @if (Model.DescriptionFileId == null)
+    {
+        <div class="row">
+           <button class="btn btn-danger">Task description not yet uploaded</button>
+        </div>
+    }     
+    
     <hr />
 </div>
 @if (isTeamLeader)
