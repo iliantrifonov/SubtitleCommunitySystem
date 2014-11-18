@@ -212,7 +212,7 @@
             }
             else
             {
-                var subtitleLanguageIds = movie.Subtitles.Select(s => s.Language.Id);
+                var subtitleLanguageIds = movie.Subtitles.Where(sc => sc.Language != null).Select(s => s.Language.Id);
 
                 var languages = this.Data.Languages.All();
                 foreach (var lang in languages)

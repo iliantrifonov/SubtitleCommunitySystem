@@ -42,7 +42,14 @@
             var mappedDirectoryName = HttpContext.Current.Server.MapPath(directoryName);
             Directory.CreateDirectory(mappedDirectoryName);
 
-            file.SaveAs(mappedDirectoryName + "/" + fileName + extention);
+            var exactFilePathAndName = mappedDirectoryName + "/" + fileName + extention;
+
+            if (File.Exists(exactFilePathAndName))
+            {
+                File.Delete(exactFilePathAndName);
+            }
+
+            file.SaveAs(exactFilePathAndName);
 
             return directoryName.Substring(1) + "/" + fileName + extention;
         }
