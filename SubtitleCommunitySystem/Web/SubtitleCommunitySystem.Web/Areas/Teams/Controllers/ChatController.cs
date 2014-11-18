@@ -7,6 +7,8 @@
 
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Web.Controllers.Base;
+    using SubtitleCommunitySystem.Web.Areas.Teams.Models.Chat;
+    using System.Collections.Generic;
 
     public class ChatController : AuthenticatedUserController
     {
@@ -14,7 +16,7 @@
         {
         }
 
-        // GET: Teams/Chat/id
+
         public ActionResult Index(int? id)
         {
             if (id == null)
@@ -22,19 +24,31 @@
                 throw new HttpException(404, "Incorrect input data!");
             }
 
-            var chat = this.Data.Channels.Find(id);
-
-            if (chat == null)
+            if (!this.CurrentUser.Teams.Any(t => t.Id == id))
             {
                 throw new HttpException(404, "Incorrect input data!");
             }
 
-            if (!this.CurrentUser.Teams.Any(t => t.ChatChannel.Id == id))
-            {
-                throw new HttpException(404, "Incorrect input data!");
-            }
+            var messages = this.Data.Teams.All()
+                .Where(t => t.Id == id)
+                .Select(t => t.ChatChannel.Messages
+                    .Select(m => new MessageOutputModel() 
+                    { 
+                        Content = m.Content, 
+                        UserName = m.User.UserName,
+                        DateSent = m.DateSent
+                    })
+                    .OrderByDescending(z => z.DateSent))
+                    .Take(200)
+                    .FirstOrDefault();
 
-            return this.View(chat);
+            this.ViewBag.Id = id;
+
+            this.ViewBag.TeamName = this.Data.Teams.All()
+                .Where(t => t.Id == id)
+                .Select(t => t.Name).FirstOrDefault();
+
+            return this.View(messages);
         }
 
         [HttpPost]

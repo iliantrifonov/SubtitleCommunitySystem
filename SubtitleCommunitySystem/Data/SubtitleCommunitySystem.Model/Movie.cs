@@ -18,7 +18,7 @@
         [MaxLength(70)]
         public string Name { get; set; }
 
-        [MaxLength(1000)]
+        [MaxLength(3000)]
         public string Description { get; set; }
 
         [MaxLength(500)]
@@ -34,7 +34,6 @@
         [MaxLength(500)]
         public string MainPosterUrl { get; set; }
 
-        [Required]
         public DateTime ReleaseDate { get; set; }
 
         public virtual DbFile InitialSource { get; set; }

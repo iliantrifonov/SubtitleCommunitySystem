@@ -1,26 +1,91 @@
-﻿@model dynamic
+﻿@model IEnumerable<SubtitleCommunitySystem.Web.Areas.Teams.Models.Chat.MessageOutputModel>
 
-<div class="jumbotron">Wecome to @*"@Html.DisplayFor(m => m.Name)"*@ chat</div>
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    var teamId = ViewBag.Id;
+}
+
+<script src="~/Scripts/jquery.signalR-2.1.2.js"></script>
+<script src="~/signalr/hubs" type="text/javascript"></script>
 
 <div class="panel panel-info">
     <div class="panel-heading">
-        <h3 class="panel-title">
-            @using (@Ajax.BeginForm("AddMessage", new AjaxOptions() { HttpMethod = "Post" }))
-            {
-                @Html.AntiForgeryToken()
-                @Html.Editor("messageBox")
-                @AppHelpers.Submit("Send")
-            }
-        </h3>
+        <h3 class="panel-title">Team "@ViewBag.TeamName" Chat</h3>
     </div>
     <div class="panel-body">
-        <div class="list-group">
-            Nothing yet
+        <div class="">
+            <div class="row form">
+                <textarea class="form-control" id="room-message" style="min-width:100%" rows="5" placeholder="Message..."></textarea>
+            </div>
+            <div class="row">
+                <button class="btn btn-success btn-block" id="send-message-to-room">Send</button>
+            </div>
+        </div>
+        <hr />
+        <div id="messages" class="row">
+        </div>
+        <div id="oldMessages" class="row">
+            @foreach (var m in Model)
+            {
+                <div class="container alert alert-info">
+                    <div class="text-info col-md-2">
+                        <strong>
+                            @m.UserName
+                        </strong> :
+                    </div>
+                    <div class="text-primary col-md-10">
+                        @m.Content
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>
-<div id="noes"></div>
+<hr />
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
+<script>
+    var rooms = [];
+    $(document).ready(function () {
+        $.connection.hub.start().done(function () {
+            var room = @ViewBag.Id;
+            chat.server.joinRoom(room);
+        });
+        var chat = $.connection.chat;
+        $('#send-message').click(function () {
+            var msg = $('#message').val();
+            chat.server.sendMessage(msg);
+        });
+
+        $("#join-room").click(function () {
+            var room = $('#room').val();
+            chat.server.joinRoom(room)
+        });
+        $('#send-message-to-room').click(function () {
+            var msg = $('#room-message').val();
+            chat.server.sendMessageToRoom(msg, rooms);
+            $('#room-message').val('');
+        });
+        chat.client.addMessage = addMessage;
+        chat.client.joinRoom = joinRoom;
+    });
+
+    function addMessage(userName, message) {
+
+        $('#messages').prepend('<div class="container alert alert-info">'
+                                     + '<div class="text-info col-md-2"><strong>' +
+                                         userName +
+                                    ' </strong>:</div>' +
+                                    '<div class="text-primary col-md-10">' +
+                                        message +
+                                    '</div>' +
+                                '</div>');
+    }
+
+    function joinRoom(room) {
+        rooms.push(room);
+    }
+</script>

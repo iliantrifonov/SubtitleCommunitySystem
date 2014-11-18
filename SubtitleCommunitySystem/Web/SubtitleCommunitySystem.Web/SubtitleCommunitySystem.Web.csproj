@@ -56,6 +56,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\Kendo.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.Core.2.1.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -234,6 +240,7 @@
     <Compile Include="Areas\Teams\Controllers\SubtitlesController.cs" />
     <Compile Include="Areas\Teams\Controllers\TasksController.cs" />
     <Compile Include="Areas\Teams\Controllers\TeamsController.cs" />
+    <Compile Include="Areas\Teams\Models\Chat\MessageOutputModel.cs" />
     <Compile Include="Areas\Teams\Models\Subtitles\SubtitleDetailsModel.cs" />
     <Compile Include="Areas\Teams\Models\Subtitles\SubtitleOutputModel.cs" />
     <Compile Include="Areas\Teams\Models\Tasks\TaskInputModel.cs" />
@@ -263,6 +270,7 @@
     <Compile Include="Helpers\DatabaseFileHelper.cs" />
     <Compile Include="Helpers\RoleEnumToStringConverter.cs" />
     <Compile Include="Helpers\UploadHelper.cs" />
+    <Compile Include="Hubs\Chat.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -526,6 +534,8 @@
     <Content Include="Areas\Administration\Views\Users\Delete.cshtml" />
     <Content Include="Areas\Administration\Views\Users\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\Users\Index.cshtml" />
+    <Content Include="Scripts\jquery.signalR-2.1.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.2.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\kendo\cultures\kendo.culture.af-ZA.min.js" />
@@ -917,7 +927,6 @@
     <Content Include="Areas\Teams\Views\Shared\DisplayTemplates\TeamIndexOutputModel.cshtml" />
     <Content Include="Areas\Teams\Views\Teams\Details.cshtml" />
     <Content Include="Areas\Teams\Views\Shared\DisplayTemplates\TeamDetailedOutputModel.cshtml" />
-    <Content Include="Areas\Teams\Views\Chat\Index.cshtml" />
     <Content Include="Content\kendo\images\kendoui.ttf" />
     <Content Include="Content\kendo\images\kendoui.woff" />
     <Content Include="Areas\Teams\Views\Subtitles\TeamSubtitles.cshtml" />
@@ -942,6 +951,7 @@
     <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\SuccessMessage.cshtml" />
     <Content Include="ResourceFiles\ASP.NET-MVC-Project-Assignment-November-2014.docx" />
     <Content Include="Areas\Teams\Views\Shared\DisplayTemplates\ErrorMessage.cshtml" />
+    <Content Include="Areas\Teams\Views\Chat\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -1016,7 +1026,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administration\Views\Movies\DisplayTemplates\" />
-    <Folder Include="Areas\Teams\Models\Chat\" />
     <Folder Include="Areas\Teams\Views\Tasks\" />
     <Folder Include="Files\" />
     <Folder Include="Views\Admin\" />

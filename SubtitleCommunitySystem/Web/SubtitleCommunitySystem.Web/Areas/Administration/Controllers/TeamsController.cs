@@ -76,6 +76,15 @@
         {
             if (this.ModelState.IsValid)
             {
+                var teamNameExists = this.Data.Teams.All().Any(c => c.Name == createTeamViewModel.Team.Name);
+                if (teamNameExists)
+                {
+                    this.ModelState.AddModelError(string.Empty, "Team name already exists!");
+                }
+            }
+
+            if (this.ModelState.IsValid)
+            {
                 var language = this.Data.Languages.Find(int.Parse(createTeamViewModel.Team.LanguageId));
 
                 if (language == null)

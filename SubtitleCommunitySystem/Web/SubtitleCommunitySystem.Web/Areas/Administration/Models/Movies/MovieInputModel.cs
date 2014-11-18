@@ -14,11 +14,14 @@
         public int Id { get; set; }
 
         [DataType(DataType.MultilineText)]
+        [MaxLength(3000)]
+        [Required]
         public string Description { get; set; }
 
         public string Directory { get; set; }
 
         [Required]
+        [MaxLength(70)]
         public string Name { get; set; }
 
         public string MainPosterUrl { get; set; }
