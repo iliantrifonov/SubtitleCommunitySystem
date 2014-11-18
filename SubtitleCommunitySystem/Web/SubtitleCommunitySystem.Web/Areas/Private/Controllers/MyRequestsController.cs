@@ -20,7 +20,6 @@
         {
         }
 
-        
         public ActionResult Index()
         {
             var user = this.CurrentUser;

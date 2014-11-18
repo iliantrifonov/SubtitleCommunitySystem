@@ -9,6 +9,7 @@
         {
             this.Teams = new HashSet<Team>();
             this.Subtitles = new HashSet<Subtitle>();
+            this.Users = new HashSet<ApplicationUser>();
         }
 
         public int Id { get; set; }
@@ -20,5 +21,7 @@
         public virtual ICollection<Team> Teams { get; set; }
 
         public virtual ICollection<Subtitle> Subtitles { get; set; }
+
+        public virtual ICollection<ApplicationUser> Users { get; set; }
     }
 }

@@ -8,14 +8,12 @@
     using SubtitleCommunitySystem.Data;
     using SubtitleCommunitySystem.Web.Controllers.Base;
     using SubtitleCommunitySystem.Web.Areas.Teams.Models.Chat;
-    using System.Collections.Generic;
 
     public class ChatController : AuthenticatedUserController
     {
         public ChatController(IApplicationData data) : base(data)
         {
         }
-
 
         public ActionResult Index(int? id)
         {

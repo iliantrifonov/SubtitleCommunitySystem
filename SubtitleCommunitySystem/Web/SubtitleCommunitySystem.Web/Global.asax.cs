@@ -16,6 +16,12 @@
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        public static void ConfigureAutoMapper()
+        {
+            var autoMapperConfig = new AutoMapperConfig();
+            autoMapperConfig.Execute(Assembly.GetExecutingAssembly());
+        }
+
         protected void Application_Start()
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
@@ -31,12 +37,6 @@
 
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
-        }
-
-        public static void ConfigureAutoMapper()
-        {
-            var autoMapperConfig = new AutoMapperConfig();
-            autoMapperConfig.Execute(Assembly.GetExecutingAssembly());
-        }
+        }        
     }
 }
