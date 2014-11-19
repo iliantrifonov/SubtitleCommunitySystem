@@ -15,6 +15,9 @@ This is a bare bones description. Inside the application, on the About page, the
 
 
 * DISCLAIMER: KENDO UI is a trial version, you can find out more at: http://www.telerik.com/download/aspnet-mvc
+* 
+
+<h2>For administration rights, the login is admin@gmail.com, pass: 123456</h2>
 
 <ul>
     <li>
